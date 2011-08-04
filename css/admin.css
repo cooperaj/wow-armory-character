@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+.icon-race-18
+{
+	float: left;
+	margin-right: 2px;
+}
+
+.icon-class-18
+{
+	display: block;
+	width: 18px; height: 18px;
+	float: left;
+	margin-right: 4px;
+	background-image: url(../cache/classes-18.jpg);
+}
+
+.icon-paladin-18
+{
+	background-position: -72px 0;
+}
+
+.icon-hunter-18
+{
+	background-position: -36px 0;
+}
+
+.icon-rogue-18
+{
+	background-position: -18px -18px;
+}
+
+.icon-druid-18
+{
+	background-position: -18px 0;
+}

@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+
+.armory_display img {
+	display: inline;
+	border: 0 none;
+	margin: 0;
+}
+
+img.armory_char_portrait {
+	width: 48px;
+	height: 48px;
+	float: left;
+	margin-right: 5px;
+}
+
+.armory_char_guild {
+	display: block;
+}
+
+.armory_char_spec {
+	display: block;
+}
+
+.armory_char_spec span {
+	margin-right: 1em;
+}
+
+.armory_char_spec img {
+	vertical-align: middle;
+}
+
+.armory_equip h4{
+	margin-top: 1em;
+}
+
+.armory_equip_list {
+	list-style: none;
+	margin: 0;
+}
+
+.armory_equip_list li {
+	margin: 0;
+	display: inline;
+}
+
+.armory_item_icon {
+	width: 26px;
+	height: 26px;
+}
