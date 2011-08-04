@@ -1,0 +1,171 @@
+# Copyright (C) 2010 WoW Armory Character
+# This file is distributed under the same license as the WoW Armory Character package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WoW Armory Character 0.9\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wow-armory-character\n"
+"POT-Creation-Date: 2011-08-04 23:00:12+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: class-wow-armory-character-widget.php:41
+msgid "Armory for %NAME%"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:44
+msgid "Displays a World of Warcraft character's information"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (WoW Armory Character 0.9)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: class-wow-armory-character-widget.php:45
+msgid "WoW Armory Character"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:54
+msgid "Title:"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:56
+msgid "Use %NAME% for the character's name."
+msgstr ""
+
+#: class-wow-armory-character-widget.php:59
+msgid "Character name:"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:63
+msgid "Realm:"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:71
+msgid "Language:"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:73
+msgid "English"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:74
+msgid "Deutsch"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:75
+msgid "Español"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:76
+msgid "Française"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:77
+msgid "Pусский"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:80
+msgid "Display Options"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:83
+msgid "Show Portrait"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:85
+msgid "Show Title"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:87
+msgid "Show Talents"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:89
+msgid "Show Items"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:91
+msgid "Show Profressions"
+msgstr ""
+
+#: class-wow-armory-character-widget.php:93
+msgid "Show Achievements"
+msgstr ""
+
+#: class-wow-armory-character-plugin.php:48
+msgid "WoW Character Cache"
+msgstr ""
+
+#: class-wow-armory-character-plugin.php:83
+msgid "Cleared %s caches."
+msgstr ""
+
+#: class-wow-armory-character-plugin.php:88
+msgid "World of Warcraft Character Cache"
+msgstr ""
+
+#: class-wow-armory-character-plugin.php:96
+msgid "Refresh"
+msgstr ""
+
+#: class-wow-armory-character-plugin.php:97
+msgid "Clear Cache"
+msgstr ""
+
+#: class-wow-armory-character-plugin.php:107
+msgid "Character Name"
+msgstr ""
+
+#: class-wow-armory-character-plugin.php:108
+msgid "Realm"
+msgstr ""
+
+#: class-wow-armory-character-plugin.php:109
+msgid "Cached On"
+msgstr ""
+
+#: class-wow-armory-character-plugin.php:120
+msgid "No Caches Found"
+msgstr ""
+
+#: view-wow-armory-character.php:17
+msgid "of"
+msgstr ""
+
+#: view-wow-armory-character.php:22
+msgid "Level"
+msgstr ""
+
+#: view-wow-armory-character.php:45
+msgid "Equipment List"
+msgstr ""
+
+#: class-wow-armory-character-dal.php:141
+msgid "Unable to fetch data from battle.net for character"
+msgstr ""
+
+#: class-wow-armory-character-dal.php:186
+msgid "Unable to fetch data from battle.net for character races"
+msgstr ""
+
+#: class-wow-armory-character-dal.php:243
+msgid "Unable to fetch data from battle.net for character classes"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://realmenweardress.es/wow-armory-character/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Pulls a wow character from the new WoW community API and displays it."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Adam Cooper"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://realmenweardress.es"
+msgstr ""
