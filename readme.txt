@@ -69,9 +69,8 @@ to update you are able to clear the cache.
 1. Navigate to the *Character Cache* section within the *Settings* area of your wordpress admin area.
 1. Tick the checkbox next to the character you wish to refresh and click the *Clear Cache* button.
 
-When you next look at your character fresh information will be pulled from the community API. It may be the 
-case that the community API is returning old information, in this cas eyou will need to wait until your armory
-page is updated.
+When you next look at your character fresh information will be pulled from the community API. It may be that the 
+community API is returning old information, in this case you will need to wait until your armorypage is updated.
 
 == Screenshots ==
 
