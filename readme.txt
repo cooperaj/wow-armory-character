@@ -3,7 +3,7 @@ Contributors: blueajcooper
 Tags: widget, world of warcraft, wow, armory, character, warcraft, blizzard, toon, gear, achievements, professions
 Requires at least: 3.0.0
 Tested up to: 3.2.1
-Stable tag: 0.9
+Stable tag: 0.9.1
 License: GPLv2
 
 Pulls character information from the WoW community API and displays it.
