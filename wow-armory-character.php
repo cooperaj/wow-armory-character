@@ -28,6 +28,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 require_once('class-wow-armory-character-plugin.php');
 
+// Store the plugin path globally so that it can find itself later.
+$wacpath = $plugin;
+
+// OO all the way baby.
 $wacplugin = new WoW_Armory_Character_Plugin();
 add_action('init', array($wacplugin, 'init'));
 add_action('admin_menu', array($wacplugin, 'admin_menu'));

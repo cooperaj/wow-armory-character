@@ -64,6 +64,8 @@ class WoW_Armory_Character_Widget extends WP_Widget
 				<select class="wa-region" id="<?php echo $this->get_field_id('region'); ?>" name="<?php echo $this->get_field_name('region'); ?>">
 					<option value="US"<?php echo ($instance['region'] == 'US' ? ' selected="selected"' : ''); ?>>US</option>
 					<option value="EU"<?php echo ($instance['region'] == 'EU' ? ' selected="selected"' : ''); ?>>EU</option>
+					<option value="KR"<?php echo ($instance['region'] == 'KR' ? ' selected="selected"' : ''); ?>>KR</option>
+					<option value="TW"<?php echo ($instance['region'] == 'TW' ? ' selected="selected"' : ''); ?>>TW</option>
 				</select>
 				<input type="text" class="wa-realm" style="width: 175px" id="<?php echo $this->get_field_id('realm'); ?>" name="<?php echo $this->get_field_name('realm'); ?>" value="<?php echo htmlspecialchars($instance['realm']); ?>" />
 			</p>
@@ -75,21 +77,23 @@ class WoW_Armory_Character_Widget extends WP_Widget
 					<option value="es_ES"<?php echo $instance['locale'] == 'es_ES' ? ' selected="selected"' : ''; ?>><?php _e('Español', 'wow_armory_character'); ?></option>
 					<option value="fr_FR"<?php echo $instance['locale'] == 'fr_FR' ? ' selected="selected"' : ''; ?>><?php _e('Française', 'wow_armory_character'); ?></option>
 					<option value="ru_RU"<?php echo $instance['locale'] == 'ru_RU' ? ' selected="selected"' : ''; ?>><?php _e('Pусский', 'wow_armory_character'); ?></option>
+					<option value="ko_KR"<?php echo $instance['locale'] == 'ko_KR' ? ' selected="selected"' : ''; ?>><?php _e('한국어', 'wow_armory_character'); ?></option>
+					<option value="zh_TW"<?php echo $instance['locale'] == 'zh_TW' ? ' selected="selected"' : ''; ?>><?php _e('官話', 'wow_armory_character'); ?></option>
 				</select>
 			</p>
 			<h4><?php _e ('Display Options', 'wow_armory_character'); ?></h4>
 			<p>
-				<input id="<?php echo $this->get_field_id('show_portrait'); ?>" name="<?php echo $this->get_field_name('show_portrait'); ?>" value="<?php echo esc_attr($instance['show_portrait']); ?>" type="checkbox" value="1"<?php echo $instance['show_portrait'] ? ' checked="checked"' : ''; ?> />
+				<input id="<?php echo $this->get_field_id('show_portrait'); ?>" name="<?php echo $this->get_field_name('show_portrait'); ?>" value="1" type="checkbox" <?php echo $instance['show_portrait'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_portrait'); ?>"><?php _e('Show Portrait', 'wow_armory_character'); ?></label><br/>
-				<input id="<?php echo $this->get_field_id('show_title'); ?>" name="<?php echo $this->get_field_name('show_title'); ?>" value="<?php echo esc_attr($instance['show_title']); ?>" type="checkbox" value="1"<?php echo $instance['show_title'] ? ' checked="checked"' : ''; ?> />
+				<input id="<?php echo $this->get_field_id('show_title'); ?>" name="<?php echo $this->get_field_name('show_title'); ?>" value="1" type="checkbox" <?php echo $instance['show_title'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_title'); ?>"><?php _e('Show Title', 'wow_armory_character'); ?></label><br/>
-				<input id="<?php echo $this->get_field_id('show_talents'); ?>" name="<?php echo $this->get_field_name('show_talents'); ?>" value="<?php echo esc_attr($instance['show_talents']); ?>" type="checkbox" value="1"<?php echo $instance['show_talents'] ? ' checked="checked"' : ''; ?> />
+				<input id="<?php echo $this->get_field_id('show_talents'); ?>" name="<?php echo $this->get_field_name('show_talents'); ?>" value="1" type="checkbox" <?php echo $instance['show_talents'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_talents'); ?>"><?php _e('Show Talents', 'wow_armory_character'); ?></label><br/>
-				<input id="<?php echo $this->get_field_id('show_items'); ?>" name="<?php echo $this->get_field_name('show_items'); ?>" value="<?php echo esc_attr($instance['show_items']); ?>" type="checkbox" value="1"<?php echo $instance['show_items'] ? ' checked="checked"' : ''; ?> />
+				<input id="<?php echo $this->get_field_id('show_items'); ?>" name="<?php echo $this->get_field_name('show_items'); ?>" value="1" type="checkbox" <?php echo $instance['show_items'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_items'); ?>"><?php _e('Show Items', 'wow_armory_character'); ?></label><br/>
-				<input id="<?php echo $this->get_field_id('show_profs'); ?>" name="<?php echo $this->get_field_name('show_profs'); ?>" value="<?php echo esc_attr($instance['show_profs']); ?>" type="checkbox" value="1"<?php echo $instance['show_profs'] ? ' checked="checked"' : ''; ?> />
+				<input id="<?php echo $this->get_field_id('show_profs'); ?>" name="<?php echo $this->get_field_name('show_profs'); ?>" value="1" type="checkbox" <?php echo $instance['show_profs'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_profs'); ?>"><?php _e('Show Profressions', 'wow_armory_character'); ?></label><br/>
-				<input id="<?php echo $this->get_field_id('show_achievs'); ?>" name="<?php echo $this->get_field_name('show_achievs'); ?>" value="<?php echo esc_attr($instance['show_achievs']); ?>" type="checkbox" value="1"<?php echo $instance['show_achievs'] ? ' checked="checked"' : ''; ?> />
+				<input id="<?php echo $this->get_field_id('show_achievs'); ?>" name="<?php echo $this->get_field_name('show_achievs'); ?>" value="1" type="checkbox" <?php echo $instance['show_achievs'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_achievs'); ?>"><?php _e('Show Achievements', 'wow_armory_character'); ?></label><br/>
 			</p>
 		</div>

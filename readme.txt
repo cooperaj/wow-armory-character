@@ -70,7 +70,7 @@ to update you are able to clear the cache.
 1. Tick the checkbox next to the character you wish to refresh and click the *Clear Cache* button.
 
 When you next look at your character fresh information will be pulled from the community API. It may be that the 
-community API is returning old information, in this case you will need to wait until your armorypage is updated.
+community API is returning old information, in this case you will need to wait until your armory page is updated.
 
 == Screenshots ==
 

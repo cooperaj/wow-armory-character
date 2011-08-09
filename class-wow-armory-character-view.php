@@ -81,7 +81,7 @@ class WoW_Armory_Character_View
 		// Ensure that we cache this file for the css to use.
 		$this->fetch_asset($this->_get_static_url() . '/icons/class/classes-18.jpg');
 		
-		return 'icon-class-18 icon-' . strtolower(str_replace(' ', '-', $this->character->class->name)) . '-18';
+		return 'icon-class-18 icon-' . strtolower(str_replace(' ', '-', $this->character->en_class->name)) . '-18';
 	}
 	
 	public function get_guild_url()
@@ -125,7 +125,7 @@ class WoW_Armory_Character_View
 	{
 		return $this->fetch_asset(
 			$this->_get_cdn_url() . '/icons/18/race_' . 
-			strtolower(str_replace(' ', '-', $this->character->race->name)) . '_' . 
+			strtolower(str_replace(' ', '-', $this->character->en_race->name)) . '_' . 
 			$this->_gender_table[$this->character->gender] . '.jpg'
 		);
 	}
@@ -210,7 +210,7 @@ class WoW_Armory_Character_View
 	
 	public function fetch_asset($asset_url)
 	{
-		$cache_url = plugins_url(self::CACHE_FOLDER_NAME, plugin_basename(__FILE__));
+		$cache_url = plugins_url(self::CACHE_FOLDER_NAME, plugin_basename($GLOBALS['wacpath']));
 	
 		$exploded_asset_url = explode('/', parse_url($asset_url, PHP_URL_PATH));
 		$asset_name = end($exploded_asset_url);

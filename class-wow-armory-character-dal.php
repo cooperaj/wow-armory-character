@@ -29,7 +29,7 @@ class WoW_Armory_Character_DAL
 	 * The API url to retrieve a character populated with Guild, Equipped Items, Profession and Talent information.
 	 * @var string
 	 */
-	const CHARACTER_URL = 'http://%s.battle.net/api/wow/character/%s/%s?fields=guild,items,professions,talents,titles&amplocale=%s';
+	const CHARACTER_URL = 'http://%s.battle.net/api/wow/character/%s/%s?fields=guild,items,professions,talents,titles&locale=%s';
 	
 	const RACE_URL = 'http://%s.battle.net/api/wow/data/character/races?locale=%s';
 	const CLASS_URL = 'http://%s.battle.net/api/wow/data/character/classes?locale=%s';
@@ -80,9 +80,19 @@ class WoW_Armory_Character_DAL
 		if (is_wp_error($char_api_data_obj->race))
 			return $char_api_data_obj->race;
 			
+		// We need the english locale too since all images are named in english
+		$char_api_data_obj->en_race = self::_fetch_race($region, 'en_GB', $char_api_data_obj->race->id);
+		if (is_wp_error($char_api_data_obj->en_race))
+			return $char_api_data_obj->en_race;
+			
 		$char_api_data_obj->class = self::_fetch_class($region, $locale, $char_api_data_obj->class);
 		if (is_wp_error($char_api_data_obj->class))
 			return $char_api_data_obj->class;
+			
+		// We need the english locale too since all images are named in english
+		$char_api_data_obj->en_class = self::_fetch_class($region, 'en_GB', $char_api_data_obj->class->id);
+		if (is_wp_error($char_api_data_obj->en_class))
+			return $char_api_data_obj->en_class;
 		
 		return new WoW_Armory_Character($region, $locale, $char_api_data_obj);
 	}
@@ -114,7 +124,7 @@ class WoW_Armory_Character_DAL
 		{
 			$http_request = new WP_Http();
 			$http_result = $http_request->request(
-				sprintf(self::CHARACTER_URL, $region, $realm, $name, $locale));
+				self::_encode_url(sprintf(self::CHARACTER_URL, strtolower($region), $realm, $name, $locale)));
 			
 			if (!is_wp_error($http_result) && $http_result['response']['code'] == 200)
 			{
@@ -161,7 +171,7 @@ class WoW_Armory_Character_DAL
 		else
 		{
 			$http_request = new WP_Http();
-			$http_result = $http_request->request(sprintf(self::RACE_URL, $region, $locale));
+			$http_result = $http_request->request(self::_encode_url(sprintf(self::RACE_URL, strtolower($region), $locale)));
 				
 			if (!is_wp_error($http_result) && $http_result['response']['code'] == 200)
 			{
@@ -218,7 +228,7 @@ class WoW_Armory_Character_DAL
 		else
 		{
 			$http_request = new WP_Http();
-			$http_result = $http_request->request(sprintf(self::CLASS_URL, $region, $locale));
+			$http_result = $http_request->request(self::_encode_url(sprintf(self::CLASS_URL, strtolower($region), $locale)));
 				
 			if (!is_wp_error($http_result) && $http_result['response']['code'] == 200)
 			{
@@ -254,5 +264,23 @@ class WoW_Armory_Character_DAL
 		// We shouldn't ever see this as it implies that the character class returned from the API does not
 		// have a lookup value stored in the API. Come on Blizz...
 		return null;
+	}
+	
+	private function _encode_url($url)
+	{
+    // http://php.net/manual/en/function.rawurlencode.php
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/encodeURI
+    $reserved = array(
+        '%2D'=>'-','%5F'=>'_','%2E'=>'.','%21'=>'!', 
+        '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')'
+    );
+    $unescaped = array(
+        '%3B'=>';','%2C'=>',','%2F'=>'/','%3F'=>'?','%3A'=>':',
+        '%40'=>'@','%26'=>'&','%3D'=>'=','%2B'=>'+','%24'=>'$'
+    );
+    $score = array(
+        '%23'=>'#'
+    );
+    return strtr(rawurlencode($url), array_merge($reserved,$unescaped,$score));
 	}
 }

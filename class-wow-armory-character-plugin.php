@@ -33,13 +33,16 @@ class WoW_Armory_Character_Plugin
 		load_plugin_textdomain('wow_armory_character', false, __DIR__ . '/languages');
 		
 		wp_enqueue_script('wowhead',"http://static.wowhead.com/widgets/power.js");
-		wp_enqueue_style('wow_armory_character', plugins_url('css/style.css', __FILE__));
+		wp_enqueue_style('wow_armory_character', plugins_url('css/style.css', $GLOBALS['wacpath']));
 	}
 	
 	public function admin_init()
 	{
-		wp_register_style( 'wow-armory-character-admin', 
-			plugins_url('css/admin.css', __FILE__));
+		wp_register_style('wow-armory-character-admin', 
+			plugins_url('css/admin.css', $GLOBALS['wacpath']));
+			
+		wp_enqueue_script('wow-armory-character-admin', 
+			plugins_url('javascript/admin.js', $GLOBALS['wacpath']), array('jquery'));
 	}
 	
 	public function admin_menu()
