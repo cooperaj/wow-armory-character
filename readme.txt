@@ -3,7 +3,7 @@ Contributors: blueajcooper
 Tags: widget, world of warcraft, wow, armory, character, warcraft, blizzard, toon, gear, achievements, professions
 Requires at least: 3.0.0
 Tested up to: 3.2.1
-Stable tag: 0.9.1
+Stable tag: 0.9.2
 License: GPLv2
 
 Pulls character information from the WoW community API and displays it.
@@ -78,6 +78,16 @@ community API is returning old information, in this case you will need to wait u
 2. The widget configuration screen.
 
 == Changelog ==
+
+= 0.9.2 =
+* Retagging since I messed it up. Give us a break it's my first plugin :)
+
+= 0.9.1 =
+* Changed file address from __FILE__ since it does not work well with symlinks
+* Enforced correct language choices per region
+* Fixed realms with spaces in their names
+* Fixed some images not working in a non-english locale
+* Added KR and TW regions
 
 = 0.9 =
 * The initial release of the plugin.
