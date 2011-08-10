@@ -36,7 +36,7 @@ professions (though these are planned).
 == Installation ==
 
 1. Upload 'wow-armory-character' to the `/wp-content/plugins/` directory
-1. Ensure your webserver has write permissions to the `/wp-content/plugins/wow-armory-character/cache`
+1. Ensure your webserver has write permissions to the `/wp-content/plugins/wow-armory-character/cache` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Configure a widget and add it to your site or use the `[armory-character]` shortcode.
 
