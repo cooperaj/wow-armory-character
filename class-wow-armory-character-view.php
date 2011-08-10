@@ -221,13 +221,13 @@ class WoW_Armory_Character_View
 		$final_url = $asset_url;
 		if ($extension == 'gif' || $extension == 'jpg' || $extension == 'png')
 		{
-			if (file_exists(__DIR__ . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name))
+			if (file_exists(plugin_dir_path($GLOBALS['wacpath']) . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name))
 			{
 				$final_url = $new_asset_url;
 			}
 			else
 			{
-				if ($fp = fopen(__DIR__ . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name, 'w'))
+				if ($fp = fopen(plugin_dir_path($GLOBALS['wacpath']) . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name, 'w'))
 				{
 					$http_request = new WP_Http();
 					$http_result = $http_request->request($asset_url);

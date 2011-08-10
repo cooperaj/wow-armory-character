@@ -30,7 +30,7 @@ class WoW_Armory_Character_Plugin
 {
 	public function init()
 	{
-		load_plugin_textdomain('wow_armory_character', false, __DIR__ . '/languages');
+		load_plugin_textdomain('wow_armory_character', false, plugin_dir_path($GLOBALS['wacpath']) . '/languages');
 		
 		wp_enqueue_script('wowhead',"http://static.wowhead.com/widgets/power.js");
 		wp_enqueue_style('wow_armory_character', plugins_url('css/style.css', $GLOBALS['wacpath']));
