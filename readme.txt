@@ -49,7 +49,7 @@ that you wish to show all the details of character from the EU region in English
 
 The configuration parameters available to use are:
 
-* **region** - *EU* and *US* currently supported
+* **region** - *EU*, *US*, *KO* and *TW* currently supported
 * **show_portrait** - *1* or *0*
 * **show_title** - *1* or *0*
 * **show_talents** - *1* or *0*
@@ -57,6 +57,8 @@ The configuration parameters available to use are:
 * **show_profs** - *1* or *0*
 * **show_achievs** - *1* or *0*
 * **locale** - *en_GB*, *en_US*, *de_DE*, *es_ES*, *es_MX*, *fr_FR*, *ru_RU*, *ko_KR*, *zh_TW* or *zh_CN*
+
+Note: Certain locale choices are only available when selecting some regions.
 
 == Frequently Asked Questions ==
 
