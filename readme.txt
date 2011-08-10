@@ -3,7 +3,7 @@ Contributors: blueajcooper
 Tags: widget, world of warcraft, wow, armory, character, warcraft, blizzard, toon, gear, achievements, professions
 Requires at least: 3.0.0
 Tested up to: 3.2.1
-Stable tag: 0.9.2
+Stable tag: 0.9.3
 License: GPLv2
 
 Pulls character information from the WoW community API and displays it.
@@ -36,6 +36,7 @@ professions (though these are planned).
 == Installation ==
 
 1. Upload 'wow-armory-character' to the `/wp-content/plugins/` directory
+1. Ensure your webserver has write permissions to the `/wp-content/plugins/wow-armory-character/cache`
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Configure a widget and add it to your site or use the `[armory-character]` shortcode.
 
@@ -80,6 +81,10 @@ community API is returning old information, in this case you will need to wait u
 2. The widget configuration screen.
 
 == Changelog ==
+
+= 0.9.3 =
+* Fixed usages of __DIR__ which is PHP5.3 only. The plugin should now work on PHP5.2+ Thanks to @Flavio_Torelli 
+for reporting the issue.
 
 = 0.9.2 =
 * Retagging since I messed it up. Give us a break it's my first plugin :)
