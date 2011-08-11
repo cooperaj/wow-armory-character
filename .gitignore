@@ -1,0 +1,6 @@
+# Mac Files
+.DS_Store
+
+# Cache Files
+cache/*
+!cache/index.php
