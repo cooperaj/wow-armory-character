@@ -99,3 +99,12 @@ for reporting the issue.
 = 0.9 =
 * The initial release of the plugin.
 
+== Development Version ==
+
+The development version, as well as all the tagged releases of this project, are hosted on 
+[github.com](https://github.com/cooperaj/wow-armory-character) and merely pushed to 
+the Wordpress plugin repository for distribution purposes. 
+
+Should you need to use the development version (perhaps to fix a bug, or test a feature) please 
+download it from the [github website](https://github.com/cooperaj/wow-armory-character/zipball/master).
+
