@@ -210,7 +210,9 @@ class WoW_Armory_Character_View
 	
 	public function fetch_asset($asset_url)
 	{
-		$cache_url = plugins_url(self::CACHE_FOLDER_NAME, plugin_basename($GLOBALS['wacpath']));
+		global $wacpath;
+		
+		$cache_url = plugins_url(self::CACHE_FOLDER_NAME, plugin_basename($wacpath));
 	
 		$exploded_asset_url = explode('/', parse_url($asset_url, PHP_URL_PATH));
 		$asset_name = end($exploded_asset_url);
@@ -221,13 +223,13 @@ class WoW_Armory_Character_View
 		$final_url = $asset_url;
 		if ($extension == 'gif' || $extension == 'jpg' || $extension == 'png')
 		{
-			if (file_exists(plugin_dir_path($GLOBALS['wacpath']) . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name))
+			if (file_exists(plugin_dir_path($wacpath) . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name))
 			{
 				$final_url = $new_asset_url;
 			}
 			else
 			{
-				if ($fp = fopen(plugin_dir_path($GLOBALS['wacpath']) . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name, 'w'))
+				if ($fp = fopen(plugin_dir_path($wacpath) . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name, 'w'))
 				{
 					$http_request = new WP_Http();
 					$http_result = $http_request->request($asset_url);
