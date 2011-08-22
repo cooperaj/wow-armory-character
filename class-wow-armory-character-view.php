@@ -70,7 +70,7 @@ class WoW_Armory_Character_View
 		$randNo = rand(0, pow(10,5));
 		
 		ob_start();
-		include('view-wow-armory-character.php');
+		include(apply_filters('wow-armory-character-template', 'view-wow-armory-character.php'));
 		$display = apply_filters('wow-armory-character-display', ob_get_clean(), $this->character);
 		
 		return $display;
