@@ -34,3 +34,33 @@
 {
 	background-position: -18px 0;
 }
+
+.icon-warrior-18
+{
+	background-position: -72px -18px;
+}
+
+.icon-mage-18
+{
+	background-position: -54px 0;
+}
+
+.icon-death-knight-18
+{
+	/* No positioning needed */
+}
+
+.icon-shaman-18
+{
+	background-position: -36px -18px;
+}
+
+.icon-warlock-18
+{
+	background-position: -54px -18px;
+}
+
+.icon-priest-18
+{
+	background-position: 0 -18px;
+}
