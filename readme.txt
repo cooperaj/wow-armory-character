@@ -61,6 +61,13 @@ The configuration parameters available to use are:
 
 Note: Certain locale choices are only available when selecting some regions.
 
+= Available Filters =
+
+* **wow-armory-character-template** - Allows you to specify an alternate template file to use to display your 
+profile. Defaults to `view-wow-armory-character.php`
+* **wow-armory-character-display** - Your profile once the template has been processed. It may be quicker to 
+alter the display at runtime rather than duplicate the template when making only minor changes.
+
 == Frequently Asked Questions ==
 
 = The plugin is displaying old information. How do I update it? =
