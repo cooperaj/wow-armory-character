@@ -45,7 +45,7 @@
 		<h4><?php _e('Equipment List', 'wow_armory_character')?></h4>
 		<ul class="armory_equip_list">
 		<?php		foreach ($this->_slot_table as $slot) : 
-							if ($item = $this->character->items->$slot) : ?>
+							if (isset($this->character->items->$slot) && $item = $this->character->items->$slot) : ?>
 			<li><a href="<?php echo $this->get_wowhead_item_url($item->id); ?>" rel="<?php echo $this->get_wowhead_item_rel($item->tooltipParams); ?>"><img src="<?php echo $this->get_item_icon_url($item->icon); ?>" alt="<?php echo $item->id; ?>" class="armory_item_icon" /></a></li>
 		<?php 		endif;
 						endforeach; ?>
