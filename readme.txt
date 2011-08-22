@@ -63,10 +63,29 @@ Note: Certain locale choices are only available when selecting some regions.
 
 = Available Filters =
 
-* **wow-armory-character-template** - Allows you to specify an alternate template file to use to display your 
-profile. Defaults to `view-wow-armory-character.php`
-* **wow-armory-character-display** - Your profile once the template has been processed. It may be quicker to 
-alter the display at runtime rather than duplicate the template when making only minor changes.
+For more capable/adventurous developers there are a number of hooks that allow you to change the way the
+plugin functions without altering it's code. This means you get to upgrade in the future without worrying
+about breaking any changes you may have made.
+
+**wow-armory-character-template**
+Allows you to specify an alternate template file to use to display your profile. Defaults to `view-wow-armory-character.php`
+
+    function my_function_name($file_path) {
+      return "THE_PATH_TO_YOUR_TEMPLATE_FILE";
+    }
+    add_filter('wow-armory-character-template','my_function_name');
+
+**wow-armory-character-display**
+Your profile once the template has been processed. It may be quicker to alter the display at runtime rather 
+than duplicate the template when making only minor changes. As well as the output that will be displayed 
+the Character data as retireved from the Community API is also passed. This should allow you to make any changes
+you need.
+
+    function my_function_name($output, $character_data) {
+      // Do something to the $output, perhaps using the $character_data
+      return $output;
+    }
+    add_filter('wow-armory-character-display','my_function_name');
 
 == Frequently Asked Questions ==
 
@@ -106,6 +125,15 @@ for reporting the issue.
 = 0.9 =
 * The initial release of the plugin.
 
+== Upgrade Notice ==
+
+= 0.9.3 =
+Prior to this version the plugin was non-functional on anything less then PHP 5.3. If your running 5.2
+then it should now work.
+
+= 0.9.1 =
+Numerous bug fixes plus the addition of support for the KR and TW regions.
+
 == Development Version ==
 
 The development version, as well as all the tagged releases of this project, are hosted on 
@@ -114,4 +142,7 @@ the Wordpress plugin repository for distribution purposes.
 
 Should you need to use the development version (perhaps to fix a bug, or test a feature) please 
 download it from the [github website](https://github.com/cooperaj/wow-armory-character/zipball/master).
+
+I also maintain a more  comprehensive issue/bug list at github so if you have anything to report it would 
+be very helpful if you could post the problem there.
 
