@@ -47,8 +47,23 @@
 <?php		foreach ($this->_slot_table as $slot) : 
 					if (isset($this->character->items->$slot) && $item = $this->character->items->$slot) : ?>
 			<li><a href="<?php echo $this->get_wowhead_item_url($item->id); ?>" rel="<?php echo $this->get_wowhead_item_rel($item->tooltipParams); ?>"><img src="<?php echo $this->get_item_icon_url($item->icon); ?>" alt="<?php echo $item->id; ?>" class="armory_item_icon" /></a></li>
-		<?php 		endif;
-						endforeach; ?>
+<?php 		endif;
+				endforeach; ?>
+		</ul>
+	</div>
+<?php endif; ?>
+	
+<?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST) : ?>
+	<div class="armory_achiev">
+		<h4><?php _e('Recent Achievements', 'wow_armory_character'); ?></h4>
+		<ul class="armory_achiev_list">
+<?php		foreach ($this->character->get_latest_achievements(5) as $ach) : ?>
+			<li>
+				<span class="points"><?php echo $ach->points; ?></span>
+				<a href="<?php echo $this->get_wowhead_achievement_url($ach->id); ?>" rel="<?php echo $this->get_wowhead_achievement_rel($ach->completed);?>"><?php echo $ach->title; ?></a>
+				<?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) echo $ach->description; ?> 
+			</li>
+<?php 	endforeach; ?>
 		</ul>
 	</div>
 <?php endif; ?>

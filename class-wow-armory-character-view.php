@@ -29,7 +29,10 @@ class WoW_Armory_Character_View
 	const STATIC_URL = 'http://%s.battle.net/wow/static/images';
 	const PORTRAIT_URL = 'http://%s.battle.net/static-render/%s';
 	const CDN_URL = 'http://%s.media.blizzard.com/wow';
-	const WOWHEAD_URL = 'http://%s.wowhead.com/?item=%s';
+	
+	const WOWHEAD_ITEM_URL = 'http://%s.wowhead.com/?item=%s';
+	const WOWHEAD_ACHIEV_URL = 'http://%s.wowhead.com/?achievement=%s';
+	
 	const CACHE_FOLDER_NAME = 'cache/';
 	
 	public $character;
@@ -161,9 +164,20 @@ class WoW_Armory_Character_View
 		return null;
 	}
 	
+	public function get_wowhead_achievement_url($achiev_id)
+	{
+		return sprintf(self::WOWHEAD_ACHIEV_URL, ($this->_locale_table[$this->character->locale] == 'en' 
+				? 'www' : $this->_locale_table[$this->character->locale]), $achiev_id);
+	}
+	
+	public function get_wowhead_achievement_rel($timestamp)
+	{
+		return '&who=' . $this->character->name . '&when=' . $timestamp;
+	}
+	
 	public function get_wowhead_item_url($item_id)
 	{
-		return sprintf(self::WOWHEAD_URL, ($this->_locale_table[$this->character->locale] == 'en' 
+		return sprintf(self::WOWHEAD_ITEM_URL, ($this->_locale_table[$this->character->locale] == 'en' 
 				? 'www' : $this->_locale_table[$this->character->locale]), $item_id);
 	}
 	

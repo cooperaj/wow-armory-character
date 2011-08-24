@@ -52,4 +52,27 @@ class WoW_Armory_Character
 	{
 		return isset($this->_api_data->$name);
 	}
+	
+	public function get_latest_achievements($no_to_fetch)
+	{
+		$achievs = array();
+		$count = 0;
+		
+		$achiev_data = WoW_Armory_Character_DAL::fetch_achievements($this->region, $this->locale);
+		
+		arsort($this->_api_data->achievements->achievementsCompletedTimestamp);
+		foreach($this->_api_data->achievements->achievementsCompletedTimestamp as $key => $timestamp)
+		{
+			if ($count >= $no_to_fetch)
+				break;
+				
+			$ach = $achiev_data->get_achievement_by_id($this->achievements->achievementsCompleted[$key]);
+			$ach->completed = $timestamp;
+			$achievs[] = $ach;
+			
+			$count++;
+		}
+		
+		return $achievs;
+	}
 }

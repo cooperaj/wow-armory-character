@@ -20,6 +20,7 @@ require_once('class-wow-armory-character.php');
 require_once('class-wow-armory-character-dal.php');
 require_once('class-wow-armory-character-view.php');
 require_once('class-wow-armory-character-widget.php');
+require_once('class-wow-armory-character-achievements.php');
 
 /**
  * Provides the wordpress integration.
@@ -28,6 +29,11 @@ require_once('class-wow-armory-character-widget.php');
  */
 class WoW_Armory_Character_Plugin
 {
+	// Bitwise operators for achievement display style.
+	const STYLE_ACHIEV_BAR = 1;
+	const STYLE_ACHIEV_LIST = 2;
+	const STYLE_ACHIEV_LIST_DESC = 4;
+	
 	public function init()
 	{
 		global $wacpath;
@@ -170,7 +176,7 @@ class WoW_Armory_Character_Plugin
 			'show_talents' => 1,
 			'show_items' => 1,
 			'show_profs' => 1,
-			'show_achievs' => 1,
+			'show_achievs' => self::STYLE_ACHIEV_BAR | self::STYLE_ACHIEV_LIST,
 			'locale' => 'en_GB',
 		), $atts);
 		

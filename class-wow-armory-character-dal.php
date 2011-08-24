@@ -29,10 +29,11 @@ class WoW_Armory_Character_DAL
 	 * The API url to retrieve a character populated with Guild, Equipped Items, Profession and Talent information.
 	 * @var string
 	 */
-	const CHARACTER_URL = 'http://%s.battle.net/api/wow/character/%s/%s?fields=guild,items,professions,talents,titles&locale=%s';
+	const CHARACTER_URL = 'http://%s.battle.net/api/wow/character/%s/%s?fields=guild,items,professions,talents,titles,achievements&locale=%s';
 	
 	const RACE_URL = 'http://%s.battle.net/api/wow/data/character/races?locale=%s';
 	const CLASS_URL = 'http://%s.battle.net/api/wow/data/character/classes?locale=%s';
+	const ACHIEV_URL = 'http://%s.battle.net/api/wow/data/character/achievements?locale=%s';
 	
 	static function fetch_all_cached_characters()
 	{
@@ -95,6 +96,53 @@ class WoW_Armory_Character_DAL
 			return $char_api_data_obj->en_class;
 		
 		return new WoW_Armory_Character($region, $locale, $char_api_data_obj);
+	}
+	
+	/**
+	 * Fetches achievement information from the community API
+	 * 
+	 * @param string $region The region to fetch from.
+	 * @param string $locale The locale in which to return the result.
+	 * @param int $expires_after The expiry time for this lookup cache. Defaults to 1 week.
+	 * @return WP_Error|stdClass Returns either an error if the API request failed or a stdClass encapsulating the response.
+	 */
+	static function fetch_achievements($region, $locale, $expires_after = 2419200)
+	{
+		$cached_achievs = get_option('wowachcache-' . $region . '-' . $locale);
+		if ($cached_achievs['last_checked'] > (time() - $expires_after))
+		{
+			$achievs_json = $cached_achievs['api_data'];
+		}
+		else
+		{
+			$http_request = new WP_Http();
+			$http_result = $http_request->request(self::_encode_url(sprintf(self::ACHIEV_URL, strtolower($region), $locale)));
+				
+			if (!is_wp_error($http_result) && $http_result['response']['code'] == 200)
+			{
+				$achievs_data = array();
+				$achievs_data['last_checked'] = time();
+				$achievs_data['locale'] = $locale;
+				$achievs_data['api_data'] = $http_result['body'];
+				
+				if (get_option('wowachcache-' . $region . '-' . $locale))
+				{
+					update_option('wowachcache-' . $region . '-' . $locale, $achievs_data);
+				}
+				else
+				{
+					add_option('wowachcache-' . $region . '-' . $locale, $achievs_data);
+				}
+				
+				$achievs_json = $achievs_data['api_data'];
+			}
+			else 
+			{
+				return new WP_Error(500, __('Unable to fetch data from battle.net for character classes', 'wow_armory_character'));
+			}
+		}
+		
+		return new WoW_Armory_Character_Achievements($region, $locale, json_decode($achievs_json));
 	}
 	
 	/**
