@@ -74,11 +74,11 @@ class WoW_Armory_Character_Widget extends WP_Widget
 				<select class="wa-lang widefat" id="<?php echo $this->get_field_id('locale'); ?>" name="<?php echo $this->get_field_name('locale'); ?>">
 					<option value="en_GB"<?php echo $instance['locale'] == 'en_GB' ? ' selected="selected"' : ''; ?>><?php _e('English', 'wow_armory_character'); ?></option>
 					<option value="de_DE"<?php echo $instance['locale'] == 'de_DE' ? ' selected="selected"' : ''; ?>><?php _e('Deutsch', 'wow_armory_character'); ?></option>
-					<option value="es_ES"<?php echo $instance['locale'] == 'es_ES' ? ' selected="selected"' : ''; ?>><?php _e('Espa√±ol', 'wow_armory_character'); ?></option>
-					<option value="fr_FR"<?php echo $instance['locale'] == 'fr_FR' ? ' selected="selected"' : ''; ?>><?php _e('Fran√ßaise', 'wow_armory_character'); ?></option>
-					<option value="ru_RU"<?php echo $instance['locale'] == 'ru_RU' ? ' selected="selected"' : ''; ?>><?php _e('P—É—Å—Å–∫–∏–π', 'wow_armory_character'); ?></option>
-					<option value="ko_KR"<?php echo $instance['locale'] == 'ko_KR' ? ' selected="selected"' : ''; ?>><?php _e('ÌïúÍµ≠Ïñ¥', 'wow_armory_character'); ?></option>
-					<option value="zh_TW"<?php echo $instance['locale'] == 'zh_TW' ? ' selected="selected"' : ''; ?>><?php _e('ÂÆòË©±', 'wow_armory_character'); ?></option>
+					<option value="es_ES"<?php echo $instance['locale'] == 'es_ES' ? ' selected="selected"' : ''; ?>><?php _e('Español', 'wow_armory_character'); ?></option>
+					<option value="fr_FR"<?php echo $instance['locale'] == 'fr_FR' ? ' selected="selected"' : ''; ?>><?php _e('Française', 'wow_armory_character'); ?></option>
+					<option value="ru_RU"<?php echo $instance['locale'] == 'ru_RU' ? ' selected="selected"' : ''; ?>><?php _e('Pусский', 'wow_armory_character'); ?></option>
+					<option value="ko_KR"<?php echo $instance['locale'] == 'ko_KR' ? ' selected="selected"' : ''; ?>><?php _e('한국의', 'wow_armory_character'); ?></option>
+					<option value="zh_TW"<?php echo $instance['locale'] == 'zh_TW' ? ' selected="selected"' : ''; ?>><?php _e('中國', 'wow_armory_character'); ?></option>
 				</select>
 			</p>
 			<h4><?php _e ('Display Options', 'wow_armory_character'); ?></h4>
