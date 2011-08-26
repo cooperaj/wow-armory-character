@@ -53,6 +53,20 @@ class WoW_Armory_Character
 		return isset($this->_api_data->$name);
 	}
 	
+	public function get_completed_achievement_data()
+	{
+		$data = new stdClass();
+		
+		$achiev_data = WoW_Armory_Character_DAL::fetch_achievements($this->region, $this->locale);
+		
+		$data->completed = count($this->achievements->achievementsCompleted);
+		$data->total = $achiev_data->get_achievement_count();
+		$data->percent_complete = round((100 / $data->total) * $data->completed);
+		$data->percent_remaining = 100 - $data->percent_complete;
+		
+		return $data;
+	}
+	
 	public function get_latest_achievements($no_to_fetch)
 	{
 		$achievs = array();

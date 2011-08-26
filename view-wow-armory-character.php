@@ -41,7 +41,7 @@
 	</div>
 	
 <?php if ($options['show_items'] == 1 && $this->character->items) : ?>
-	<div class="armory_equip">
+	<div class="armory_section armory_equip">
 		<h4><?php _e('Equipment List', 'wow_armory_character')?></h4>
 		<ul class="armory_equip_list">
 <?php		foreach ($this->_slot_table as $slot) : 
@@ -52,9 +52,24 @@
 		</ul>
 	</div>
 <?php endif; ?>
+
+<?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR) : 
+				$ach_data = $this->character->get_completed_achievement_data();
+?>
+	<div class="armory_section armory_achiev_points">
+		<h4><?php _e('Achievements', 'wow_armory_character'); ?></h4>
+		<div class="bar-wrap" title="<?php printf(__('Completed %1$s out of a possible %2$s achievements earning a total of %3$s achievement points.'), $ach_data->completed, $ach_data->total, $this->character->achievementPoints); ?>">
+    	<div class="bar-value" style="width: <?php echo $ach_data->percent_complete; ?>%;">
+        <div class="bar-text">
+        	<span><?php echo $this->character->achievementPoints; ?></span> &mdash; <?php echo $ach_data->completed; ?>/<?php echo $ach_data->total; ?> (<?php echo $ach_data->percent_complete; ?>%)
+        </div>
+      </div>
+    </div>
+	</div>
+<?php endif; ?>
 	
 <?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST) : ?>
-	<div class="armory_achiev">
+	<div class="armory_section armory_achiev">
 		<h4><?php _e('Recent Achievements', 'wow_armory_character'); ?></h4>
 		<ul class="armory_achiev_list">
 <?php		foreach ($this->character->get_latest_achievements(5) as $ach) : ?>

@@ -57,14 +57,18 @@ class WoW_Armory_Character_Achievements
 	/**
 	 * Returns the count of the earnable achievements.
 	 * 
-	 * Because some of the achievements are no long obtainable we need to
+	 * Because some of the achievements are no longer obtainable (feats of strength)
+	 * or are duplicated because they are different for horde/alliance we need to
 	 * calculate a count that will remove these from consideration.
 	 * 
 	 * @return int The number of achievements available to earn.
 	 */
 	public function get_achievement_count()
 	{
+		// TODO Until I can figure this out I'm going to hard code it based on what the armory
+		// tells me is available.
 		
+		return 1352;
 	}
 	
 	/**
