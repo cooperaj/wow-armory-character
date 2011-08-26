@@ -7,27 +7,27 @@
 			<a href="<?php echo $this->get_profile_url(); ?>"><?php if ($options['show_title'] == 1 && $name = $this->get_name_with_title_text()) :
 				echo $name;
 			else :
-				echo $this->character->name;
+				echo $character->name;
 			endif; ?>
 			</a>
 		</span>
 		
-<?php if (isset($this->character->guild)) : ?>
-		<span class="armory_char_guild"><a href ="<?php echo $this->get_guild_url(); ?>">&lt;<?php echo $this->character->guild->name?>&gt;</a>
-			<?php _e('of', 'wow_armory_character')?> <?php echo $this->character->realm; ?>-<?php echo $this->character->region; ?>
+<?php if (isset($character->guild)) : ?>
+		<span class="armory_char_guild"><a href ="<?php echo $this->get_guild_url(); ?>">&lt;<?php echo $character->guild->name?>&gt;</a>
+			<?php _e('of', 'wow_armory_character')?> <?php echo $character->realm; ?>-<?php echo $character->region; ?>
 		</span>
 <?php endif; ?>
 		
 		<span class="armory_char_info" >
 			<?php _e('Level', 'wow_armory_character')?> 
-			<?php echo $this->character->level; ?>
-			<?php echo $this->character->race->name; ?>
-			<?php echo $this->character->class->name; ?>
+			<?php echo $character->level; ?>
+			<?php echo $character->race->name; ?>
+			<?php echo $character->class->name; ?>
 
-<?php if ($options['show_talents'] == 1 && $this->character->talents) : ?>
+<?php if ($options['show_talents'] == 1 && $character->talents) : ?>
 			<span class="armory_char_spec">
 <?php		$count = 0;
-				foreach ($this->character->talents as $talent) :
+				foreach ($character->talents as $talent) :
 					$type = ($count == 0) ? 'primary' : 'secondary'; ?>
 				<span class="<?php echo (isset($talent->selected) && $talent->selected) ? 'active' : 'inactive'; ?>_spec">
 					<img src="<?php echo $this->get_talent_tree_icon_url($talent); ?>" alt="<?php echo $talent->name; ?> talent spec icon" />
@@ -40,12 +40,12 @@
 		</span>
 	</div>
 	
-<?php if ($options['show_items'] == 1 && $this->character->items) : ?>
+<?php if ($options['show_items'] == 1 && $character->items) : ?>
 	<div class="armory_section armory_equip">
 		<h4><?php _e('Equipment List', 'wow_armory_character')?></h4>
 		<ul class="armory_equip_list">
 <?php		foreach ($this->_slot_table as $slot) : 
-					if (isset($this->character->items->$slot) && $item = $this->character->items->$slot) : ?>
+					if (isset($character->items->$slot) && $item = $character->items->$slot) : ?>
 			<li><a href="<?php echo $this->get_wowhead_item_url($item->id); ?>" rel="<?php echo $this->get_wowhead_item_rel($item->tooltipParams); ?>"><img src="<?php echo $this->get_item_icon_url($item->icon); ?>" alt="<?php echo $item->id; ?>" class="armory_item_icon" /></a></li>
 <?php 		endif;
 				endforeach; ?>
@@ -54,14 +54,14 @@
 <?php endif; ?>
 
 <?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR) : 
-				$ach_data = $this->character->get_completed_achievement_data();
+				$ach_data = $character->get_completed_achievement_data();
 ?>
 	<div class="armory_section armory_achiev_points">
 		<h4><?php _e('Achievements', 'wow_armory_character'); ?></h4>
-		<div class="bar-wrap" title="<?php printf(__('Completed %1$s out of a possible %2$s achievements earning a total of %3$s achievement points.'), $ach_data->completed, $ach_data->total, $this->character->achievementPoints); ?>">
+		<div class="bar-wrap" title="<?php printf(__('Completed %1$s out of a possible %2$s achievements earning a total of %3$s achievement points.'), $ach_data->completed, $ach_data->total, $character->achievementPoints); ?>">
     	<div class="bar-value" style="width: <?php echo $ach_data->percent_complete; ?>%;">
         <div class="bar-text">
-        	<span><?php echo $this->character->achievementPoints; ?></span> &mdash; <?php echo $ach_data->completed; ?>/<?php echo $ach_data->total; ?> (<?php echo $ach_data->percent_complete; ?>%)
+        	<span><?php echo $character->achievementPoints; ?></span> &mdash; <?php echo $ach_data->completed; ?>/<?php echo $ach_data->total; ?> (<?php echo $ach_data->percent_complete; ?>%)
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
 	<div class="armory_section armory_achiev">
 		<h4><?php _e('Recent Achievements', 'wow_armory_character'); ?></h4>
 		<ul class="armory_achiev_list">
-<?php		foreach ($this->character->get_latest_achievements(5) as $ach) : ?>
+<?php		foreach ($character->get_latest_achievements(5) as $ach) : ?>
 			<li>
 				<span class="points"><?php echo $ach->points; ?></span>
 				<a href="<?php echo $this->get_wowhead_achievement_url($ach->id); ?>" rel="<?php echo $this->get_wowhead_achievement_rel($ach->completed);?>"><?php echo $ach->title; ?></a>
