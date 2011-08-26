@@ -36,7 +36,7 @@ class WoW_Armory_Character_Widget extends WP_Widget
 			'show_talents' => 1,
 			'show_items' => 1,
 			'show_profs' => 1,
-			'show_achievs' => 1,
+			'show_achievs' => WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST,
 			'locale' => 'en_GB',
 			'title' => __('Armory for %NAME%', 'wow_armory_character'),
 		);
@@ -74,11 +74,11 @@ class WoW_Armory_Character_Widget extends WP_Widget
 				<select class="wa-lang widefat" id="<?php echo $this->get_field_id('locale'); ?>" name="<?php echo $this->get_field_name('locale'); ?>">
 					<option value="en_GB"<?php echo $instance['locale'] == 'en_GB' ? ' selected="selected"' : ''; ?>><?php _e('English', 'wow_armory_character'); ?></option>
 					<option value="de_DE"<?php echo $instance['locale'] == 'de_DE' ? ' selected="selected"' : ''; ?>><?php _e('Deutsch', 'wow_armory_character'); ?></option>
-					<option value="es_ES"<?php echo $instance['locale'] == 'es_ES' ? ' selected="selected"' : ''; ?>><?php _e('Español', 'wow_armory_character'); ?></option>
-					<option value="fr_FR"<?php echo $instance['locale'] == 'fr_FR' ? ' selected="selected"' : ''; ?>><?php _e('Française', 'wow_armory_character'); ?></option>
-					<option value="ru_RU"<?php echo $instance['locale'] == 'ru_RU' ? ' selected="selected"' : ''; ?>><?php _e('Pусский', 'wow_armory_character'); ?></option>
-					<option value="ko_KR"<?php echo $instance['locale'] == 'ko_KR' ? ' selected="selected"' : ''; ?>><?php _e('한국어', 'wow_armory_character'); ?></option>
-					<option value="zh_TW"<?php echo $instance['locale'] == 'zh_TW' ? ' selected="selected"' : ''; ?>><?php _e('官話', 'wow_armory_character'); ?></option>
+					<option value="es_ES"<?php echo $instance['locale'] == 'es_ES' ? ' selected="selected"' : ''; ?>><?php _e('Espa√±ol', 'wow_armory_character'); ?></option>
+					<option value="fr_FR"<?php echo $instance['locale'] == 'fr_FR' ? ' selected="selected"' : ''; ?>><?php _e('Fran√ßaise', 'wow_armory_character'); ?></option>
+					<option value="ru_RU"<?php echo $instance['locale'] == 'ru_RU' ? ' selected="selected"' : ''; ?>><?php _e('P—É—Å—Å–∫–∏–π', 'wow_armory_character'); ?></option>
+					<option value="ko_KR"<?php echo $instance['locale'] == 'ko_KR' ? ' selected="selected"' : ''; ?>><?php _e('ÌïúÍµ≠Ïñ¥', 'wow_armory_character'); ?></option>
+					<option value="zh_TW"<?php echo $instance['locale'] == 'zh_TW' ? ' selected="selected"' : ''; ?>><?php _e('ÂÆòË©±', 'wow_armory_character'); ?></option>
 				</select>
 			</p>
 			<h4><?php _e ('Display Options', 'wow_armory_character'); ?></h4>
@@ -96,6 +96,25 @@ class WoW_Armory_Character_Widget extends WP_Widget
 				<input id="<?php echo $this->get_field_id('show_achievs'); ?>" name="<?php echo $this->get_field_name('show_achievs'); ?>" value="1" type="checkbox" <?php echo $instance['show_achievs'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_achievs'); ?>"><?php _e('Show Achievements', 'wow_armory_character'); ?></label><br/>
 			</p>
+			<div class="achiev_options">
+				<h5><?php _e ('Achievement Display Options', 'wow_armory_character'); ?></h5>
+				<p>
+					<input id="<?php echo $this->get_field_id('show_achievs_bar'); ?>"
+								 name="<?php echo $this->get_field_name('show_achievs_bar'); ?>"
+								 value="<?php echo WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR; ?>"
+								 type="checkbox"
+								 <?php echo (($instance['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR) ? 'checked="checked"' : ''; ?>
+					/>
+					<label for="<?php echo $this->get_field_id('show_achievs_list'); ?>"><?php _e('Show Completion Bar', 'wow_armory_character'); ?></label><br/>
+					<input id="<?php echo $this->get_field_id('show_achievs_list'); ?>"
+								 name="<?php echo $this->get_field_name('show_achievs_list'); ?>"
+								 value="<?php echo WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST; ?>"
+								 type="checkbox"
+								 <?php echo (($instance['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST) ? 'checked="checked"' : ''; ?>
+					/>
+					<label for="<?php echo $this->get_field_id('show_achievs_list'); ?>"><?php _e('Show Recent Achievements', 'wow_armory_character'); ?></label><br/>
+				</p>
+			</div>
 		</div>
 	<?php
 	}
@@ -112,9 +131,19 @@ class WoW_Armory_Character_Widget extends WP_Widget
 		$instance['show_talents'] = strip_tags(stripslashes($new_instance['show_talents']));
 		$instance['show_items'] = strip_tags(stripslashes($new_instance['show_items']));
 		$instance['show_profs'] = strip_tags(stripslashes($new_instance['show_profs']));
-		$instance['show_achievs'] = strip_tags(stripslashes($new_instance['show_achievs']));
 		$instance['locale'] = strip_tags(stripslashes($new_instance['locale']));
 		$instance['title'] = strip_tags(stripslashes($new_instance['title']));
+		
+		// We ignore the setting of 'show_achievs' and parse the bitwise setting instead. Having
+		// bitwise settings checked implies you want the master setting configured.
+		$ach_config = null;
+		if ($new_instance['show_achievs_bar']) $ach_config = $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR;
+		if ($new_instance['show_achievs_list']) $ach_config =  $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST;
+
+		// If no settings are configured but the master is ticked then set the defaults. This shouldn't be 
+		// needed since JS on the frontend will sort it but we need to cover ourselves.
+		if ($new_instance['show_achievs'] && $ach_config == null) $ach_config = $this->_default_options['show_achievs'];
+		$instance['show_achievs'] = $ach_config;		
 		
 		return $instance;
 	}
