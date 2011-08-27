@@ -48,9 +48,8 @@ class WoW_Armory_Character_Plugin
 	{
 		global $wacpath;
 		
-		wp_register_style('wow-armory-character-admin', 
-			plugins_url('css/admin.css', $wacpath));
-			
+		wp_enqueue_style('wow_armory_character-admin', plugins_url('css/admin.css', $wacpath));
+		
 		wp_enqueue_script('wow-armory-character-admin', 
 			plugins_url('javascript/admin.js', $wacpath), array('jquery'));
 	}
@@ -63,14 +62,6 @@ class WoW_Armory_Character_Plugin
 			'administrator', 
 			'wowcharcache', 
 			array($this, 'options_page'));
-			
-		// Using registered $page_name handle to hook stylesheet loading
-    add_action( 'admin_print_styles-' . $page_name, array($this, 'admin_styles'));
-	}
-	
-	public function admin_styles()
-	{
-		wp_enqueue_style('wow-armory-character-admin');
 	}
 	
 	public function widget_init()
