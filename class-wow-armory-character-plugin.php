@@ -89,7 +89,7 @@ class WoW_Armory_Character_Plugin
 		
 	?>
 		<div class="wrap">
-	    <h2><?php _e('World of Warcraft Character Cache', 'wow_armory_character')?></h2>
+		<h2><?php _e('World of Warcraft Character Cache', 'wow_armory_character')?></h2>
 			<form id="cache-list" action="options-general.php?page=wowcharcache" method="post">
 				<?php
 				// Add a nonce
@@ -97,26 +97,26 @@ class WoW_Armory_Character_Plugin
 				?>
 			
 				<div class="tablenav">
-	    		<input type="submit" value="<?php _e('Refresh', 'wow_armory_character')?>" name="refresh" class="button-secondary" />
-	    		<input type="submit" value="<?php _e('Clear Cache', 'wow_armory_character')?>" name="deleteit" class="button-secondary delete" />
-	    		<br class="clear" />
-	    	</div>
-	    
-	    	<br class="clear" />
-	    		
-	    	<table class="widefat">
-	    		<thead>
-	    			<tr>
-	    				<th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('cache-list'));" /></th>
-	        		<th scope="col"><?php _e('Character Name', 'wow_armory_character')?></th>
-	        		<th scope="col"><?php _e('Realm', 'wow_armory_character')?></th>
-	    				<th scope="col"><?php _e('Cached On', 'wow_armory_character')?></th>
-	    			</tr>
-	    		</thead>
-	    		<tbody>
-	    		
-	    			<?php 
-	    			$chars = WoW_Armory_Character_DAL::fetch_all_cached_characters();
+				<input type="submit" value="<?php _e('Refresh', 'wow_armory_character')?>" name="refresh" class="button-secondary" />
+				<input type="submit" value="<?php _e('Clear Cache', 'wow_armory_character')?>" name="deleteit" class="button-secondary delete" />
+				<br class="clear" />
+			</div>
+
+			<br class="clear" />
+
+			<table class="widefat">
+				<thead>
+					<tr>
+						<th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('cache-list'));" /></th>
+						<th scope="col"><?php _e('Character Name', 'wow_armory_character')?></th>
+						<th scope="col"><?php _e('Realm', 'wow_armory_character')?></th>
+						<th scope="col"><?php _e('Cached On', 'wow_armory_character')?></th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<?php 
+					$chars = WoW_Armory_Character_DAL::fetch_all_cached_characters();
 						if (count($chars) == 0) 
 						{
 						?>
@@ -124,10 +124,10 @@ class WoW_Armory_Character_Plugin
 							<td scope="row" colspan="4" style="text-align: center;"><strong><?php _e('No Caches Found', 'wow_armory_character')?></strong></td>
 						</tr>
 						<?php
-						} 
-						else 
+						}
+						else
 						{
-							foreach ($chars as $character) 
+							foreach ($chars as $character)
 							{
 								$char_view = new WoW_Armory_Character_View($character);
 						?>
@@ -135,7 +135,7 @@ class WoW_Armory_Character_Plugin
 							<th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="<?php echo $character->cache_name; ?>" /></th>
 							<td scope="row" style="text-align: left">
 								<img class="icon-race-18" src="<?php echo $char_view->get_race_icon_url(); ?>" />
-							  <span class="<?php echo $char_view->get_class_icon_class(); ?>"></span> 
+								<span class="<?php echo $char_view->get_class_icon_class(); ?>"></span>
 								<?php echo $character->name; ?>
 							</td>
 							<td scope="row" style="text-align: left"><?php echo $character->realm; ?></td>
@@ -145,13 +145,13 @@ class WoW_Armory_Character_Plugin
 							}
 						}
 						?>
-	    		
-	    		</tbody>
-	    	</table>
-	    	<div class="tablenav">
-	    		<br class="clear" />
-	    	</div>
-	    </form>	
+
+				</tbody>
+			</table>
+			<div class="tablenav">
+				<br class="clear" />
+			</div>
+		</form>	
 		</div>
 	<?php 
 	}
