@@ -59,12 +59,12 @@
 	<div class="armory_section armory_achiev_points">
 		<h4><?php _e('Achievements', 'wow_armory_character'); ?></h4>
 		<div class="bar-wrap" title="<?php printf(__('Completed %1$s out of a possible %2$s achievements earning a total of %3$s achievement points.'), $ach_data->completed, $ach_data->total, $character->achievementPoints); ?>">
-    	<div class="bar-value" style="width: <?php echo $ach_data->percent_complete; ?>%;">
-        <div class="bar-text">
-        	<span><?php echo $character->achievementPoints; ?></span> &mdash; <?php echo $ach_data->completed; ?>/<?php echo $ach_data->total; ?> (<?php echo $ach_data->percent_complete; ?>%)
-        </div>
-      </div>
-    </div>
+			<div class="bar-value" style="width: <?php echo $ach_data->percent_complete; ?>%;">
+				<div class="bar-text">
+					<span><?php echo $character->achievementPoints; ?></span> &mdash; <?php echo $ach_data->completed; ?>/<?php echo $ach_data->total; ?> (<?php echo $ach_data->percent_complete; ?>%)
+				</div>
+      		</div>
+		</div>
 	</div>
 <?php endif; ?>
 	
@@ -75,7 +75,7 @@
 <?php		foreach ($character->get_latest_achievements(5) as $ach) : ?>
 			<li>
 				<span class="points"><?php echo $ach->points; ?></span>
-				<a href="<?php echo $this->get_wowhead_achievement_url($ach->id); ?>" rel="<?php echo $this->get_wowhead_achievement_rel($ach->completed);?>"><?php echo $ach->title; ?></a>
+				<a href="<?php echo $this->get_wowhead_achievement_url($ach->id); ?>" rel="<?php echo $this->get_wowhead_achievement_rel($ach->completed);?>"><?php echo $ach->title; ?></a><br/>
 				<?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) echo $ach->description; ?> 
 			</li>
 <?php 	endforeach; ?>

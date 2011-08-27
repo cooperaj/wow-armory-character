@@ -67,7 +67,7 @@ class WoW_Armory_Character_Widget extends WP_Widget
 					<option value="KR"<?php echo ($instance['region'] == 'KR' ? ' selected="selected"' : ''); ?>>KR</option>
 					<option value="TW"<?php echo ($instance['region'] == 'TW' ? ' selected="selected"' : ''); ?>>TW</option>
 				</select>
-				<input type="text" class="wa-realm" style="width: 175px" id="<?php echo $this->get_field_id('realm'); ?>" name="<?php echo $this->get_field_name('realm'); ?>" value="<?php echo htmlspecialchars($instance['realm']); ?>" />
+				<input type="text" class="wa-realm" style="width: 150px" id="<?php echo $this->get_field_id('realm'); ?>" name="<?php echo $this->get_field_name('realm'); ?>" value="<?php echo htmlspecialchars($instance['realm']); ?>" />
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('locale'); ?>"><?php echo __('Language:', 'wow_armory_character'); ?></label><br />
@@ -95,26 +95,30 @@ class WoW_Armory_Character_Widget extends WP_Widget
 				<label for="<?php echo $this->get_field_id('show_profs'); ?>"><?php _e('Show Professions', 'wow_armory_character'); ?></label><br/>
 				<input id="<?php echo $this->get_field_id('show_achievs'); ?>" name="<?php echo $this->get_field_name('show_achievs'); ?>" value="1" type="checkbox" <?php echo $instance['show_achievs'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_achievs'); ?>"><?php _e('Show Achievements', 'wow_armory_character'); ?></label><br/>
-			</p>
-			<div class="achiev_options">
-				<h5><?php _e ('Achievement Display Options', 'wow_armory_character'); ?></h5>
-				<p>
+				<span class="sub_options<?php echo !$instance['show_achievs'] ? ' sub_options_hidden' : ''; ?>" rel="<?php echo $this->get_field_id('show_achievs'); ?>">
 					<input id="<?php echo $this->get_field_id('show_achievs_bar'); ?>"
 								 name="<?php echo $this->get_field_name('show_achievs_bar'); ?>"
 								 value="<?php echo WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR; ?>"
 								 type="checkbox"
 								 <?php echo (($instance['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR) ? 'checked="checked"' : ''; ?>
 					/>
-					<label for="<?php echo $this->get_field_id('show_achievs_list'); ?>"><?php _e('Show Completion Bar', 'wow_armory_character'); ?></label><br/>
+					<label for="<?php echo $this->get_field_id('show_achievs_list'); ?>"title="<?php _e('Show a progress bar indicating the number of achievements this character has gained from the total.', 'wow_armory_character'); ?>"><?php _e('Completion Bar', 'wow_armory_character'); ?></label><br/>
 					<input id="<?php echo $this->get_field_id('show_achievs_list'); ?>"
 								 name="<?php echo $this->get_field_name('show_achievs_list'); ?>"
 								 value="<?php echo WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST; ?>"
 								 type="checkbox"
 								 <?php echo (($instance['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST) ? 'checked="checked"' : ''; ?>
 					/>
-					<label for="<?php echo $this->get_field_id('show_achievs_list'); ?>"><?php _e('Show Recent Achievements', 'wow_armory_character'); ?></label><br/>
-				</p>
-			</div>
+					<label for="<?php echo $this->get_field_id('show_achievs_list'); ?>" title="<?php _e('Show a listing of the characters most recent achievements.', 'wow_armory_character'); ?>"><?php _e('Recent Achievements', 'wow_armory_character'); ?></label><br/>
+					<input id="<?php echo $this->get_field_id('show_achievs_list_desc'); ?>"
+								 name="<?php echo $this->get_field_name('show_achievs_list_desc'); ?>"
+								 value="<?php echo WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC; ?>"
+								 type="checkbox"
+								 <?php echo (($instance['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) ? 'checked="checked"' : ''; ?>
+					/>
+					<label for="<?php echo $this->get_field_id('show_achievs_list_desc'); ?>" title="<?php _e('Show the achievement description text when showing the Recent Achievements listing.', 'wow_armory_character'); ?>"><?php _e('Achievement Descriptions', 'wow_armory_character'); ?></label>
+				</span>
+			</p>
 		</div>
 	<?php
 	}
@@ -139,9 +143,9 @@ class WoW_Armory_Character_Widget extends WP_Widget
 		$ach_config = null;
 		if ($new_instance['show_achievs_bar']) $ach_config = $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR;
 		if ($new_instance['show_achievs_list']) $ach_config =  $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST;
+		if ($new_instance['show_achievs_list_desc']) $ach_config =  $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC;
 
-		// If no settings are configured but the master is ticked then set the defaults. This shouldn't be 
-		// needed since JS on the frontend will sort it but we need to cover ourselves.
+		// If no settings are configured but the master is ticked then set the defaults.
 		if ($new_instance['show_achievs'] && $ach_config == null) $ach_config = $this->_default_options['show_achievs'];
 		$instance['show_achievs'] = $ach_config;		
 		

@@ -15,52 +15,28 @@
 	background-image: url(../cache/classes-18.jpg);
 }
 
-.icon-paladin-18
+.icon-paladin-18 { background-position: -72px 0; }
+.icon-hunter-18 { background-position: -36px 0; }
+.icon-rogue-18 { background-position: -18px -18px; }
+.icon-druid-18 { background-position: -18px 0; }
+.icon-warrior-18 { background-position: -72px -18px; }
+.icon-mage-18 { background-position: -54px 0; }
+.icon-death-knight-18 { /* No positioning needed */ }
+.icon-shaman-18 { background-position: -36px -18px; }
+.icon-warlock-18 { background-position: -54px -18px; }
+.icon-priest-18 { background-position: 0 -18px; }
+
+.sub_options
 {
-	background-position: -72px 0;
+	display: block;
 }
 
-.icon-hunter-18
+body.js .sub_options_hidden
 {
-	background-position: -36px 0;
+	display: none;
 }
 
-.icon-rogue-18
+.sub_options input
 {
-	background-position: -18px -18px;
-}
-
-.icon-druid-18
-{
-	background-position: -18px 0;
-}
-
-.icon-warrior-18
-{
-	background-position: -72px -18px;
-}
-
-.icon-mage-18
-{
-	background-position: -54px 0;
-}
-
-.icon-death-knight-18
-{
-	/* No positioning needed */
-}
-
-.icon-shaman-18
-{
-	background-position: -36px -18px;
-}
-
-.icon-warlock-18
-{
-	background-position: -54px -18px;
-}
-
-.icon-priest-18
-{
-	background-position: 0 -18px;
+    margin-left: 1.4em;
 }

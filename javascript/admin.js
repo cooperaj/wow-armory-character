@@ -27,9 +27,31 @@ jQuery(document).ready(function() {
     var start_val = jQuery('select.wa-region').val();
     wac_disable_lang(select_clone, start_val);
     
-    // and an onchange event to keep things pucka.
-    jQuery('select.wa-region').change(function() {
+    // and onchange events to keep things pucka.
+    // since the widget is updated using javascript we need to delegate so that
+	// the events are reattached to the new DOM elemnents
+    jQuery('div.widget-liquid-right').delegate('select.wa-region', 'change', function() {
         var val = jQuery(this).val();
         wac_disable_lang(select_clone, val);
     });
+    
+    // find all the sub-options lists and make them show/hide based on their parent
+    // form elements status.
+    jQuery('span.sub_options').each(function() {
+		var parent = jQuery(this).attr('rel');
+		
+		// more delegation
+		jQuery('div.widget-liquid-right').delegate('#' + parent, 'change', function() {
+	    	if (jQuery(this).is(':checked'))
+	    	{
+	    		jQuery('span.sub_options[rel="' + this.id + '"]').slideDown('fast');
+	    	}
+	    	else
+	    	{
+	    		jQuery('span.sub_options[rel="' + this.id + '"]').slideUp('fast', function() {
+	    			jQuery('input[type="checkbox"]', this).attr('checked', false);
+	    		})
+	    	}
+	    });
+	});
 });

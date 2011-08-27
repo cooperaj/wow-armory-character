@@ -56,34 +56,31 @@ img.armory_char_portrait {
 .armory_achiev_list li {
 	list-style: none;
 	margin: 0;
-	font-size: 0.8em;
 }
 
 .armory_achiev_list li a {
-	font-size: 1.2em;
 }
 
 .armory_achiev_list li span.points {
 	float: right;
 	padding-right: 12px;
-	margin: 0 1em;
 	background: url(../images/shield.png) no-repeat right center;
 }
 
 .bar-wrap {
-  position: relative;
-  border: 1px solid #555;
-  padding: 1px;
-  width: 100%;
-  height: 1.4em;
-  background-color: #999;
+	position: relative;
+	border: 1px solid #555;
+	padding: 1px;
+	width: 100%;
+	height: 1.4em;
+	background-color: #999;
 }
 
 .bar-value {
-  height: 1.4em;
-  
-  /* http://www.colorzilla.com/gradient-editor/#30ad0d+0,379b0c+48,18840a+51,176608+100;Custom */
-  background: #30ad0d; /* Old browsers */
+	height: 1.4em;
+
+	/* http://www.colorzilla.com/gradient-editor/#30ad0d+0,379b0c+48,18840a+51,176608+100;Custom */
+	background: #30ad0d; /* Old browsers */
 	background: -moz-linear-gradient(top, #30ad0d 0%, #379b0c 48%, #18840a 51%, #176608 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#30ad0d), color-stop(48%,#379b0c), color-stop(51%,#18840a), color-stop(100%,#176608)); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(top, #30ad0d 0%,#379b0c 48%,#18840a 51%,#176608 100%); /* Chrome10+,Safari5.1+ */
@@ -92,16 +89,16 @@ img.armory_char_portrait {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#30ad0d', endColorstr='#176608',GradientType=0 ); /* IE6-9 */
 	background: linear-gradient(top, #30ad0d 0%,#379b0c 48%,#18840a 51%,#176608 100%); /* W3C */
 }
-            
+
 .bar-text {
-  position: absolute;
-  top:0; 
-  left:0;
-  color: #fff;
-  text-shadow: 2px 2px 2px #000;
-  text-align: center;
-  width: 100%;
-  font-size: 0.9em;
+	position: absolute;
+	top:0; 
+	left:0;
+	color: #fff;
+	text-shadow: 2px 2px 2px #000;
+	text-align: center;
+	width: 100%;
+	font-size: 0.9em;
 }
 
 .bar-text span {
