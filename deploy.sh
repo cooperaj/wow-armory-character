@@ -10,6 +10,10 @@ MAINFILE="wow-armory-character.php" # this should be the name of your main php f
 # git config
 GITPATH="$CURRENTDIR/" # this file should be in the base of your git repository
 
+# wordpress i18n tools config
+MAKEPOTPATH="/Users/adam/Projects/Resources/wordpress-i18n-tools/makepot.php"
+TEXTDOMAIN="wow_armory_character"
+
 # svn config
 SVNPATH="/tmp/$PLUGINSLUG" # path to a temp SVN repo. No trailing slash required and don't add trunk.
 SVNURL="http://plugins.svn.wordpress.org/wow-armory-character" # Remote SVN repo on wordpress.org, with no trailing slash
@@ -24,6 +28,8 @@ echo
 echo ".........................................."
 echo 
 
+if [ -n "$(git status --porcelain)" ]; then echo "There are changes to be commited. Exiting...."; exit 1; fi
+
 # Check version in readme.txt is the same as plugin file
 NEWVERSION1=`grep "^Stable tag" $GITPATH/readme.txt | awk '{print $NF}'`
 echo "readme version: $NEWVERSION1"
@@ -33,6 +39,11 @@ echo "$MAINFILE version: $NEWVERSION2"
 if [ "$NEWVERSION1" != "$NEWVERSION2" ]; then echo "Versions don't match. Exiting...."; exit 1; fi
 
 echo "Versions match in readme.txt and PHP file. Let's proceed..."
+
+echo "Generating translation POT file and commiting it to git"
+php $MAKEPOTPATH wp-plugin . languages/$TEXTDOMAIN.pot
+git add languages/$TEXTDOMAIN.pot
+git commit -m "Deploy.sh auto-generated wow_armory_character.pot translation file"
 
 cd $GITPATH
 echo -e "Enter an SVN commit message for this new version: \c"
