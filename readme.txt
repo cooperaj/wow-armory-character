@@ -108,6 +108,10 @@ community API is returning old information, in this case you will need to wait u
 
 == Changelog ==
 
+= 0.9.4 =
+* Achievements are now available to be shown.
+* New filter added to allow you to change the template file location.
+
 = 0.9.3 =
 * Fixed usages of __DIR__ which is PHP5.3 only. The plugin should now work on PHP5.2+ Thanks to @Flavio_Torelli 
 for reporting the issue.
@@ -126,6 +130,10 @@ for reporting the issue.
 * The initial release of the plugin.
 
 == Upgrade Notice ==
+
+= 0.9.4 =
+You can show show your characters achievements. For easier theming you can now specify your own
+template file to render the profile.
 
 = 0.9.3 =
 Prior to this version the plugin was non-functional on anything less then PHP 5.3. If your running 5.2
