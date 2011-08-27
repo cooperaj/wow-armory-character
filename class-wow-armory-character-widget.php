@@ -92,7 +92,7 @@ class WoW_Armory_Character_Widget extends WP_Widget
 				<input id="<?php echo $this->get_field_id('show_items'); ?>" name="<?php echo $this->get_field_name('show_items'); ?>" value="1" type="checkbox" <?php echo $instance['show_items'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_items'); ?>"><?php _e('Show Items', 'wow_armory_character'); ?></label><br/>
 				<input id="<?php echo $this->get_field_id('show_profs'); ?>" name="<?php echo $this->get_field_name('show_profs'); ?>" value="1" type="checkbox" <?php echo $instance['show_profs'] ? 'checked="checked"' : ''; ?> />
-				<label for="<?php echo $this->get_field_id('show_profs'); ?>"><?php _e('Show Profressions', 'wow_armory_character'); ?></label><br/>
+				<label for="<?php echo $this->get_field_id('show_profs'); ?>"><?php _e('Show Professions', 'wow_armory_character'); ?></label><br/>
 				<input id="<?php echo $this->get_field_id('show_achievs'); ?>" name="<?php echo $this->get_field_name('show_achievs'); ?>" value="1" type="checkbox" <?php echo $instance['show_achievs'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_achievs'); ?>"><?php _e('Show Achievements', 'wow_armory_character'); ?></label><br/>
 			</p>
