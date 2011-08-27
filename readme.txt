@@ -135,7 +135,7 @@ for reporting the issue.
 == Upgrade Notice ==
 
 = 0.9.4 =
-You can show show your characters achievements. For easier theming you can now specify your own
+You can now show your characters achievements. For easier theming you can now specify your own
 template file to render the profile.
 
 = 0.9.3 =
