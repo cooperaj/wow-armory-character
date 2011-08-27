@@ -56,7 +56,10 @@ The configuration parameters available to use are:
 * **show_talents** - *1* or *0*
 * **show_items** - *1* or *0*
 * **show_profs** - *1* or *0*
-* **show_achievs** - *1* or *0*
+* **show_achievs** - This is a bitwise field. To get the setting you want use add together the numbers below.
+* * *1* - Show achievement bar
+* * *2* - Show achievement list
+* * *4* - Show descriptions on the achievement list.
 * **locale** - *en_GB*, *en_US*, *de_DE*, *es_ES*, *es_MX*, *fr_FR*, *ru_RU*, *ko_KR*, *zh_TW* or *zh_CN*
 
 Note: Certain locale choices are only available when selecting some regions.
