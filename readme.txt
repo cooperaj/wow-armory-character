@@ -31,7 +31,6 @@ professions (though these are planned).
 = Known Issues =
 
 * Professions do not show
-* Achievements do not show
 
 == Installation ==
 
@@ -46,7 +45,8 @@ The shortcode can be added to any page or post and can be configured in an ident
 widget. At a minimum you will need to specify the realm and character name for it to work - though this will assume
 that you wish to show all the details of character from the EU region in English.
 
-`[armory-character realm="Terokkar" name="Grokknar"]`
+    [armory-character realm="Terokkar" name="Grokknar"]
+
 
 The configuration parameters available to use are:
 
@@ -57,9 +57,9 @@ The configuration parameters available to use are:
 * **show_items** - *1* or *0*
 * **show_profs** - *1* or *0*
 * **show_achievs** - This is a bitwise field. To get the setting you want use add together the numbers below.
-* * *1* - Show achievement bar
-* * *2* - Show achievement list
-* * *4* - Show descriptions on the achievement list.
+    * *1* - Show achievement bar
+    * *2* - Show achievement list
+    * *4* - Show descriptions on the achievement list.
 * **locale** - *en_GB*, *en_US*, *de_DE*, *es_ES*, *es_MX*, *fr_FR*, *ru_RU*, *ko_KR*, *zh_TW* or *zh_CN*
 
 Note: Certain locale choices are only available when selecting some regions.
@@ -70,7 +70,7 @@ For more capable/adventurous developers there are a number of hooks that allow y
 plugin functions without altering it's code. This means you get to upgrade in the future without worrying
 about breaking any changes you may have made.
 
-**wow-armory-character-template**
+**wow-armory-character-template**  
 Allows you to specify an alternate template file to use to display your profile. Defaults to `view-wow-armory-character.php`
 
     function my_function_name($file_path) {
@@ -78,7 +78,8 @@ Allows you to specify an alternate template file to use to display your profile.
     }
     add_filter('wow-armory-character-template','my_function_name');
 
-**wow-armory-character-display**
+
+**wow-armory-character-display**  
 Your profile once the template has been processed. It may be quicker to alter the display at runtime rather 
 than duplicate the template when making only minor changes. As well as the output that will be displayed 
 the Character data as retireved from the Community API is also passed. This should allow you to make any changes
