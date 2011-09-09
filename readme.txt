@@ -25,8 +25,8 @@ I've tried to keep as much of the display markup as possible so that people migr
 have to redo any theming they have carried out - however, there are some minor changes so it may not be a 100% fit.
 
 I have not replicated all the functionality that was offered by WoW Armory and have instead concentrated on getting it 
-working well for how I use it. Consequently you are unable to view a 3D view of your character or see achievements or
-professions (though these are planned).
+working well for how I use it. Consequently you are unable to view a 3D view of your character or professions (though 
+these are planned).
 
 = Known Issues =
 
@@ -74,6 +74,7 @@ about breaking any changes you may have made.
 Allows you to specify an alternate template file to use to display your profile. Defaults to `view-wow-armory-character.php`
 
     function my_function_name($file_path) {
+      // e.g. return realpath(__FILE__) . '/view-wow-armory-character.php'
       return "THE_PATH_TO_YOUR_TEMPLATE_FILE";
     }
     add_filter('wow-armory-character-template','my_function_name');
