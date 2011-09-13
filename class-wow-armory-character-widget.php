@@ -35,7 +35,7 @@ class WoW_Armory_Character_Widget extends WP_Widget
 			'show_title' => 1,
 			'show_talents' => 1,
 			'show_items' => 1,
-			'show_profs' => 1,
+			'show_profs' => WoW_Armory_Character_Plugin::STYLE_PROF_BAR | WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY,
 			'show_achievs' => WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST,
 			'locale' => 'en_GB',
 			'title' => __('Armory for %NAME%', 'wow_armory_character'),
@@ -93,6 +93,29 @@ class WoW_Armory_Character_Widget extends WP_Widget
 				<label for="<?php echo $this->get_field_id('show_items'); ?>"><?php _e('Show Items', 'wow_armory_character'); ?></label><br/>
 				<input id="<?php echo $this->get_field_id('show_profs'); ?>" name="<?php echo $this->get_field_name('show_profs'); ?>" value="1" type="checkbox" <?php echo $instance['show_profs'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_profs'); ?>"><?php _e('Show Professions', 'wow_armory_character'); ?></label><br/>
+				<span class="sub_options<?php echo !$instance['show_profs'] ? ' sub_options_hidden' : ''; ?>" rel="<?php echo $this->get_field_id('show_profs'); ?>">
+					<input id="<?php echo $this->get_field_id('show_profs_badges'); ?>"
+								 name="<?php echo $this->get_field_name('show_profs_badges'); ?>"
+								 value="<?php echo WoW_Armory_Character_Plugin::STYLE_PROF_BADGES; ?>"
+								 type="checkbox"
+								 <?php echo (($instance['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_BADGES) === WoW_Armory_Character_Plugin::STYLE_PROF_BADGES) ? 'checked="checked"' : ''; ?>
+					/>
+					<label for="<?php echo $this->get_field_id('show_profs_badges'); ?>"title="<?php _e('Show your professions as a series of badges.', 'wow_armory_character'); ?>"><?php _e('Badges', 'wow_armory_character'); ?></label><br/>
+					<input id="<?php echo $this->get_field_id('show_profs_bar'); ?>"
+								 name="<?php echo $this->get_field_name('show_profs_bar'); ?>"
+								 value="<?php echo WoW_Armory_Character_Plugin::STYLE_PROF_BAR; ?>"
+								 type="checkbox"
+								 <?php echo (($instance['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_BAR) === WoW_Armory_Character_Plugin::STYLE_PROF_BAR) ? 'checked="checked"' : ''; ?>
+					/>
+					<label for="<?php echo $this->get_field_id('show_profs_bar'); ?>"title="<?php _e('Show your profession levels with a progress bar.', 'wow_armory_character'); ?>"><?php _e('Progress Bars', 'wow_armory_character'); ?></label><br/>
+					<input id="<?php echo $this->get_field_id('show_profs_secondary'); ?>"
+								 name="<?php echo $this->get_field_name('show_profs_secondary'); ?>"
+								 value="<?php echo WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY; ?>"
+								 type="checkbox"
+								 <?php echo (($instance['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY) === WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY) ? 'checked="checked"' : ''; ?>
+					/>
+					<label for="<?php echo $this->get_field_id('show_profs_secondary'); ?>"title="<?php _e('Show your secondary professions (e.g. fishing, first aid).', 'wow_armory_character'); ?>"><?php _e('Secondary Professions', 'wow_armory_character'); ?></label><br/>
+				</span>
 				<input id="<?php echo $this->get_field_id('show_achievs'); ?>" name="<?php echo $this->get_field_name('show_achievs'); ?>" value="1" type="checkbox" <?php echo $instance['show_achievs'] ? 'checked="checked"' : ''; ?> />
 				<label for="<?php echo $this->get_field_id('show_achievs'); ?>"><?php _e('Show Achievements', 'wow_armory_character'); ?></label><br/>
 				<span class="sub_options<?php echo !$instance['show_achievs'] ? ' sub_options_hidden' : ''; ?>" rel="<?php echo $this->get_field_id('show_achievs'); ?>">
@@ -134,18 +157,28 @@ class WoW_Armory_Character_Widget extends WP_Widget
 		$instance['show_title'] = strip_tags(stripslashes($new_instance['show_title']));
 		$instance['show_talents'] = strip_tags(stripslashes($new_instance['show_talents']));
 		$instance['show_items'] = strip_tags(stripslashes($new_instance['show_items']));
-		$instance['show_profs'] = strip_tags(stripslashes($new_instance['show_profs']));
 		$instance['locale'] = strip_tags(stripslashes($new_instance['locale']));
 		$instance['title'] = strip_tags(stripslashes($new_instance['title']));
 		
-		// We ignore the setting of 'show_achievs' and parse the bitwise setting instead. Having
+		// TODO it is possible to submit options that are invalid. 
+		// Youc can tick the boxes that basically will have nothing displayed yet still have 'Show...' ticked.
+		
+		// We ignore the setting of 'show_profs' and parse the bitwise setting instead. Having
 		// bitwise settings checked implies you want the master setting configured.
+		$prof_config = null;
+		if ($new_instance['show_profs_badges']) $prof_config = $prof_config | WoW_Armory_Character_Plugin::STYLE_PROF_BADGES;
+		if ($new_instance['show_profs_bar']) $prof_config = $prof_config | WoW_Armory_Character_Plugin::STYLE_PROF_BAR;
+		if ($new_instance['show_profs_secondary']) $prof_config = $prof_config | WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY;
+		
 		$ach_config = null;
 		if ($new_instance['show_achievs_bar']) $ach_config = $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR;
 		if ($new_instance['show_achievs_list']) $ach_config =  $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST;
 		if ($new_instance['show_achievs_list_desc']) $ach_config =  $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC;
 
 		// If no settings are configured but the master is ticked then set the defaults.
+		if ($new_instance['show_profs'] && $prof_config == null) $prof_config = $this->_default_options['show_profs'];
+		$instance['show_profs'] = $prof_config;
+		
 		if ($new_instance['show_achievs'] && $ach_config == null) $ach_config = $this->_default_options['show_achievs'];
 		$instance['show_achievs'] = $ach_config;		
 		

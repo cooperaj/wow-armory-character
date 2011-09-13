@@ -34,6 +34,11 @@ class WoW_Armory_Character_Plugin
 	const STYLE_ACHIEV_LIST = 2;
 	const STYLE_ACHIEV_LIST_DESC = 4;
 	
+	// Bitwise operators for profession display.
+	const STYLE_PROF_BADGES = 1;
+	const STYLE_PROF_BAR = 2;
+	const STYLE_PROF_SECONDARY = 4;
+	
 	public function init()
 	{
 		global $wacpath;
@@ -166,7 +171,7 @@ class WoW_Armory_Character_Plugin
 			'show_title' => 1,
 			'show_talents' => 1,
 			'show_items' => 1,
-			'show_profs' => 1,
+			'show_profs' => self::STYLE_PROF_BAR | self::STYLE_PROF_SECONDARY,
 			'show_achievs' => self::STYLE_ACHIEV_BAR | self::STYLE_ACHIEV_LIST,
 			'locale' => 'en_GB',
 		), $atts);
