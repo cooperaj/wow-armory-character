@@ -65,9 +65,10 @@ class WoW_Armory_Character
 		
 		$achiev_data = WoW_Armory_Character_DAL::fetch_achievements($this->region, $this->locale);
 		
+		// TODO ensure that we're not counting Feats of Strength
 		$data->completed = count($this->achievements->achievementsCompleted);
 		$data->total = $achiev_data->get_achievement_count();
-		$data->percent_complete = round((100 / $data->total) * $data->completed);
+		$data->percent_complete = round(($data->completed / $data->total) * 100);
 		$data->percent_remaining = 100 - $data->percent_complete;
 		
 		return $data;
@@ -81,8 +82,9 @@ class WoW_Armory_Character
 		if (!$this->_has_valid_achievement_data()) return $achievs;
 		
 		$achiev_data = WoW_Armory_Character_DAL::fetch_achievements($this->region, $this->locale);
-		arsort($this->_api_data->achievements->achievementsCompletedTimestamp);
-		foreach($this->_api_data->achievements->achievementsCompletedTimestamp as $key => $timestamp)
+		
+		arsort($this->achievements->achievementsCompletedTimestamp);
+		foreach($this->achievements->achievementsCompletedTimestamp as $key => $timestamp)
 		{
 			if ($count >= $no_to_fetch)
 				break;
