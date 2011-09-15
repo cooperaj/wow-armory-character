@@ -160,9 +160,6 @@ class WoW_Armory_Character_Widget extends WP_Widget
 		$instance['locale'] = strip_tags(stripslashes($new_instance['locale']));
 		$instance['title'] = strip_tags(stripslashes($new_instance['title']));
 		
-		// TODO it is possible to submit options that are invalid. 
-		// Youc can tick the boxes that basically will have nothing displayed yet still have 'Show...' ticked.
-		
 		// We ignore the setting of 'show_profs' and parse the bitwise setting instead. Having
 		// bitwise settings checked implies you want the master setting configured.
 		$prof_config = null;
@@ -175,11 +172,15 @@ class WoW_Armory_Character_Widget extends WP_Widget
 		if ($new_instance['show_achievs_list']) $ach_config =  $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST;
 		if ($new_instance['show_achievs_list_desc']) $ach_config =  $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC;
 
-		// If no settings are configured but the master is ticked then set the defaults.
-		if ($new_instance['show_profs'] && $prof_config == null) $prof_config = $this->_default_options['show_profs'];
+		// If no settings are configured but the master or useless setting is ticked then set the defaults.
+		if (($new_instance['show_profs'] && $prof_config == null) || 
+				$prof_config == WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY) 
+			$prof_config = $this->_default_options['show_profs'];
 		$instance['show_profs'] = $prof_config;
 		
-		if ($new_instance['show_achievs'] && $ach_config == null) $ach_config = $this->_default_options['show_achievs'];
+		if (($new_instance['show_achievs'] && $ach_config == null) ||
+				$ach_config == WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) 
+			$ach_config = $this->_default_options['show_achievs'];
 		$instance['show_achievs'] = $ach_config;		
 		
 		return $instance;
