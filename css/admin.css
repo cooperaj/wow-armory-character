@@ -40,3 +40,15 @@ body.js .sub_options_hidden
 {
     margin-left: 1.4em;
 }
+
+td.notes .warning-icon
+{
+	float: left;
+}
+
+td.notes p
+{
+	padding: 0;
+	margin: 0;
+	padding-left: 26px;
+}

@@ -50,6 +50,7 @@ class WoW_Armory_Character_DAL
 			
 			$char->last_checked = $data['last_checked'];
 			$char->cache_name = $option->option_name;
+			$char->notes = $data['notes'];
 			
 			$chars[] = $char;
 		}
@@ -145,6 +146,16 @@ class WoW_Armory_Character_DAL
 		return new WoW_Armory_Character_Achievements($region, $locale, json_decode($achievs_json));
 	}
 	
+	static function persist_character_note($character, $note)
+	{
+		$char_data = get_option('wowcharcache-'.md5($character->name . '-' . $character->realm . '-' . $character->region . '-' . $character->locale));
+		if ($char_data !== false && !in_array($note, $char_data['notes']))
+		{
+			$char_data['notes'][] = $note;
+			update_option('wowcharcache-'.md5($character->name . '-' . $character->realm . '-' . $character->region . '-' . $character->locale), $char_data);
+		}
+	}
+	
 	/**
 	 * Fetch a WoW character from the Community API.
 	 * 
@@ -181,6 +192,7 @@ class WoW_Armory_Character_DAL
 				$char_data['region'] = $region;
 				$char_data['locale'] = $locale;
 				$char_data['api_data'] = $http_result['body'];
+				$char_data['notes'] = array();
 				
 				// Cache the result so we don't have to keep fetching this. We have to update if it exists already.
 				if (get_option('wowcharcache-'.md5($name . '-' . $realm . '-' . $region . '-' . $locale)))

@@ -76,6 +76,8 @@ class WoW_Armory_Character_Plugin
 	
 	public function options_page()
 	{ 
+		global $wacpath;
+		
 		if (isset($_POST['deleteit']) && isset($_POST['delete']))
 		{
 			// Verify nonce
@@ -116,6 +118,7 @@ class WoW_Armory_Character_Plugin
 						<th scope="col"><?php _e('Character Name', 'wow_armory_character')?></th>
 						<th scope="col"><?php _e('Realm', 'wow_armory_character')?></th>
 						<th scope="col"><?php _e('Cached On', 'wow_armory_character')?></th>
+						<th scope="col"><?php _e('Note/s', 'wow_armory_character')?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -144,7 +147,17 @@ class WoW_Armory_Character_Plugin
 								<?php echo $character->name; ?>
 							</td>
 							<td scope="row" style="text-align: left"><?php echo $character->realm; ?></td>
-							<td scope="row" style="text-align: left"><?php echo date("F j, Y, g:i a", $character->last_checked); ?></td>
+							<td scope="row" style="text-align: left"><?php echo date(__('F j, Y, g:i a', 'wow_armory_character'), $character->last_checked); ?></td>
+							<td scope="row" style="text-align: left" class="notes">
+							<?php if (count($character->notes) > 0) : ?>
+								<img class="warning-icon" src="<?php echo plugins_url('images/warning.png', $wacpath) ?>" alt="<?php _e('Warning Icon', 'wow_armory_character'); ?>" />
+								<p>
+							<?php 	foreach ($character->notes as $note) : ?>
+								<?php echo $note; ?><br />
+							<?php 	endforeach; ?>
+								</p>
+							<?php endif; ?>
+							</td>
 						</tr>
 						<?php
 							}

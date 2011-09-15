@@ -30,6 +30,7 @@ class WoW_Armory_Character
 	// Setting these in the object makes things a little easier.
 	public $last_checked;
 	public $cache_name;
+	public $notes;
 	
 	private $_api_data;
 	
@@ -57,6 +58,11 @@ class WoW_Armory_Character
 	{
 		$data = new stdClass();
 		
+		if (!$this->_has_valid_achievement_data())
+		{
+			return $data;
+		}
+		
 		$achiev_data = WoW_Armory_Character_DAL::fetch_achievements($this->region, $this->locale);
 		
 		$data->completed = count($this->achievements->achievementsCompleted);
@@ -72,8 +78,9 @@ class WoW_Armory_Character
 		$achievs = array();
 		$count = 0;
 		
-		$achiev_data = WoW_Armory_Character_DAL::fetch_achievements($this->region, $this->locale);
+		if (!$this->_has_valid_achievement_data()) return $achievs;
 		
+		$achiev_data = WoW_Armory_Character_DAL::fetch_achievements($this->region, $this->locale);
 		arsort($this->_api_data->achievements->achievementsCompletedTimestamp);
 		foreach($this->_api_data->achievements->achievementsCompletedTimestamp as $key => $timestamp)
 		{
@@ -81,12 +88,44 @@ class WoW_Armory_Character
 				break;
 				
 			$ach = $achiev_data->get_achievement_by_id($this->achievements->achievementsCompleted[$key]);
-			$ach->completed = $timestamp;
-			$achievs[] = $ach;
 			
-			$count++;
+			// Our achievement data may not contain what we need so we skip achievements that don't get
+			// returned correctly. Come on Blizz...
+			if (!is_null($ach))
+			{
+				$ach->completed = $timestamp;
+				$achievs[] = $ach;
+			
+				$count++;
+			}
+			else
+			{
+				WoW_Armory_Character_DAL::persist_character_note($this, 
+						__('The achievement data does not contain a match for achievement id ' . 
+								$this->achievements->achievementsCompleted[$key] . '.',
+								'wow_armory_character'));	
+			}
 		}
 		
 		return $achievs;
+	}
+	
+	/**
+	 * Return whether or not our achievement data is valid.
+	 * 
+	 * It appears that sometimes the api will return incorrect data for the acheivements of a
+	 * character. We now make sure to check before attempting any procession on that data.
+	 * @return boolean
+	 */
+	private function _has_valid_achievement_data()
+	{
+		if (is_array($this->achievements->achievementsCompleted) && 
+				is_array($this->achievements->achievementsCompletedTimestamp))
+			return true;
+		
+		WoW_Armory_Character_DAL::persist_character_note($this, 
+				__('The achievement data for this character is not fully formed.',
+						'wow_armory_character'));		
+		return false;
 	}
 }

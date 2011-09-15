@@ -101,6 +101,11 @@ class WoW_Armory_Character_View
 			$this->_get_cdn_url() . '/icons/56/' . $icon_name . '.jpg'
 		);
 	}
+	
+	public function get_notes()
+	{
+	
+	}
 
 	public function get_portrait_icon_url()
 	{
