@@ -37,6 +37,22 @@
 				endforeach; ?>
 			</span>
 <?php	endif; ?>
+
+<?php if (($options['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_BADGES) === WoW_Armory_Character_Plugin::STYLE_PROF_BADGES && 
+					$character->professions ) : ?>
+			<span class="armory_char_prof_badge">
+<?php		if ($character->professions->primary) :
+					$count = 0;
+					foreach ($character->professions->primary as $prof) : ?>
+				<span class="armory_char_prof_badge_primary">
+					<img src="<?php echo $this->get_profession_icon_url($prof); ?>" alt="<?php echo $prof->name; ?> profession icon" />
+					<a href="<?php echo $this->get_profession_url($prof); ?>"><?php echo $this->get_profession_badge_text($prof); ?></a>	
+				</span>
+<?php				$count++;
+					endforeach; 
+				endif; ?>
+			</span>
+<?php	endif; ?>
 		</span>
 	</div>
 	

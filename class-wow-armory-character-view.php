@@ -101,11 +101,6 @@ class WoW_Armory_Character_View
 			$this->_get_cdn_url() . '/icons/56/' . $icon_name . '.jpg'
 		);
 	}
-	
-	public function get_notes()
-	{
-	
-	}
 
 	public function get_portrait_icon_url()
 	{
@@ -120,9 +115,22 @@ class WoW_Armory_Character_View
 		);
 	}
 	
-	public function get_profession_icon_url($profession)
+	public function get_profession_badge_text(stdClass $prof)
 	{
-		
+		return sprintf('%s / %s', $prof->rank, $prof->max);
+	}
+	
+	public function get_profession_url(stdClass $prof)
+	{
+		return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . '/character/' . 
+			$this->character->realm . '/' . $this->character->name . '/profession/' . strtolower($prof->name);
+	}
+	
+	public function get_profession_icon_url(stdClass $prof)
+	{
+		return $this->fetch_asset(
+			$this->_get_cdn_url() . '/icons/18/' . $prof->icon . '.jpg'
+		);
 	}
 
 	public function get_profile_url($type = 'simple')

@@ -17,15 +17,18 @@ img.armory_char_portrait {
 	display: block;
 }
 
-.armory_char_spec {
+.armory_char_spec,
+.armory_char_prof_badge {
 	display: block;
 }
 
-.armory_char_spec span {
+.armory_char_spec span,
+.armory_char_prof_badge span {
 	margin-right: 1em;
 }
 
-.armory_char_spec img {
+.armory_char_spec img,
+.armory_char_prof_badge img {
 	vertical-align: middle;
 }
 
