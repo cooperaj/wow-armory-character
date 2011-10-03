@@ -57,15 +57,17 @@ class WoW_Armory_Character_Plugin
 		
 		wp_enqueue_script('wow-armory-character-admin', 
 			plugins_url('javascript/admin.js', $wacpath), array('jquery'));
+			
+		register_setting('wac_options_group', 'wowhead_tooltips');
 	}
 	
 	public function admin_menu()
 	{
 		$page_name = add_options_page(
-			__('WoW Character Cache', 'wow_armory_character'), 
-			'Character Cache', 
+			__('WoW Armory Character', 'wow_armory_character'), 
+			'Armory Character', 
 			'administrator', 
-			'wowcharcache', 
+			'wowarmchar', 
 			array($this, 'options_page'));
 	}
 	
@@ -81,7 +83,7 @@ class WoW_Armory_Character_Plugin
 		if (isset($_POST['deleteit']) && isset($_POST['delete']))
 		{
 			// Verify nonce
-			check_admin_referer('wowcharcache');
+			check_admin_referer('wowarmchar');
 			
 			$clear_count = 0;
 			foreach((array)$_POST['delete'] as $clear_name)
@@ -96,32 +98,47 @@ class WoW_Armory_Character_Plugin
 		
 	?>
 		<div class="wrap">
-		<h2><?php _e('World of Warcraft Character Cache', 'wow_armory_character')?></h2>
-			<form id="cache-list" action="options-general.php?page=wowcharcache" method="post">
+			<?php screen_icon(); ?>
+			<h2><?php _e('World of Warcraft Armory Character', 'wow_armory_character')?></h2>
+			<form method="post" action="<?php echo admin_url('options.php'); ?>"> 
+				<?php settings_fields('wac_options_group'); ?>
+				
+				<table class="form-table">
+					<tr>
+						<th>Global settings</th>
+						<td>
+							<input id="attach_css" name="wac_settings[attach_css]" type="checkbox"  value="true" /> 
+							<label for="attach_css"><?php _e('Add plugin css to the page.', 'wow_armory_character'); ?></label>
+							<br />
+							<input id="wowhead_tooltips" name="wac_settings[wowhead_tooltips]" type="checkbox"  value="true" /> 
+							<label for="wowhead_tooltips"><?php _e('Display wowhead tooltips when hovering over equipped items.', 'wow_armory_character'); ?></label>
+						</td>
+					</tr>
+				</table>
+				
+				<p class="submit">
+					<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+				</p>
+			</form>
+			
+			<h3 class="title"><?php _e('Character Cache', 'wow_armory_character')?></h3>
+			<form id="cache-list" action="options-general.php?page=wowarmchar" method="post">
 				<?php
 				// Add a nonce
 				wp_nonce_field('wowcharcache');
 				?>
-			
-				<div class="tablenav">
-				<input type="submit" value="<?php _e('Refresh', 'wow_armory_character')?>" name="refresh" class="button-secondary" />
-				<input type="submit" value="<?php _e('Clear Cache', 'wow_armory_character')?>" name="deleteit" class="button-secondary delete" />
-				<br class="clear" />
-			</div>
-
-			<br class="clear" />
-
-			<table class="widefat">
-				<thead>
-					<tr>
-						<th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('cache-list'));" /></th>
-						<th scope="col"><?php _e('Character Name', 'wow_armory_character')?></th>
-						<th scope="col"><?php _e('Realm', 'wow_armory_character')?></th>
-						<th scope="col"><?php _e('Cached On', 'wow_armory_character')?></th>
-						<th scope="col"><?php _e('Note/s', 'wow_armory_character')?></th>
-					</tr>
-				</thead>
-				<tbody>
+				
+				<table class="widefat">
+					<thead>
+						<tr>
+							<th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('cache-list'));" /></th>
+							<th scope="col"><?php _e('Character Name', 'wow_armory_character')?></th>
+							<th scope="col"><?php _e('Realm', 'wow_armory_character')?></th>
+							<th scope="col"><?php _e('Cached On', 'wow_armory_character')?></th>
+							<th scope="col"><?php _e('Note/s', 'wow_armory_character')?></th>
+						</tr>
+					</thead>
+					<tbody>
 
 					<?php 
 					$chars = WoW_Armory_Character_DAL::fetch_all_cached_characters();
@@ -164,12 +181,15 @@ class WoW_Armory_Character_Plugin
 						}
 						?>
 
-				</tbody>
-			</table>
-			<div class="tablenav">
+					</tbody>
+				</table>
+				<div class="tablenav">
+					<input type="submit" value="<?php _e('Clear selected cache items', 'wow_armory_character')?>" name="deleteit" class="button-secondary delete" />
+					<br class="clear" />
+				</div>
+
 				<br class="clear" />
-			</div>
-		</form>	
+			</form>	
 		</div>
 	<?php 
 	}
