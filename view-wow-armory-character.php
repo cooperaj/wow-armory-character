@@ -51,6 +51,17 @@
 <?php				$count++;
 					endforeach; 
 				endif; ?>
+<?php		if (($options['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY) === WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY &&
+						$character->professions->secondary) :
+					$count = 0;
+					foreach ($character->professions->secondary as $prof) : ?>
+				<span class="armory_char_prof_badge_secondary">
+					<img src="<?php echo $this->get_profession_icon_url($prof); ?>" alt="<?php echo $prof->name; ?> profession icon" />
+					<a href="<?php echo $this->get_profession_url($prof); ?>"><?php echo $this->get_profession_badge_text($prof); ?></a>	
+				</span>
+<?php				$count++;
+					endforeach; 
+				endif; ?>
 			</span>
 <?php	endif; ?>
 		</span>
