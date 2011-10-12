@@ -45,7 +45,11 @@ class WoW_Armory_Character_Plugin
 	
 		load_plugin_textdomain('wow_armory_character', false, plugin_dir_path($wacpath) . '/languages');
 		
-		wp_enqueue_script('wowhead',"http://static.wowhead.com/widgets/power.js");
+		$wowhead_script_http = 
+				isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 
+				'https://' : 'http://';
+		
+		wp_enqueue_script('wowhead', $wowhead_script_http . 'static.wowhead.com/widgets/power.js');
 		wp_enqueue_style('wow_armory_character', plugins_url('css/style.css', $wacpath));
 	}
 	
