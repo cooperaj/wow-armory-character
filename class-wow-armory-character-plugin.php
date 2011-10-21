@@ -129,7 +129,7 @@ class WoW_Armory_Character_Plugin
 			<form id="cache-list" action="options-general.php?page=wowarmchar" method="post">
 				<?php
 				// Add a nonce
-				wp_nonce_field('wowcharcache');
+				wp_nonce_field('wowarmchar');
 				?>
 				
 				<table class="widefat">
@@ -158,7 +158,9 @@ class WoW_Armory_Character_Plugin
 						{
 							foreach ($chars as $character)
 							{
-								$char_view = new WoW_Armory_Character_View($character);
+								if ($character instanceof WoW_Armory_Character)
+								{
+									$char_view = new WoW_Armory_Character_View($character);
 						?>
 						<tr>
 							<th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="<?php echo $character->cache_name; ?>" /></th>
@@ -181,6 +183,28 @@ class WoW_Armory_Character_Plugin
 							</td>
 						</tr>
 						<?php
+								}
+								else 
+								{
+						?>
+						<tr>
+							<th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="<?php echo $character->cache_name; ?>" /></th>
+							<td scope="row" style="text-align: left"></td>
+							<td scope="row" style="text-align: left"></td>
+							<td scope="row" style="text-align: left"><?php echo date(__('F j, Y, g:i a', 'wow_armory_character'), $character->last_checked); ?></td>
+							<td scope="row" style="text-align: left" class="notes">
+							<?php if (count($character->notes) > 0) : ?>
+								<img class="warning-icon" src="<?php echo plugins_url('images/warning.png', $wacpath) ?>" alt="<?php _e('Warning Icon', 'wow_armory_character'); ?>" />
+								<p>
+							<?php 	foreach ($character->notes as $note) : ?>
+								<?php echo $note; ?><br />
+							<?php 	endforeach; ?>
+								</p>
+							<?php endif; ?>
+							</td>
+						</tr>
+						<?php
+								}
 							}
 						}
 						?>

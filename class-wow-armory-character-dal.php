@@ -46,11 +46,22 @@ class WoW_Armory_Character_DAL
 		{
 			$data = get_option($option->option_name);
 			$api_data = json_decode($data['api_data']);
-			$char = self::fetch_character($data['region'], $data['locale'], $api_data->realm, $api_data->name);
+			
+			if ($api_data != null)
+			{
+				$char = self::fetch_character($data['region'], $data['locale'], $api_data->realm, $api_data->name);
+			}
+			else 
+			{
+				$char = new WP_Error(500, 'Invalid character cache');
+			}
 			
 			$char->last_checked = $data['last_checked'];
 			$char->cache_name = $option->option_name;
 			$char->notes = $data['notes'];
+			
+			if ($api_data == null)
+				$char->notes[] = 'There has been an error whilst retrieving this record from the cache. Please clear it and try again.';
 			
 			$chars[] = $char;
 		}
