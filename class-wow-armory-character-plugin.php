@@ -57,12 +57,39 @@ class WoW_Armory_Character_Plugin
 	{
 		global $wacpath;
 		
+		// Used when configuring the widget AND on the settings/cache page.
 		wp_enqueue_style('wow_armory_character-admin', plugins_url('css/admin.css', $wacpath));
 		
+		// Used when configuring the widget.
 		wp_enqueue_script('wow-armory-character-admin', 
-			plugins_url('javascript/admin.js', $wacpath), array('jquery'));
+			plugins_url('javascript/admin_widget.js', $wacpath), array('jquery'));
 			
-		register_setting('wac_options_group', 'wowhead_tooltips');
+		// Register admin stuff that will only be on the settings/cache page.
+		wp_register_script('qTip2', plugins_url('javascript/qTip2/jquery.qtip.min.js', $wacpath), array('jquery'));
+		wp_register_style('qTip2', plugins_url('javascript/qTip2/jquery.qtip.min.css', $wacpath));
+		wp_register_script('wow-armory-character-admin-settings', 
+			plugins_url('javascript/admin_settings.js', $wacpath), array('jquery', 'qTip2'));
+			
+		register_setting('wac_settings', 'wac_settings', array($this, 'admin_settings_validate'));
+	}
+	
+	public function admin_settings_validate($input)
+	{
+		if (!is_array($input))
+			$input = array($input);
+		
+		// Boolean values.
+    $input['attach_css'] = ((isset($input['attach_css']) && $input['attach_css']) == 1 ? 1 : 0);
+    $input['wowhead_tooltips'] = ((isset($input['wowhead_tooltips']) && $input['wowhead_tooltips']) == 1 ? 1 : 0);
+   
+    return $input;
+	}
+	
+	public function admin_resources()
+	{
+		wp_enqueue_script('qTip2');
+		wp_enqueue_style('qTip2');
+		wp_enqueue_script('wow-armory-character-admin-settings');
 	}
 	
 	public function admin_menu()
@@ -73,6 +100,9 @@ class WoW_Armory_Character_Plugin
 			'administrator', 
 			'wowarmchar', 
 			array($this, 'options_page'));
+			
+		/* Using registered $page handle to hook script load */
+    add_action('admin_print_styles-' . $page_name, array($this, 'admin_resources'));
 	}
 	
 	public function widget_init()
@@ -100,22 +130,27 @@ class WoW_Armory_Character_Plugin
 				sprintf(__('Cleared %s caches.', 'wow_armory_character'), $clear_count) . '</p></div>';
 		}
 		
+		$options = get_option('wac_settings');
 	?>
 		<div class="wrap">
 			<?php screen_icon(); ?>
 			<h2><?php _e('World of Warcraft Armory Character', 'wow_armory_character')?></h2>
 			<form method="post" action="<?php echo admin_url('options.php'); ?>"> 
-				<?php settings_fields('wac_options_group'); ?>
+				<?php settings_fields('wac_settings'); ?>
 				
 				<table class="form-table">
 					<tr>
 						<th>Global settings</th>
 						<td>
-							<input id="attach_css" name="wac_settings[attach_css]" type="checkbox"  value="true" /> 
-							<label for="attach_css"><?php _e('Add plugin css to the page.', 'wow_armory_character'); ?></label>
+							<input id="attach_css" name="wac_settings[attach_css]" type="checkbox" value="1" <?php checked(1, $options['attach_css']); ?> /> 
+							<label for="attach_css" title="<?php _e('Add a basic CSS file that styles the widget and shortcode outputs.', 'wow_armory_character'); ?>">
+								<?php _e('Add plugin css to the page.', 'wow_armory_character'); ?>
+							</label>
 							<br />
-							<input id="wowhead_tooltips" name="wac_settings[wowhead_tooltips]" type="checkbox"  value="true" /> 
-							<label for="wowhead_tooltips"><?php _e('Display wowhead tooltips when hovering over equipped items.', 'wow_armory_character'); ?></label>
+							<input id="wowhead_tooltips" name="wac_settings[wowhead_tooltips]" type="checkbox" value="1" <?php checked(1, $options['wowhead_tooltips']); ?> /> 
+							<label for="wowhead_tooltips" title="<?php _e('Display wowhead tooltips when hovering over equipped items.', 'wow_armory_character'); ?>">
+								<?php _e('Show equipped item tooltips.', 'wow_armory_character'); ?>
+							</label>
 						</td>
 					</tr>
 				</table>
