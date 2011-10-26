@@ -123,7 +123,7 @@ class WoW_Armory_Character_DAL
 		$cached_achievs = get_option('wowachcache-' . $region . '-' . $locale);
 		if ($cached_achievs['last_checked'] > (time() - $expires_after))
 		{
-			$achievs_json = $cached_achievs['api_data'];
+			$achievs_json = json_decode($cached_achievs['api_data']);
 		}
 		else
 		{
@@ -132,6 +132,10 @@ class WoW_Armory_Character_DAL
 				
 			if (!is_wp_error($http_result) && $http_result['response']['code'] == 200)
 			{
+				$achievs_json = json_decode($http_result['body']);
+				if ($achievs_json == null)
+					return new WP_Error(500, __('Unable to fetch data from battle.net for character acheivements', 'wow_armory_character'));
+				
 				$achievs_data = array();
 				$achievs_data['last_checked'] = time();
 				$achievs_data['locale'] = $locale;
@@ -145,16 +149,14 @@ class WoW_Armory_Character_DAL
 				{
 					add_option('wowachcache-' . $region . '-' . $locale, $achievs_data);
 				}
-				
-				$achievs_json = $achievs_data['api_data'];
 			}
 			else 
 			{
-				return new WP_Error(500, __('Unable to fetch data from battle.net for character classes', 'wow_armory_character'));
+				return new WP_Error(500, __('Unable to fetch data from battle.net for character acheivements', 'wow_armory_character'));
 			}
 		}
 		
-		return new WoW_Armory_Character_Achievements($region, $locale, json_decode($achievs_json));
+		return new WoW_Armory_Character_Achievements($region, $locale, $achievs_json);
 	}
 	
 	static function persist_character_note($character, $note)
@@ -198,6 +200,10 @@ class WoW_Armory_Character_DAL
 			
 			if (!is_wp_error($http_result) && $http_result['response']['code'] == 200)
 			{
+				$char_json = json_decode($http_result['body']);
+				if ($char_json == null)
+					return new WP_Error(500, __('Unable to fetch data from battle.net for character', 'wow_armory_character'));
+				
 				$char_data = array();
 				$char_data['last_checked'] = time();
 				$char_data['region'] = $region;
@@ -215,7 +221,7 @@ class WoW_Armory_Character_DAL
 					add_option('wowcharcache-'.md5($name . '-' . $realm . '-' . $region . '-' . $locale), $char_data);
 				}
 				
-				return json_decode($char_data['api_data']);
+				return $char_json;
 			}
 			
 			// If we get here then it means the character does not exist in the cache and the API interrogation failed.
@@ -237,7 +243,7 @@ class WoW_Armory_Character_DAL
 		$cached_races = get_option('wowracecache-' . $region . '-' . $locale);
 		if ($cached_races['last_checked'] > (time() - $expires_after))
 		{
-			$races_json = $cached_races['api_data'];
+			$races_json = json_decode($cached_races['api_data']);
 		}
 		else
 		{
@@ -246,6 +252,10 @@ class WoW_Armory_Character_DAL
 				
 			if (!is_wp_error($http_result) && $http_result['response']['code'] == 200)
 			{
+				$races_json = json_decode($http_result['body']);
+				if ($races_json == null)
+					return new WP_Error(500, __('Unable to fetch data from battle.net for character races', 'wow_armory_character'));
+				
 				$races_data = array();
 				$races_data['last_checked'] = time();
 				$races_data['locale'] = $locale;
@@ -259,8 +269,6 @@ class WoW_Armory_Character_DAL
 				{
 					add_option('wowracecache-' . $region . '-' . $locale, $races_data);
 				}
-				
-				$races_json = $races_data['api_data'];
 			}
 			else 
 			{
@@ -268,8 +276,7 @@ class WoW_Armory_Character_DAL
 			}
 		}
 		
-		$races_obj = json_decode($races_json);
-		foreach ($races_obj->races as $race)
+		foreach ($races_json->races as $race)
 		{
 			if ($race->id == $race_id)
 				return $race;
@@ -294,7 +301,7 @@ class WoW_Armory_Character_DAL
 		$cached_classes = get_option('wowclasscache-' . $region . '-' . $locale);
 		if ($cached_classes['last_checked'] > (time() - $expires_after))
 		{
-			$classes_json = $cached_classes['api_data'];
+			$classes_json = json_decode($cached_classes['api_data']);
 		}
 		else
 		{
@@ -303,6 +310,10 @@ class WoW_Armory_Character_DAL
 				
 			if (!is_wp_error($http_result) && $http_result['response']['code'] == 200)
 			{
+				$classes_json = json_decode($http_result['body']);
+				if ($classes_json == null)
+					return new WP_Error(500, __('Unable to fetch data from battle.net for character classes', 'wow_armory_character'));
+				
 				$classes_data = array();
 				$classes_data['last_checked'] = time();
 				$classes_data['locale'] = $locale;
@@ -316,8 +327,6 @@ class WoW_Armory_Character_DAL
 				{
 					add_option('wowclasscache-' . $region . '-' . $locale, $classes_data);
 				}
-				
-				$classes_json = $classes_data['api_data'];
 			}
 			else 
 			{
@@ -325,8 +334,7 @@ class WoW_Armory_Character_DAL
 			}
 		}
 		
-		$classes_obj = json_decode($classes_json);
-		foreach ($classes_obj->classes as $class)
+		foreach ($classes_json->classes as $class)
 		{
 			if ($class->id == $class_id)
 				return $class;
