@@ -84,6 +84,20 @@ class WoW_Armory_Character_Plugin
    
     return $input;
 	}
+
+	/**
+	 * Describes the default settings as provided on the settings page
+	 * @return array Key/value pairs of settings
+	 */
+	public function admin_settings_default_values()
+	{
+		$options = array(
+			'attach_css' => 1,
+			'use_tooltips' => 1
+		);
+		
+		return $options;
+	}
 	
 	public function admin_resources()
 	{
@@ -284,5 +298,15 @@ class WoW_Armory_Character_Plugin
 			// Show the error message.
 			return $char->get_error_message();
 		}
+	}
+	
+	public function on_activate()
+	{
+		
+	}
+	
+	public function on_deactivate()
+	{
+		
 	}
 }
