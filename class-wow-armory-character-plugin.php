@@ -162,7 +162,7 @@ class WoW_Armory_Character_Plugin
 							</label>
 							<br />
 							<input id="use_tooltips" name="wac_settings[use_tooltips]" type="checkbox" value="1" <?php checked(1, $options['use_tooltips']); ?> /> 
-							<label for="use_tooltips" title="<?php _e('Display wowhead tooltips when hovering over equipped items.', 'wow_armory_character'); ?>">
+							<label for="use_tooltips" title="<?php _e('Display informational tooltips when hovering over equipped items.', 'wow_armory_character'); ?>">
 								<?php _e('Show equipped item tooltips.', 'wow_armory_character'); ?>
 							</label>
 							<br />
