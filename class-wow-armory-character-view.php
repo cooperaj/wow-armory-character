@@ -50,7 +50,7 @@ class WoW_Armory_Character_View
 		);
 		
 		$this->_slot_table = array(
-			'head', 'neck', 'back', 'chest', 'shirt', 'tabard', 'wrist', 'hands', 'waist', 'legs', 'feet', 
+			'head', 'neck', 'shoulder', 'back', 'chest', 'shirt', 'tabard', 'wrist', 'hands', 'waist', 'legs', 'feet', 
 			'finger1', 'finger2', 'trinket1', 'trinket2', 'mainHand', 'offHand', 'ranged',
 		);
 		
