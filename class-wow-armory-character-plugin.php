@@ -81,6 +81,7 @@ class WoW_Armory_Character_Plugin
 		// Boolean values.
 		$input['attach_css'] = ((isset($input['attach_css']) && $input['attach_css']) == 1 ? 1 : 0);
 		$input['use_tooltips'] = ((isset($input['use_tooltips']) && $input['use_tooltips']) == 1 ? 1 : 0);
+		$input['wowhead_links'] = ((isset($input['wowhead_links']) && $input['wowhead_links']) == 1 ? 1 : 0);
 		
 		return $input;
 	}
@@ -93,7 +94,8 @@ class WoW_Armory_Character_Plugin
 	{
 		$options = array(
 			'attach_css' => 1,
-			'use_tooltips' => 1
+			'use_tooltips' => 1,
+			'wowhead_links' => 1
 		);
 		
 		return $options;
