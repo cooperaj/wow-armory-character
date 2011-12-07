@@ -80,9 +80,23 @@ class WoW_Armory_Character_Plugin
 
 		// Boolean values.
 		$input['attach_css'] = ((isset($input['attach_css']) && $input['attach_css']) == 1 ? 1 : 0);
-		$input['wowhead_tooltips'] = ((isset($input['wowhead_tooltips']) && $input['wowhead_tooltips']) == 1 ? 1 : 0);
-
+		$input['use_tooltips'] = ((isset($input['use_tooltips']) && $input['use_tooltips']) == 1 ? 1 : 0);
+		
 		return $input;
+	}
+
+	/**
+	 * Describes the default settings as provided on the settings page
+	 * @return array Key/value pairs of settings
+	 */
+	public function admin_settings_default_values()
+	{
+		$options = array(
+			'attach_css' => 1,
+			'use_tooltips' => 1
+		);
+		
+		return $options;
 	}
 	
 	public function admin_resources()
@@ -147,8 +161,8 @@ class WoW_Armory_Character_Plugin
 								<?php _e('Add plugin css to the page.', 'wow_armory_character'); ?>
 							</label>
 							<br />
-							<input id="wowhead_tooltips" name="wac_settings[wowhead_tooltips]" type="checkbox" value="1" <?php checked(1, $options['wowhead_tooltips']); ?> /> 
-							<label for="wowhead_tooltips" title="<?php _e('Display wowhead tooltips when hovering over equipped items.', 'wow_armory_character'); ?>">
+							<input id="use_tooltips" name="wac_settings[use_tooltips]" type="checkbox" value="1" <?php checked(1, $options['use_tooltips']); ?> /> 
+							<label for="use_tooltips" title="<?php _e('Display wowhead tooltips when hovering over equipped items.', 'wow_armory_character'); ?>">
 								<?php _e('Show equipped item tooltips.', 'wow_armory_character'); ?>
 							</label>
 							<br />
@@ -289,5 +303,15 @@ class WoW_Armory_Character_Plugin
 			// Show the error message.
 			return $char->get_error_message();
 		}
+	}
+	
+	public function on_activate()
+	{
+		
+	}
+	
+	public function on_deactivate()
+	{
+		
 	}
 }
