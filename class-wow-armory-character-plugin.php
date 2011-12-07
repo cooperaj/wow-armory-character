@@ -77,12 +77,12 @@ class WoW_Armory_Character_Plugin
 	{
 		if (!is_array($input))
 			$input = array($input);
-		
+
 		// Boolean values.
-    $input['attach_css'] = ((isset($input['attach_css']) && $input['attach_css']) == 1 ? 1 : 0);
-    $input['wowhead_tooltips'] = ((isset($input['wowhead_tooltips']) && $input['wowhead_tooltips']) == 1 ? 1 : 0);
-   
-    return $input;
+		$input['attach_css'] = ((isset($input['attach_css']) && $input['attach_css']) == 1 ? 1 : 0);
+		$input['wowhead_tooltips'] = ((isset($input['wowhead_tooltips']) && $input['wowhead_tooltips']) == 1 ? 1 : 0);
+
+		return $input;
 	}
 	
 	public function admin_resources()
@@ -102,7 +102,7 @@ class WoW_Armory_Character_Plugin
 			array($this, 'options_page'));
 			
 		/* Using registered $page handle to hook script load */
-    add_action('admin_print_styles-' . $page_name, array($this, 'admin_resources'));
+		add_action('admin_print_styles-' . $page_name, array($this, 'admin_resources'));
 	}
 	
 	public function widget_init()
@@ -150,6 +150,11 @@ class WoW_Armory_Character_Plugin
 							<input id="wowhead_tooltips" name="wac_settings[wowhead_tooltips]" type="checkbox" value="1" <?php checked(1, $options['wowhead_tooltips']); ?> /> 
 							<label for="wowhead_tooltips" title="<?php _e('Display wowhead tooltips when hovering over equipped items.', 'wow_armory_character'); ?>">
 								<?php _e('Show equipped item tooltips.', 'wow_armory_character'); ?>
+							</label>
+							<br />
+							<input id="wowhead_links" name="wac_settings[wowhead_links]" type="checkbox" value="1" <?php checked(1, $options['wowhead_links']); ?> /> 
+							<label for="wowhead_links" title="<?php _e('Instead of linking items and acheivements to battle.net link to the wowhead 3rd party site.', 'wow_armory_character'); ?>">
+								<?php _e('Link items and acheivements to wowhead.', 'wow_armory_character'); ?>
 							</label>
 						</td>
 					</tr>
