@@ -159,12 +159,12 @@ class WoW_Armory_Character_Plugin
 						<th>Global settings</th>
 						<td>
 							<input id="attach_css" name="wac_settings[attach_css]" type="checkbox" value="1" <?php checked(1, $options['attach_css']); ?> /> 
-							<label for="attach_css" title="<?php _e('Add a basic CSS file that styles the widget and shortcode outputs.', 'wow_armory_character'); ?>">
+							<label for="attach_css" title="<?php _e('Add a basic CSS file that styles the widget and shortcode outputs. Unchecking this will remove all styling from the plugins display. Please ensure you have styled the plugin in your own CSS.', 'wow_armory_character'); ?>">
 								<?php _e('Add plugin css to the page.', 'wow_armory_character'); ?>
 							</label>
 							<br />
 							<input id="use_tooltips" name="wac_settings[use_tooltips]" type="checkbox" value="1" <?php checked(1, $options['use_tooltips']); ?> /> 
-							<label for="use_tooltips" title="<?php _e('Display informational tooltips when hovering over equipped items.', 'wow_armory_character'); ?>">
+							<label for="use_tooltips" title="<?php _e('Display informational tooltips when hovering over equipped items and completed achievements.', 'wow_armory_character'); ?>">
 								<?php _e('Show equipped item tooltips.', 'wow_armory_character'); ?>
 							</label>
 							<br />
