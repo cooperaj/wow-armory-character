@@ -22,38 +22,38 @@ function wac_disable_lang(select_clone, chosen_value)
 ;(function($) {
 	$(document).ready(function() {
 		// copy the lang select, so we can easily reset it
-	    var select_clone = $('select.wa-lang').clone();
-	    
-	    // setup the initial options
-	    var start_val = $('select.wa-region').val();
-	    wac_disable_lang(select_clone, start_val);
-	    
-	    // and onchange events to keep things pucka.
-	    // since the widget is updated using javascript we need to delegate so that
+		var select_clone = $('select.wa-lang').clone();
+		
+		// setup the initial options
+		var start_val = $('select.wa-region').val();
+		wac_disable_lang(select_clone, start_val);
+		
+		// and onchange events to keep things pucka.
+		// since the widget is updated using javascript we need to delegate so that
 		// the events are reattached to the new DOM elemnents
-	    $('div.widget-liquid-right').delegate('select.wa-region', 'change', function() {
-	        var val = $(this).val();
-	        wac_disable_lang(select_clone, val);
-	    });
-	    
-	    // find all the sub-options lists and make them show/hide based on their parent
-	    // form elements status.
-	    $('span.sub_options').each(function() {
+		$('div.widget-liquid-right').delegate('select.wa-region', 'change', function() {
+			var val = $(this).val();
+			wac_disable_lang(select_clone, val);
+		});
+		
+		// find all the sub-options lists and make them show/hide based on their parent
+		// form elements status.
+		$('span.sub_options').each(function() {
 			var parent = $(this).attr('rel');
 			
 			// more delegation
 			$('div.widget-liquid-right').delegate('#' + parent, 'change', function() {
-		    	if ($(this).is(':checked'))
-		    	{
-		    		$('span.sub_options[rel="' + this.id + '"]').slideDown('fast');
-		    	}
-		    	else
-		    	{
-		    		$('span.sub_options[rel="' + this.id + '"]').slideUp('fast', function() {
-		    			$('input[type="checkbox"]', this).attr('checked', false);
-		    		})
-		    	}
-		    });
+				if ($(this).is(':checked'))
+				{
+					$('span.sub_options[rel="' + this.id + '"]').slideDown('fast');
+				}
+				else
+				{
+					$('span.sub_options[rel="' + this.id + '"]').slideUp('fast', function() {
+						$('input[type="checkbox"]', this).attr('checked', false);
+					})
+				}
+			});
 		});
 	});
 }(jQuery));

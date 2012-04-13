@@ -90,7 +90,7 @@
 				<div class="bar-text">
 					<span><?php echo $character->achievementPoints; ?></span> &mdash; <?php echo $ach_data->completed; ?>/<?php echo $ach_data->total; ?> (<?php echo $ach_data->percent_complete; ?>%)
 				</div>
-      		</div>
+			</div>
 		</div>
 	</div>
 <?php endif; ?>

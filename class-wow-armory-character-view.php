@@ -92,7 +92,7 @@ class WoW_Armory_Character_View
 	public function get_guild_url()
 	{
 		return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . '/guild/' . 
-			$this->character->realm . '/' . $this->character->guild->name . '/';
+				$this->character->realm . '/' . $this->character->guild->name . '/';
 	}
 	
 	public function get_item_icon_url($icon_name)
@@ -123,7 +123,7 @@ class WoW_Armory_Character_View
 	public function get_profession_url(stdClass $prof)
 	{
 		return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . '/character/' . 
-			$this->character->realm . '/' . $this->character->name . '/profession/' . strtolower($prof->name);
+				$this->character->realm . '/' . $this->character->name . '/profession/' . strtolower($prof->name);
 	}
 	
 	public function get_profession_icon_url(stdClass $prof)
@@ -136,22 +136,22 @@ class WoW_Armory_Character_View
 	public function get_profile_url($type = 'simple')
 	{
 		return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . '/character/' . 
-			$this->character->realm . '/' . $this->character->name . '/' . $type;
+				$this->character->realm . '/' . $this->character->name . '/' . $type;
 	}
 	
 	public function get_race_icon_url()
 	{
 		return $this->fetch_asset(
 			$this->_get_cdn_url() . '/icons/18/race_' . 
-			strtolower(str_replace(' ', '-', $this->character->en_race->name)) . '_' . 
-			$this->_gender_table[$this->character->gender] . '.jpg'
+					strtolower(str_replace(' ', '-', $this->character->en_race->name)) . '_' . 
+					$this->_gender_table[$this->character->gender] . '.jpg'
 		);
 	}
 	
 	public function get_talent_url()
 	{
 		return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . '/character/' . 
-			$this->character->realm . '/' . $this->character->name . '/talent';
+				$this->character->realm . '/' . $this->character->name . '/talent';
 	}
 	
 	public function get_talent_tree_icon_url(stdClass $talent)
