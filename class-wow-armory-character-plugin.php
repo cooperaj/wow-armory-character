@@ -307,13 +307,24 @@ class WoW_Armory_Character_Plugin
 		}
 	}
 	
-	public function on_activate()
+	
+	/**
+	 * Plugin activation method.
+	 * 
+	 * Ensure that the activation of the plugin creates sane default values for the global settings.
+	 */
+	static function on_activate()
 	{
-		
+		add_option('wac_settings', WoW_Armory_Character_Plugin::admin_settings_default_values());
 	}
 	
-	public function on_deactivate()
+	/**
+	 * Plugin deactivation method.
+	 * 
+	 * Make sure to remove the plugins global settings when deactivating it.
+	 */
+	static function on_deactivate()
 	{
-		
+		delete_option('wac_settings');
 	}
 }
