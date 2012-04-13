@@ -62,23 +62,23 @@ class WoW_Armory_Character_Widget extends WP_Widget
 			<p>
 				<label for="<?php echo $this->get_field_id('realm'); ?>"><?php echo __('Realm:', 'wow_armory_character'); ?></label><br />
 				<select class="wa-region" id="<?php echo $this->get_field_id('region'); ?>" name="<?php echo $this->get_field_name('region'); ?>">
-					<option value="US"<?php echo ($instance['region'] == 'US' ? ' selected="selected"' : ''); ?>>US</option>
-					<option value="EU"<?php echo ($instance['region'] == 'EU' ? ' selected="selected"' : ''); ?>>EU</option>
-					<option value="KR"<?php echo ($instance['region'] == 'KR' ? ' selected="selected"' : ''); ?>>KR</option>
-					<option value="TW"<?php echo ($instance['region'] == 'TW' ? ' selected="selected"' : ''); ?>>TW</option>
+					<option value="US"<?php selected($instance['region'], 'US', true); ?>>US</option>
+					<option value="EU"<?php selected($instance['region'], 'EU', true); ?>>EU</option>
+					<option value="KR"<?php selected($instance['region'], 'KR', true); ?>>KR</option>
+					<option value="TW"<?php selected($instance['region'], 'TW', true); ?>>TW</option>
 				</select>
 				<input type="text" class="wa-realm" style="width: 150px" id="<?php echo $this->get_field_id('realm'); ?>" name="<?php echo $this->get_field_name('realm'); ?>" value="<?php echo htmlspecialchars($instance['realm']); ?>" />
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('locale'); ?>"><?php echo __('Language:', 'wow_armory_character'); ?></label><br />
 				<select class="wa-lang widefat" id="<?php echo $this->get_field_id('locale'); ?>" name="<?php echo $this->get_field_name('locale'); ?>">
-					<option value="en_GB"<?php echo $instance['locale'] == 'en_GB' ? ' selected="selected"' : ''; ?>><?php _e('English', 'wow_armory_character'); ?></option>
-					<option value="de_DE"<?php echo $instance['locale'] == 'de_DE' ? ' selected="selected"' : ''; ?>><?php _e('Deutsch', 'wow_armory_character'); ?></option>
-					<option value="es_ES"<?php echo $instance['locale'] == 'es_ES' ? ' selected="selected"' : ''; ?>><?php _e('Español', 'wow_armory_character'); ?></option>
-					<option value="fr_FR"<?php echo $instance['locale'] == 'fr_FR' ? ' selected="selected"' : ''; ?>><?php _e('Française', 'wow_armory_character'); ?></option>
-					<option value="ru_RU"<?php echo $instance['locale'] == 'ru_RU' ? ' selected="selected"' : ''; ?>><?php _e('Pусский', 'wow_armory_character'); ?></option>
-					<option value="ko_KR"<?php echo $instance['locale'] == 'ko_KR' ? ' selected="selected"' : ''; ?>><?php _e('한국의', 'wow_armory_character'); ?></option>
-					<option value="zh_TW"<?php echo $instance['locale'] == 'zh_TW' ? ' selected="selected"' : ''; ?>><?php _e('中國', 'wow_armory_character'); ?></option>
+					<option value="en_GB"<?php selected($instance['locale'], 'en_GB', true); ?>><?php _e('English', 'wow_armory_character'); ?></option>
+					<option value="de_DE"<?php selected($instance['locale'], 'de_DE', true);  ?>><?php _e('Deutsch', 'wow_armory_character'); ?></option>
+					<option value="es_ES"<?php selected($instance['locale'], 'es_ES', true);  ?>><?php _e('Español', 'wow_armory_character'); ?></option>
+					<option value="fr_FR"<?php selected($instance['locale'], 'fr_FR', true);  ?>><?php _e('Française', 'wow_armory_character'); ?></option>
+					<option value="ru_RU"<?php selected($instance['locale'], 'ru_RU', true);  ?>><?php _e('Pусский', 'wow_armory_character'); ?></option>
+					<option value="ko_KR"<?php selected($instance['locale'], 'ko_KR', true);  ?>><?php _e('한국의', 'wow_armory_character'); ?></option>
+					<option value="zh_TW"<?php selected($instance['locale'], 'zh_TW', true);  ?>><?php _e('中國', 'wow_armory_character'); ?></option>
 				</select>
 			</p>
 			<h4><?php _e ('Display Options', 'wow_armory_character'); ?></h4>
