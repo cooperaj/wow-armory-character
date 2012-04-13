@@ -37,6 +37,8 @@ class WoW_Armory_Character_View
 	
 	public $character;
 	
+	protected $_global_options;
+	
 	protected $_gender_table;
 	protected $_slot_table;
 	protected $_locale_table;
@@ -44,6 +46,9 @@ class WoW_Armory_Character_View
 	public function __construct(WoW_Armory_Character $character)
 	{
 		$this->character = $character;
+		
+		// Make available global options
+		$this->_global_options = get_option('wac_settings', WoW_Armory_Character_Plugin::admin_settings_default_values());
 		
 		$this->_gender_table = array(
 			'male', 'female',
@@ -93,6 +98,20 @@ class WoW_Armory_Character_View
 	{
 		return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . '/guild/' . 
 				$this->character->realm . '/' . $this->character->guild->name . '/';
+	}
+	
+	public function get_item_url($item_id)
+	{
+		if ($this->_global_options['wowhead_links'])
+		{
+			return sprintf(self::WOWHEAD_ITEM_URL, ($this->_locale_table[$this->character->locale] == 'en' 
+					? 'www' : $this->_locale_table[$this->character->locale]), $item_id);
+		}
+		else 
+		{
+			return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . 
+					'/item/' . $item_id;
+		}
 	}
 	
 	public function get_item_icon_url($icon_name)
@@ -179,6 +198,11 @@ class WoW_Armory_Character_View
 		return null;
 	}
 	
+	public function get_acheivement_url($achiev_id)
+	{
+		
+	}
+	
 	public function get_wowhead_achievement_url($achiev_id)
 	{
 		return sprintf(self::WOWHEAD_ACHIEV_URL, ($this->_locale_table[$this->character->locale] == 'en' 
@@ -192,8 +216,7 @@ class WoW_Armory_Character_View
 	
 	public function get_wowhead_item_url($item_id)
 	{
-		return sprintf(self::WOWHEAD_ITEM_URL, ($this->_locale_table[$this->character->locale] == 'en' 
-				? 'www' : $this->_locale_table[$this->character->locale]), $item_id);
+		
 	}
 	
 	public function get_wowhead_item_rel($tooltip_params)

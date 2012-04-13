@@ -49,8 +49,13 @@ class WoW_Armory_Character_Plugin
 				isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 
 				'https://' : 'http://';
 		
-		wp_enqueue_script('wowhead', $wowhead_script_http . 'static.wowhead.com/widgets/power.js');
-		wp_enqueue_style('wow_armory_character', plugins_url('css/style.css', $wacpath));
+		$options = get_option('wac_settings', $this->admin_settings_default_values());		
+				
+		if ($options['use_tooltips'] === 1)	
+			wp_enqueue_script('wowhead', $wowhead_script_http . 'static.wowhead.com/widgets/power.js');
+		
+		if ($options['attach_css'] === 1)
+			wp_enqueue_style('wow_armory_character', plugins_url('css/style.css', $wacpath));
 	}
 	
 	public function admin_init()
@@ -90,7 +95,7 @@ class WoW_Armory_Character_Plugin
 	 * Describes the default settings as provided on the settings page
 	 * @return array Key/value pairs of settings
 	 */
-	public function admin_settings_default_values()
+	static function admin_settings_default_values()
 	{
 		$options = array(
 			'attach_css' => 1,

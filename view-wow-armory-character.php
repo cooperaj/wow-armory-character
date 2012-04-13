@@ -73,7 +73,7 @@
 		<ul class="armory_equip_list">
 <?php		foreach ($this->_slot_table as $slot) : 
 					if (isset($character->items->$slot) && $item = $character->items->$slot) : ?>
-			<li><a href="<?php echo $this->get_wowhead_item_url($item->id); ?>" rel="<?php echo $this->get_wowhead_item_rel($item->tooltipParams); ?>"><img src="<?php echo $this->get_item_icon_url($item->icon); ?>" alt="<?php echo $item->id; ?>" class="armory_item_icon" /></a></li>
+			<li><a href="<?php echo $this->get_item_url($item->id); ?>" rel="<?php echo $this->get_wowhead_item_rel($item->tooltipParams); ?>"><img src="<?php echo $this->get_item_icon_url($item->icon); ?>" alt="<?php echo $item->id; ?>" class="armory_item_icon" /></a></li>
 <?php 		endif;
 				endforeach; ?>
 		</ul>
