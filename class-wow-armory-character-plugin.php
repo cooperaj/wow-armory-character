@@ -49,8 +49,8 @@ class WoW_Armory_Character_Plugin
 				isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 
 				'https://' : 'http://';
 		
-		$options = get_option('wac_settings', $this->admin_settings_default_values());		
-				
+		$options = get_option('wac_settings', $this->admin_settings_default_values());
+		
 		if ($options['use_tooltips'] === 1)	
 			wp_enqueue_script('wowhead', $wowhead_script_http . 'static.wowhead.com/widgets/power.js');
 		
