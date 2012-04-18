@@ -30,7 +30,8 @@ these are planned).
 
 = Known Issues =
 
-* Professions do not show
+* When showing characters with Chinese or Korean locales the wowhead tooltips will show in english. I'm actively 
+  seeking a solution
 
 == Installation ==
 
@@ -106,12 +107,30 @@ to update you are able to clear the cache.
 When you next look at your character fresh information will be pulled from the community API. It may be that the 
 community API is returning old information, in this case you will need to wait until your armory page is updated.
 
+= How do I change the styling of the character display =
+
+There are two ways you can do this. You can use a pure CSS based approach or alter the html output using either of
+the two display filters that have been made available. 
+
+To use the filters please create the necessary function (perhaps in your template.php file) and alter the html as
+you see fit. You can either alter the html after it has been created or you can override the template that produces
+the output.
+
+The CSS can be overriden by using the global setting 'Add plugin css to the page'. Unticking this box will allow
+you to provide your own CSS as part of your theme.
+
 == Screenshots ==
 
 1. The default widget output
 2. The widget configuration screen.
 
 == Changelog ==
+
+= 0.9.5b =
+* New global settings introduced. Including the ability to disable the built in stylesheet and wowhead integration.
+* Professions now show.
+* Shoulder slot items now show correctly. Thanks to xsherbearx for reporting the issue.
+* Numerous other bug fixes and code cleanups.
 
 = 0.9.4 =
 * Achievements are now available to be shown.
