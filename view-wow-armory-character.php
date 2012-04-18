@@ -30,24 +30,27 @@
 				foreach ($character->talents as $talent) :
 					$type = ($count == 0) ? 'primary' : 'secondary'; ?>
 				<span class="<?php echo (isset($talent->selected) && $talent->selected) ? 'active' : 'inactive'; ?>_spec">
-					<img src="<?php echo $this->get_talent_tree_icon_url($talent); ?>" alt="<?php echo $talent->name; ?> talent spec icon" />
-					<a href="<?php echo $this->get_talent_url(); ?>/<?php echo $type; ?>"><?php echo $this->get_talent_tree_text($talent); ?></a>	
+					<a href="<?php echo $this->get_talent_url(); ?>/<?php echo $type; ?>"><img src="<?php echo $this->get_talent_tree_icon_url($talent); ?>" alt="<?php echo $talent->name; ?> talent spec icon" /> <?php echo $this->get_talent_tree_text($talent); ?></a>	
 				</span>
 <?php			$count++;
 				endforeach; ?>
+				<br />
 			</span>
 <?php	endif; ?>
-
+		</span>
+	</div>
+	
 <?php if (($options['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_BADGES) === WoW_Armory_Character_Plugin::STYLE_PROF_BADGES && 
 					$character->professions ) : ?>
-			<span class="armory_char_prof_badge">
+	<div class="armory_section armory_profession">
+		<h4><?php _e('Professions', 'wow_armory_character')?></h4>
+		<ul class="armory_profession_list">
 <?php		if ($character->professions->primary) :
 					$count = 0;
 					foreach ($character->professions->primary as $prof) : ?>
-				<span class="armory_char_prof_badge_primary">
-					<img src="<?php echo $this->get_profession_icon_url($prof); ?>" alt="<?php echo $prof->name; ?> profession icon" />
-					<a href="<?php echo $this->get_profession_url($prof); ?>"><?php echo $this->get_profession_badge_text($prof); ?></a>	
-				</span>
+			<li class="armory_profession_primary">
+				<a href="<?php echo $this->get_profession_url($prof); ?>"><img src="<?php echo $this->get_profession_icon_url($prof); ?>" alt="<?php echo $prof->name; ?> profession icon" /> <?php echo $this->get_profession_badge_text($prof); ?></a>
+			</li>
 <?php				$count++;
 					endforeach; 
 				endif; ?>
@@ -55,17 +58,16 @@
 						$character->professions->secondary) :
 					$count = 0;
 					foreach ($character->professions->secondary as $prof) : ?>
-				<span class="armory_char_prof_badge_secondary">
-					<img src="<?php echo $this->get_profession_icon_url($prof); ?>" alt="<?php echo $prof->name; ?> profession icon" />
-					<a href="<?php echo $this->get_profession_url($prof); ?>"><?php echo $this->get_profession_badge_text($prof); ?></a>	
-				</span>
+			<li class="armory_profession_secondary">
+				<a href="<?php echo $this->get_profession_url($prof); ?>"><img src="<?php echo $this->get_profession_icon_url($prof); ?>" alt="<?php echo $prof->name; ?> profession icon" /> <?php echo $this->get_profession_badge_text($prof); ?></a>
+			</li>
 <?php				$count++;
 					endforeach; 
 				endif; ?>
-			</span>
-<?php	endif; ?>
-		</span>
+		</ul>
+		<br />
 	</div>
+<?php	endif; ?>
 	
 <?php if ($options['show_items'] == 1 && $character->items) : ?>
 	<div class="armory_section armory_equip">

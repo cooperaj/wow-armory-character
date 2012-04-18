@@ -18,22 +18,21 @@ img.armory_char_portrait {
 }
 
 .armory_char_spec,
-.armory_char_prof_badge {
+.armory_profession_list li {
 	display: block;
 }
 
-.armory_char_spec span,
-.armory_char_prof_badge span {
-	margin-right: 1em;
-}
-
 .armory_char_spec img,
-.armory_char_prof_badge img {
+.armory_profession_list li img {
 	vertical-align: middle;
 }
 
-.armory_section  h4{
+.armory_section  h4 {
 	margin-top: 1em;
+}
+
+.armory_section  br {
+	clear: left;
 }
 
 .armory_equip_list {
@@ -41,9 +40,21 @@ img.armory_char_portrait {
 	margin: 0;
 }
 
-.armory_equip_list li {
+.armory_profession_list {
+	margin: 0;
+}
+
+.armory_equip_list li,
+.armory_profession_list li {
 	margin: 0;
 	display: inline;
+}
+
+.armory_char_spec span a,
+.armory_profession_list li a {
+	display: block;
+	width: 50%;
+	float: left;
 }
 
 .armory_item_icon {
