@@ -41,5 +41,6 @@ add_action('admin_init', array(&$wacplugin, 'admin_init'));
 add_action( 'widgets_init', array(&$wacplugin, 'widget_init'));
 add_shortcode('armory-character', array(&$wacplugin, 'shortcode'));
 
+// These methods need to be defined as static in the class.
 register_activation_hook($wacpath, array(&$wacplugin, 'on_activate'));
 register_deactivation_hook($wacpath, array(&$wacplugin, 'on_deactivate'));
