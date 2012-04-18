@@ -102,7 +102,7 @@
 <?php		foreach ($character->get_latest_achievements(5) as $ach) : ?>
 			<li>
 				<span class="points"><?php echo $ach->points; ?></span>
-				<a href="<?php echo $this->get_wowhead_achievement_url($ach->id); ?>" rel="<?php echo $this->get_wowhead_achievement_rel($ach->completed);?>"><?php echo $ach->title; ?></a><br/>
+				<a href="<?php echo $this->get_achievement_url($ach->id, $ach->section->id, $ach->category->id); ?>" rel="<?php echo $this->get_wowhead_achievement_rel($ach->completed);?>"><?php echo $ach->title; ?></a><br/>
 				<?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) echo $ach->description; ?> 
 			</li>
 <?php 	endforeach; ?>

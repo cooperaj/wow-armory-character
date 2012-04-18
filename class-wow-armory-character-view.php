@@ -25,6 +25,9 @@ require_once(ABSPATH . WPINC . '/class-http.php');
  */
 class WoW_Armory_Character_View
 {
+	const ACHIEVEMENT_JSON = 'db/achievementIcons.json';
+	const PROFESSION_JSON = 'db/professionNames.json';
+	
 	const PROFILE_URL = 'http://%s.battle.net/wow/%s';
 	const STATIC_URL = 'http://%s.battle.net/wow/static/images';
 	const PORTRAIT_URL = 'http://%s.battle.net/static-render/%s';
@@ -86,6 +89,25 @@ class WoW_Armory_Character_View
 		return $display;
 	}
 	
+	public function get_achievement_url($achiev_id, $section_id, $category_id)
+	{
+	
+		if ($this->_global_options['wowhead_links'])
+		{
+			return sprintf(self::WOWHEAD_ACHIEV_URL, ($this->_locale_table[$this->character->locale] == 'en'
+					? 'www'
+					: $this->_locale_table[$this->character->locale]), $achiev_id);
+		}
+		else 
+		{
+			return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . '/character/' . 
+					$this->character->realm . '/' . $this->character->name . '/achievement#' . 
+					$section_id . ':' .
+					(($category_id != null) ? $category_id . ':' : '') .
+					'a' . $achiev_id;
+		}
+	}
+	
 	public function get_class_icon_class()
 	{
 		// Ensure that we cache this file for the css to use.
@@ -141,8 +163,16 @@ class WoW_Armory_Character_View
 	
 	public function get_profession_url(stdClass $prof)
 	{
+		global $wacpath;
+		
+		// Professions are linked using the english names. We need to load these from our own sources
+		// since there are no API endpoints for this information.
+		$prof_names_json = json_decode(file_get_contents(plugin_dir_path($wacpath) . DIRECTORY_SEPARATOR . self::PROFESSION_JSON));
+		if ($prof_names_json == null)
+			return new WP_Error(500, __('Unable to load the profession db file.', 'wow_armory_character'));
+		
 		return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . '/character/' . 
-				$this->character->realm . '/' . $this->character->name . '/profession/' . strtolower($prof->name);
+				$this->character->realm . '/' . $this->character->name . '/profession/' . $prof_names_json->{$prof->id};
 	}
 	
 	public function get_profession_icon_url(stdClass $prof)
@@ -198,25 +228,9 @@ class WoW_Armory_Character_View
 		return null;
 	}
 	
-	public function get_acheivement_url($achiev_id)
-	{
-		
-	}
-	
-	public function get_wowhead_achievement_url($achiev_id)
-	{
-		return sprintf(self::WOWHEAD_ACHIEV_URL, ($this->_locale_table[$this->character->locale] == 'en' 
-				? 'www' : $this->_locale_table[$this->character->locale]), $achiev_id);
-	}
-	
 	public function get_wowhead_achievement_rel($timestamp)
 	{
 		return '&who=' . $this->character->name . '&when=' . $timestamp;
-	}
-	
-	public function get_wowhead_item_url($item_id)
-	{
-		
 	}
 	
 	public function get_wowhead_item_rel($tooltip_params)

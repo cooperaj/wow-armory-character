@@ -108,8 +108,14 @@ class WoW_Armory_Character_Achievements
 				{
 					foreach ($category->achievements as $ach)
 					{
-						$ach->section = $section->name;
-						$ach->category = $category->name;
+						$ach->section = new stdClass();
+						$ach->section->id = $section->id;
+						$ach->section->name = $section->name;
+						
+						$ach->category = new stdClass();
+						$ach->category->id = $category->id;
+						$ach->category->name = $category->name;
+						
 						$this->_flat_api_data[$ach->id] = $ach;
 					}
 				}
@@ -117,7 +123,14 @@ class WoW_Armory_Character_Achievements
 
 			foreach ($section->achievements as $ach)
 			{
-				$ach->section = $section->name;
+				$ach->section = new stdClass();
+				$ach->section->id = $section->id;
+				$ach->section->name = $section->name;
+				
+				$ach->category = new stdClass();
+				$ach->category->id = null;
+				$ach->category->name = null;
+				
 				$this->_flat_api_data[$ach->id] = $ach;
 			}
 		}
