@@ -143,7 +143,7 @@ class WoW_Armory_Character_Plugin
 			$clear_count = 0;
 			foreach((array)$_POST['delete'] as $clear_name)
 			{
-				delete_option($clear_name);
+				delete_transient(str_replace('_transient_', '', $clear_name));
 				$clear_count++;
 			}
 			
@@ -205,13 +205,13 @@ class WoW_Armory_Character_Plugin
 					</thead>
 					<tbody>
 
-					<?php 
-					$chars = WoW_Armory_Character_DAL::fetch_all_cached_characters();
+						<?php 
+						$chars = WoW_Armory_Character_DAL::fetch_all_cached_characters();
 						if (count($chars) == 0) 
 						{
 						?>
 						<tr>
-							<td scope="row" colspan="4" style="text-align: center;"><strong><?php _e('No Caches Found', 'wow_armory_character')?></strong></td>
+							<td scope="row" colspan="5" style="text-align: center;"><strong><?php _e('No cached characters found', 'wow_armory_character')?></strong></td>
 						</tr>
 						<?php
 						}

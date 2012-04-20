@@ -40,7 +40,7 @@ class WoW_Armory_Character_DAL
 		$chars = array();
 		
 		global $wpdb;
-		$options = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."options WHERE `option_name` LIKE '%wowcharcache%'");
+		$options = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."options WHERE `option_name` LIKE '_transient_wowcharcache%'");
 		
 		foreach ($options as $option)
 		{
@@ -120,8 +120,7 @@ class WoW_Armory_Character_DAL
 	 */
 	static function fetch_achievements($region, $locale, $expires_after = 2419200)
 	{
-		$cached_achievs = get_option('wowachcache-' . $region . '-' . $locale);
-		if ($cached_achievs['last_checked'] > (time() - $expires_after))
+		if (false !== ($cached_achievs = get_transient('wowachcache-' . $region . '-' . $locale)))
 		{
 			$achievs_json = json_decode($cached_achievs['api_data']);
 		}
@@ -141,14 +140,7 @@ class WoW_Armory_Character_DAL
 				$achievs_data['locale'] = $locale;
 				$achievs_data['api_data'] = $http_result['body'];
 				
-				if (get_option('wowachcache-' . $region . '-' . $locale))
-				{
-					update_option('wowachcache-' . $region . '-' . $locale, $achievs_data);
-				}
-				else
-				{
-					add_option('wowachcache-' . $region . '-' . $locale, $achievs_data);
-				}
+				set_transient('wowachcache-' . $region . '-' . $locale, $achievs_data, $expires_after);
 			}
 			else 
 			{
@@ -159,13 +151,14 @@ class WoW_Armory_Character_DAL
 		return new WoW_Armory_Character_Achievements($region, $locale, $achievs_json);
 	}
 	
-	static function persist_character_note($character, $note)
+	static function persist_character_note($character, $note, $expires_after = 43200)
 	{
-		$char_data = get_option('wowcharcache-'.md5($character->name . '-' . $character->realm . '-' . $character->region . '-' . $character->locale));
+		$char_data = get_transient('wowcharcache-'.md5($character->name . '-' . $character->realm . '-' . $character->region . '-' . $character->locale));
 		if ($char_data !== false && !in_array($note, $char_data['notes']))
 		{
 			$char_data['notes'][] = $note;
-			update_option('wowcharcache-'.md5($character->name . '-' . $character->realm . '-' . $character->region . '-' . $character->locale), $char_data);
+			set_transient('wowcharcache-'.md5($character->name . '-' . $character->realm . '-' . $character->region . '-' . $character->locale), 
+					$char_data, $expires_after);
 		}
 	}
 	
@@ -186,8 +179,7 @@ class WoW_Armory_Character_DAL
 	private function _fetch_character($region, $locale, $realm, $name, $expires_after = 43200)
 	{
 		// Try to fetch from the cache.
-		$cached_char = get_option('wowcharcache-'.md5($name . '-' . $realm . '-' . $region . '-' . $locale));
-		if ($cached_char['last_checked'] > (time() - $expires_after))
+		if (false !== ($cached_char = get_transient('wowcharcache-'.md5($name . '-' . $realm . '-' . $region . '-' . $locale))))
 		{
 			// Cached available and within the expiry time.
 			return json_decode($cached_char['api_data']);
@@ -211,15 +203,8 @@ class WoW_Armory_Character_DAL
 				$char_data['api_data'] = $http_result['body'];
 				$char_data['notes'] = array();
 				
-				// Cache the result so we don't have to keep fetching this. We have to update if it exists already.
-				if (get_option('wowcharcache-'.md5($name . '-' . $realm . '-' . $region . '-' . $locale)))
-				{
-					update_option('wowcharcache-'.md5($name . '-' . $realm . '-' . $region . '-' . $locale), $char_data);
-				}
-				else
-				{
-					add_option('wowcharcache-'.md5($name . '-' . $realm . '-' . $region . '-' . $locale), $char_data);
-				}
+				// Cache the result so we don't have to keep fetching this.
+				set_transient('wowcharcache-'.md5($name . '-' . $realm . '-' . $region . '-' . $locale), $char_data, $expires_after);
 				
 				return $char_json;
 			}
@@ -240,8 +225,7 @@ class WoW_Armory_Character_DAL
 	 */
 	private function _fetch_race($region, $locale, $race_id, $expires_after = 2419200)
 	{
-		$cached_races = get_option('wowracecache-' . $region . '-' . $locale);
-		if ($cached_races['last_checked'] > (time() - $expires_after))
+		if (false !== ($cached_races = get_transient('wowracecache-' . $region . '-' . $locale)))
 		{
 			$races_json = json_decode($cached_races['api_data']);
 		}
@@ -261,14 +245,7 @@ class WoW_Armory_Character_DAL
 				$races_data['locale'] = $locale;
 				$races_data['api_data'] = $http_result['body'];
 				
-				if (get_option('wowracecache-' . $region . '-' . $locale))
-				{
-					update_option('wowracecache-' . $region . '-' . $locale, $races_data);
-				}
-				else
-				{
-					add_option('wowracecache-' . $region . '-' . $locale, $races_data);
-				}
+				set_transient('wowracecache-' . $region . '-' . $locale, $races_data, $expires_after);
 			}
 			else 
 			{
@@ -298,8 +275,7 @@ class WoW_Armory_Character_DAL
 	 */
 	private function _fetch_class($region, $locale, $class_id, $expires_after = 2419200)
 	{
-		$cached_classes = get_option('wowclasscache-' . $region . '-' . $locale);
-		if ($cached_classes['last_checked'] > (time() - $expires_after))
+		if (false !== ($cached_classes = get_transient('wowclasscache-' . $region . '-' . $locale)))
 		{
 			$classes_json = json_decode($cached_classes['api_data']);
 		}
@@ -319,14 +295,7 @@ class WoW_Armory_Character_DAL
 				$classes_data['locale'] = $locale;
 				$classes_data['api_data'] = $http_result['body'];
 				
-				if (get_option('wowclasscache-' . $region . '-' . $locale))
-				{
-					update_option('wowclasscache-' . $region . '-' . $locale, $classes_data);
-				}
-				else
-				{
-					add_option('wowclasscache-' . $region . '-' . $locale, $classes_data);
-				}
+				set_transient('wowclasscache-' . $region . '-' . $locale, $classes_data, $expires_after);
 			}
 			else 
 			{
