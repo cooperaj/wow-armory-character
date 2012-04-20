@@ -3,7 +3,7 @@ Contributors: blueajcooper
 Tags: widget, world of warcraft, wow, armory, character, warcraft, blizzard, toon, gear, achievements, professions
 Requires at least: 3.0.0
 Tested up to: 3.2.1
-Stable tag: 0.9.4
+Stable tag: 0.9.5
 License: GPLv2
 
 Pulls character information from the WoW community API and displays it.
@@ -12,26 +12,28 @@ Pulls character information from the WoW community API and displays it.
 
 This plugin displays World of Warcraft character profiles pulled from data made available by the WoW community API.
 It allows you to view a basic profile that shows your character information and picture. It can be easily configured to 
-show the gear that you are wearing (with links to [wowhead](http://wowhead.com)), your talents, professions and recent
-achievements.
+show the gear that you are wearing (with optional links to [wowhead](http://wowhead.com)), your talents, professions and
+recent achievements.
 
 To see an example of the plugin in action [check it out on my wordpress blog](http://realmenweardress.es/about/).
 
 = Please Note =
 
 This is a ground up rewrite of seifertim's effort [WoW Armory](http://wordpress.org/extend/plugins/wow-armory/). The 
-API that was used by the WoW Armory plugin will be discontinued on the 12th of August and so it will cease to function.
-I've tried to keep as much of the display markup as possible so that people migrating from WoW Armory will not 
+API that was used by the WoW Armory plugin was discontinued on the 12th of August 2011 and so the plugin has ceased to
+function. I've tried to keep as much of the display markup as possible so that people migrating from WoW Armory will not 
 have to redo any theming they have carried out - however, there are some minor changes so it may not be a 100% fit.
 
 I have not replicated all the functionality that was offered by WoW Armory and have instead concentrated on getting it 
-working well for how I use it. Consequently you are unable to view a 3D view of your character or professions (though 
-these are planned).
+working well for how I use it. Consequently you are unable to view a 3D view of your character.
 
 = Known Issues =
 
 * When showing characters with Chinese or Korean locales the wowhead tooltips will show in english. I'm actively 
-  seeking a solution
+  seeking a solution.
+* The widget configuration will keep reseting your language choice to English. When making changes be sure to first
+  re-choose your region and then choose your language if you do not wish english to be selected.
+* Profession completion bars do not show when configured to.
 
 == Installation ==
 
@@ -42,7 +44,7 @@ these are planned).
 
 = Shortcode Use =
 
-The shortcode can be added to any page or post and can be configured in an identical fashion to the 
+The shortcode can be added to any page or post and can be configured in an identical fashion to the
 widget. At a minimum you will need to specify the realm and character name for it to work - though this will assume
 that you wish to show all the details of character from the EU region in English.
 
@@ -56,7 +58,10 @@ The configuration parameters available to use are:
 * **show_title** - *1* or *0*
 * **show_talents** - *1* or *0*
 * **show_items** - *1* or *0*
-* **show_profs** - *1* or *0*
+* **show_profs** - This is a bitwise field. To get the setting you want use add together the numbers below.
+    * *1* - Show profession badges
+    * *2* - Show profession completion bars
+    * *4* - Show seconday professions
 * **show_achievs** - This is a bitwise field. To get the setting you want use add together the numbers below.
     * *1* - Show achievement bar
     * *2* - Show achievement list
@@ -98,11 +103,11 @@ you need.
 = The plugin is displaying old information. How do I update it? =
 
 The plugin will cache the characters it retrieves from the community API for 12 hours. This ensures that 
-your website will make no more then 2 requests in any 24 hour period. In order to force your character display 
-to update you are able to clear the cache.
+your website will make no more then 2 requests per character in any 24 hour period. In order to force your character
+display to update you are able to clear the cache.
 
-1. Navigate to the *Character Cache* section within the *Settings* area of your wordpress admin area.
-1. Tick the checkbox next to the character you wish to refresh and click the *Clear Cache* button.
+1. Navigate to the *Armory Character* section within the *Settings* area of your wordpress admin area.
+1. Tick the checkbox next to the character you wish to refresh and click the *Clear selected cache items* button.
 
 When you next look at your character fresh information will be pulled from the community API. It may be that the 
 community API is returning old information, in this case you will need to wait until your armory page is updated.
@@ -117,7 +122,8 @@ you see fit. You can either alter the html after it has been created or you can 
 the output.
 
 The CSS can be overriden by using the global setting 'Add plugin css to the page'. Unticking this box will allow
-you to provide your own CSS as part of your theme.
+you to provide your own CSS as part of your theme. For simple edits I suggest you add the necessary tweaks to your
+themes CSS and keep the basic styling the plugin provides.
 
 == Screenshots ==
 
@@ -126,7 +132,7 @@ you to provide your own CSS as part of your theme.
 
 == Changelog ==
 
-= 0.9.5b =
+= 0.9.5 =
 * New global settings introduced. Including the ability to disable the built in stylesheet and wowhead integration.
 * Professions now show.
 * Shoulder slot items now show correctly. Thanks to xsherbearx for reporting the issue.
