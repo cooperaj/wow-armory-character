@@ -143,7 +143,7 @@ themes CSS and keep the basic styling the plugin provides.
 * New filter added to allow you to change the template file location.
 
 = 0.9.3 =
-* Fixed usages of __DIR__ which is PHP5.3 only. The plugin should now work on PHP5.2+ Thanks to @Flavio_Torelli 
+* Fixed usages of __DIR__ which is PHP5.3 only. The plugin should now work on PHP5.2+ Thanks to @Flavio_Torelli
 for reporting the issue.
 
 = 0.9.2 =
@@ -160,6 +160,10 @@ for reporting the issue.
 * The initial release of the plugin.
 
 == Upgrade Notice ==
+
+= 0.9.5 =
+Profession information can now be show as a number of badges and new global settings have been introduced
+to help with theming.
 
 = 0.9.4 =
 You can now show your characters achievements. For easier theming you can now specify your own
