@@ -101,7 +101,7 @@
 	<div class="armory_section armory_achiev">
 		<h4><?php _e('Recent Achievements', 'wow_armory_character'); ?></h4>
 		<ul class="armory_achiev_list">
-<?php		foreach ($character->get_latest_achievements(5) as $ach) : ?>
+<?php		foreach ($character->get_latest_achievements(5) as $ach) : // Shows the 5 latest achievements. ?>
 			<li>
 				<span class="points"><?php echo $ach->points; ?></span>
 				<a href="<?php echo $this->get_achievement_url($ach->id, $ach->section->id, $ach->category->id); ?>" rel="<?php echo $this->get_wowhead_achievement_rel($ach->completed);?>"><?php echo $ach->title; ?></a><br/>
