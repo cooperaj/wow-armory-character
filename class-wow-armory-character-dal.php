@@ -204,7 +204,7 @@ class WoW_Armory_Character_DAL
 				$char_data['notes'] = array();
 				
 				// Cache the result so we don't have to keep fetching this.
-				set_transient('wowcharcache-'.md5($name . '-' . $realm . '-' . $region . '-' . $locale), $char_data, $expires_after);
+				set_transient('wowcharcache-'.md5($name . '-' . $char_json->realm . '-' . $region . '-' . $locale), $char_data, $expires_after);
 				
 				return $char_json;
 			}
