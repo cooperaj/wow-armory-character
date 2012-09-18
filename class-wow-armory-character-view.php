@@ -197,22 +197,22 @@ class WoW_Armory_Character_View
 		);
 	}
 	
-	public function get_talent_url()
+	public function get_talent_url(stdClass $talent)
 	{
-		return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . '/character/' . 
-				$this->character->realm . '/' . $this->character->name . '/talent';
+		return sprintf(self::PROFILE_URL, strtolower($this->character->region), $this->_locale_table[$this->character->locale]) . '/tool/talent-calculator#' .
+                $this->character->calcClass . $talent->calcSpec . '!' . $talent->calcTalent . '!' . $talent->calcGlyph;
 	}
 	
 	public function get_talent_tree_icon_url(stdClass $talent)
 	{
 		return $this->fetch_asset(
-			$this->_get_cdn_url() . '/icons/18/' . $talent->icon . '.jpg'
+			$this->_get_cdn_url() . '/icons/18/' . $talent->spec->icon . '.jpg'
 		);
 	}
 	
 	public function get_talent_tree_text(stdClass $talent)
 	{
-		return $talent->trees[0]->total . ' / ' . $talent->trees[1]->total . ' / ' . $talent->trees[2]->total; 
+		return $talent->spec->name; //$talent->trees[0]->total . ' / ' . $talent->trees[1]->total . ' / ' . $talent->trees[2]->total;
 	}
 	
 	public function get_name_with_title_text()

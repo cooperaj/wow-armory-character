@@ -27,10 +27,9 @@
 <?php if ($options['show_talents'] == 1 && $character->talents) : ?>
 			<span class="armory_char_spec">
 <?php		$count = 0;
-				foreach ($character->talents as $talent) :
-					$type = ($count == 0) ? 'primary' : 'secondary'; ?>
+				foreach ($character->talents as $talent) : ?>
 				<span class="<?php echo (isset($talent->selected) && $talent->selected) ? 'active' : 'inactive'; ?>_spec">
-					<a href="<?php echo $this->get_talent_url(); ?>/<?php echo $type; ?>"><img src="<?php echo $this->get_talent_tree_icon_url($talent); ?>" alt="<?php echo $talent->name; ?> talent spec icon" /> <?php echo $this->get_talent_tree_text($talent); ?></a>	
+					<a href="<?php echo $this->get_talent_url($talent); ?>"><img src="<?php echo $this->get_talent_tree_icon_url($talent); ?>" alt="<?php echo $talent->spec->name; ?> talent spec icon" /> <?php echo $this->get_talent_tree_text($talent); ?></a>
 				</span>
 <?php			$count++;
 				endforeach; ?>
