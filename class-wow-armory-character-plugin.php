@@ -73,7 +73,8 @@ class WoW_Armory_Character_Plugin
 		wp_register_script('qTip2', plugins_url('javascript/qTip2/jquery.qtip.min.js', $wacpath), array('jquery'));
 		wp_register_style('qTip2', plugins_url('javascript/qTip2/jquery.qtip.min.css', $wacpath));
 		wp_register_script('wow-armory-character-admin-settings', 
-			plugins_url('javascript/admin_settings.js', $wacpath), array('jquery', 'qTip2'));
+			plugins_url('javascript/admin_settings.js', $wacpath), 
+			array('jquery', 'qTip2'));
 			
 		register_setting('wac_settings', 'wac_settings', array($this, 'admin_settings_validate'));
 	}
