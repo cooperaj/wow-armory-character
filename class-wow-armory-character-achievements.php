@@ -68,7 +68,7 @@ class WoW_Armory_Character_Achievements
 		// TODO Until I can figure this out I'm going to hard code it based on what the armory
 		// tells me is available.
 		
-		return 1401;
+		return 1821;
 	}
 	
 	/**
