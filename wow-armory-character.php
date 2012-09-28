@@ -3,7 +3,7 @@
 Plugin Name: WoW Armory Character
 Plugin URI: http://realmenweardress.es/wow-armory-character/
 Description: Pulls a wow character from the new WoW community API and displays it.
-Version: 0.9.5
+Version: 0.9.6
 Author: Adam Cooper
 Author URI: http://realmenweardress.es
 License: GPLv2

@@ -2,8 +2,8 @@
 Contributors: blueajcooper
 Tags: widget, world of warcraft, wow, armory, character, warcraft, blizzard, toon, gear, achievements, professions
 Requires at least: 3.0.0
-Tested up to: 3.3.1
-Stable tag: 0.9.5
+Tested up to: 3.4.2
+Stable tag: 0.9.6
 License: GPLv2
 
 Pulls character information from the WoW community API and displays it.
@@ -132,6 +132,10 @@ themes CSS and keep the basic styling the plugin provides.
 
 == Changelog ==
 
+= 0.9.6 =
+* Update for patch 5.0.4 talent changes.
+* Achievemnt count update
+
 = 0.9.5 =
 * New global settings introduced. Including the ability to disable the built in stylesheet and wowhead integration.
 * Professions now show.
@@ -160,6 +164,9 @@ for reporting the issue.
 * The initial release of the plugin.
 
 == Upgrade Notice ==
+
+= 0.9.6 =
+This update makes changes to how the talents are displayed due to the changes to talents in 5.0.4
 
 = 0.9.5 =
 Profession information can now be show as a number of badges and new global settings have been introduced
