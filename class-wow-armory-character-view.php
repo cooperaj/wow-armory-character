@@ -25,7 +25,8 @@ require_once(ABSPATH . WPINC . '/class-http.php');
  */
 class WoW_Armory_Character_View
 {
-	const ACHIEVEMENT_JSON = 'db/achievementIcons.json';
+	// Needed so that we can grab profession icons. They aren't consistant with the actual
+	// names we can't do any automated conversion.
 	const PROFESSION_JSON = 'db/professionNames.json';
 	
 	const PROFILE_URL = 'http://%s.battle.net/wow/%s';
