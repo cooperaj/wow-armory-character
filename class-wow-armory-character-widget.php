@@ -72,10 +72,14 @@ class WoW_Armory_Character_Widget extends WP_Widget
 			<p>
 				<label for="<?php echo $this->get_field_id('locale'); ?>"><?php echo __('Language:', 'wow_armory_character'); ?></label><br />
 				<select class="wa-lang widefat" id="<?php echo $this->get_field_id('locale'); ?>" name="<?php echo $this->get_field_name('locale'); ?>">
-					<option value="en_GB"<?php selected($instance['locale'], 'en_GB', true); ?>><?php _e('English', 'wow_armory_character'); ?></option>
+					<option value="en_GB"<?php selected($instance['locale'], 'en_GB', true); ?>><?php _e('English (EU)', 'wow_armory_character'); ?></option>
+                    <option value="en_US"<?php selected($instance['locale'], 'en_US', true); ?>><?php _e('English (US)', 'wow_armory_character'); ?></option>
 					<option value="de_DE"<?php selected($instance['locale'], 'de_DE', true);  ?>><?php _e('Deutsch', 'wow_armory_character'); ?></option>
-					<option value="es_ES"<?php selected($instance['locale'], 'es_ES', true);  ?>><?php _e('Español', 'wow_armory_character'); ?></option>
+					<option value="es_ES"<?php selected($instance['locale'], 'es_ES', true);  ?>><?php _e('Español (EU)', 'wow_armory_character'); ?></option>
+                    <option value="es_MX"<?php selected($instance['locale'], 'es_MX', true);  ?>><?php _e('Español (AL)', 'wow_armory_character'); ?></option>
 					<option value="fr_FR"<?php selected($instance['locale'], 'fr_FR', true);  ?>><?php _e('Française', 'wow_armory_character'); ?></option>
+                    <option value="pt_PT"<?php selected($instance['locale'], 'pt_PT', true);  ?>><?php _e('Português (EU)', 'wow_armory_character'); ?></option>
+                    <option value="pt_BR"<?php selected($instance['locale'], 'pt_BR', true);  ?>><?php _e('Português (AL)', 'wow_armory_character'); ?></option>
 					<option value="ru_RU"<?php selected($instance['locale'], 'ru_RU', true);  ?>><?php _e('Pусский', 'wow_armory_character'); ?></option>
 					<option value="ko_KR"<?php selected($instance['locale'], 'ko_KR', true);  ?>><?php _e('한국의', 'wow_armory_character'); ?></option>
 					<option value="zh_TW"<?php selected($instance['locale'], 'zh_TW', true);  ?>><?php _e('中國', 'wow_armory_character'); ?></option>
