@@ -67,6 +67,8 @@ class WoW_Armory_Character_View
 			'es_MX' => 'es',
 			'en_GB' => 'en',
 			'es_ES' => 'es',
+			'pt_PT' => 'pt',
+			'pt_BR' => 'pt',
 			'fr_FR' => 'fr',
 			'ru_RU' => 'ru',
 			'de_DE' => 'de',
