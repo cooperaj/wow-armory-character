@@ -11,7 +11,7 @@ MAINFILE="wow-armory-character.php" # this should be the name of your main php f
 GITPATH="$CURRENTDIR/" # this file should be in the base of your git repository
 
 # wordpress i18n tools config
-MAKEPOTPATH="/Users/adam/Projects/Resources/wordpress-i18n-tools/makepot.php"
+MAKEPOTPATH="/usr/local/lib/wordpress-i18n-tools/makepot.php"
 TEXTDOMAIN="wow_armory_character"
 
 # svn config
