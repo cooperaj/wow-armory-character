@@ -17,23 +17,20 @@ recent achievements.
 
 To see an example of the plugin in action [check it out on my wordpress blog](http://realmenweardress.es/about/).
 
-= Please Note =
-
-This is a ground up rewrite of seifertim's effort [WoW Armory](http://wordpress.org/extend/plugins/wow-armory/). The 
-API that was used by the WoW Armory plugin was discontinued on the 12th of August 2011 and so the plugin has ceased to
-function. I've tried to keep as much of the display markup as possible so that people migrating from WoW Armory will not 
-have to redo any theming they have carried out - however, there are some minor changes so it may not be a 100% fit.
-
-I have not replicated all the functionality that was offered by WoW Armory and have instead concentrated on getting it 
-working well for how I use it. Consequently you are unable to view a 3D view of your character.
-
 = Known Issues =
 
 * When showing characters with Chinese or Korean locales the wowhead tooltips will show in english. I'm actively 
   seeking a solution.
 * The widget configuration will keep reseting your language choice to English. When making changes be sure to first
   re-choose your region and then choose your language if you do not wish english to be selected.
+* Multiple Armory widgets on one page will cause issue with the javascript. For the time being I recommend using
+  shortcodes if you need more then one character displayed on a page.
 * Profession completion bars do not show when configured to.
+
+== With Thanks ==
+
+Many thanks to seifertim and his effort [WoW Armory](http://wordpress.org/extend/plugins/wow-armory/) for providing the
+inspiration (and base upon which to work).
 
 == Installation ==
 
@@ -170,6 +167,8 @@ for reporting the issue.
 
 == Upgrade Notice ==
 
+= 0.9.7 =
+
 = 0.9.6 =
 This update makes changes to how the talents are displayed due to the changes to talents in 5.0.4
 
@@ -199,4 +198,3 @@ download it from the [github website](https://github.com/cooperaj/wow-armory-cha
 
 I also maintain a more  comprehensive issue/bug list at github so if you have anything to report it would 
 be very helpful if you could post the problem there.
-
