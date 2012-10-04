@@ -38,7 +38,8 @@ $wacplugin = new WoW_Armory_Character_Plugin();
 add_action('init', array(&$wacplugin, 'init'));
 add_action('admin_menu', array(&$wacplugin, 'admin_menu'));
 add_action('admin_init', array(&$wacplugin, 'admin_init'));
-add_action( 'widgets_init', array(&$wacplugin, 'widget_init'));
+add_action('widgets_init', array(&$wacplugin, 'widget_init'));
+add_action('wp_ajax_admin_ajax_realms', array(&$wacplugin, 'admin_ajax_realms'));
 add_shortcode('armory-character', array(&$wacplugin, 'shortcode'));
 
 // These methods need to be defined as static in the class.

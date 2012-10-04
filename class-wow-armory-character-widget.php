@@ -67,7 +67,9 @@ class WoW_Armory_Character_Widget extends WP_Widget
 					<option value="KR"<?php selected($instance['region'], 'KR', true); ?>>KR</option>
 					<option value="TW"<?php selected($instance['region'], 'TW', true); ?>>TW</option>
 				</select>
-				<input type="text" class="wa-realm" style="width: 150px" id="<?php echo $this->get_field_id('realm'); ?>" name="<?php echo $this->get_field_name('realm'); ?>" value="<?php echo htmlspecialchars($instance['realm']); ?>" />
+				<select class="wa-realm" style="width: 150px" id="<?php echo $this->get_field_id('realm'); ?>" name="<?php echo $this->get_field_name('realm'); ?>">
+					<?php echo $this->get_realms_options($instance['region'], $instance['realm']); ?>
+				</select>
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('locale'); ?>"><?php echo __('Language:', 'wow_armory_character'); ?></label><br />
@@ -214,5 +216,17 @@ class WoW_Armory_Character_Widget extends WP_Widget
 		}
 		
 		echo $after_widget;
+	}
+
+	/**
+	 * @param $region The region for which to fetch a list of realms.
+	 * @param $realm The currently selected realm (if any).
+	 * @return string A string of html option elements to display within a select element.
+	 */
+	public function get_realms_options($region, $current_realm = null)
+	{
+		$realms_for_region = WoW_Armory_Character_DAL::fetch_realms($region);
+
+		return $realms_for_region->get_realms_as_options($current_realm);
 	}
 }

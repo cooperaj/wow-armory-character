@@ -19,6 +19,25 @@ function wac_disable_lang(select_clone, chosen_value)
 	});
 }
 
+function wac_change_realms(region)
+{
+	var data = {
+		action: 'admin_ajax_realms',
+		region: region
+	};
+
+	jQuery.post('admin-ajax.php', data, function(response) {
+		jQuery('select.wa-realm').each(function() {
+			var current_realm = jQuery('option:selected', this).attr('value');
+
+			jQuery('option', this).remove();
+			jQuery(this).html(response);
+
+			jQuery('option[value="' + current_realm + '"]', this).attr('selected', 'selected');
+		});
+	});
+}
+
 ;(function($) {
 	$(document).ready(function() {
 		// copy the lang select, so we can easily reset it
@@ -34,6 +53,7 @@ function wac_disable_lang(select_clone, chosen_value)
 		$('div.widget-liquid-right').delegate('select.wa-region', 'change', function() {
 			var val = $(this).val();
 			wac_disable_lang(select_clone, val);
+			wac_change_realms(val);
 		});
 		
 		// find all the sub-options lists and make them show/hide based on their parent

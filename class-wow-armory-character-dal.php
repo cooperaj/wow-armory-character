@@ -30,7 +30,8 @@ class WoW_Armory_Character_DAL
 	 * @var string
 	 */
 	const CHARACTER_URL = 'http://%s.battle.net/api/wow/character/%s/%s?fields=guild,items,professions,talents,titles,achievements&locale=%s';
-	
+
+    const REALM_URL = 'http://%s.battle.net/api/wow/realm/status';
 	const RACE_URL = 'http://%s.battle.net/api/wow/data/character/races?locale=%s';
 	const CLASS_URL = 'http://%s.battle.net/api/wow/data/character/classes?locale=%s';
 	const ACHIEV_URL = 'http://%s.battle.net/api/wow/data/character/achievements?locale=%s';
@@ -150,6 +151,45 @@ class WoW_Armory_Character_DAL
 		
 		return new WoW_Armory_Character_Achievements($region, $locale, $achievs_json);
 	}
+
+    /**
+     * Fetches realm information from the community API
+     *
+     * @param string $region The region to fetch from.
+     * @param int $expires_after The expiry time for this lookup cache. Defaults to 1 week.
+     * @return WP_Error|stdClass Returns either an error if the API request failed or a stdClass encapsulating the response.
+     */
+    static function fetch_realms($region, $expires_after = 2419200)
+    {
+        if (false !== ($cached_realms = get_transient('wowrealmcache-' . $region)))
+        {
+            $realms_json = json_decode($cached_realms['api_data']);
+        }
+        else
+        {
+            $http_request = new WP_Http();
+            $http_result = $http_request->request(self::_encode_url(sprintf(self::REALM_URL, strtolower($region))));
+
+            if (!is_wp_error($http_result) && $http_result['response']['code'] == 200)
+            {
+                $realms_json = json_decode($http_result['body']);
+                if ($realms_json == null)
+                    return new WP_Error(500, __('Unable to fetch data from battle.net for realms', 'wow_armory_character'));
+
+                $realms_data = array();
+                $realms_data['last_checked'] = time();
+                $realms_data['api_data'] = $http_result['body'];
+
+                set_transient('wowrealmcache-' . $region, $realms_data, $expires_after);
+            }
+            else
+            {
+                return new WP_Error(500, __('Unable to fetch data from battle.net for realms', 'wow_armory_character'));
+            }
+        }
+
+        return new WoW_Armory_Character_Realms($region, $realms_json);
+    }
 	
 	static function persist_character_note($character, $note, $expires_after = 43200)
 	{

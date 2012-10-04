@@ -132,9 +132,14 @@ themes CSS and keep the basic styling the plugin provides.
 
 == Changelog ==
 
+= 0.9.7 =
+* Realms are now chosen from a dropdown list rather then typed. This should help where the slug varies from the
+realm name.
+
 = 0.9.6 =
 * Update for patch 5.0.4 talent changes.
 * Achievemnt count update
+* Include Portugese language configuration options.
 
 = 0.9.5 =
 * New global settings introduced. Including the ability to disable the built in stylesheet and wowhead integration.

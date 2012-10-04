@@ -21,6 +21,7 @@ require_once('class-wow-armory-character-dal.php');
 require_once('class-wow-armory-character-view.php');
 require_once('class-wow-armory-character-widget.php');
 require_once('class-wow-armory-character-achievements.php');
+require_once('class-wow-armory-character-realms.php');
 
 /**
  * Provides the wordpress integration.
@@ -125,6 +126,17 @@ class WoW_Armory_Character_Plugin
 			
 		/* Using registered $page handle to hook script load */
 		add_action('admin_print_styles-' . $page_name, array($this, 'admin_resources'));
+	}
+
+	public function admin_ajax_realms()
+	{
+		$region = htmlspecialchars($_POST['region']);
+		$realms = WoW_Armory_Character_DAL::fetch_realms($region);
+
+		echo $realms->get_realms_as_options();
+
+		// needed on ajax endpoints
+		die();
 	}
 	
 	public function widget_init()
