@@ -104,9 +104,24 @@
 			<li>
 				<span class="points"><?php echo $ach->points; ?></span>
 				<a href="<?php echo $this->get_achievement_url($ach->id, $ach->section->id, $ach->category->id); ?>" rel="<?php echo $this->get_wowhead_achievement_rel($ach->completed);?>"><?php echo $ach->title; ?></a><br/>
-				<?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) echo $ach->description; ?> 
+				<?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) echo $ach->description; ?>
 			</li>
-<?php 	endforeach; ?>
+<?php 		endforeach; ?>
+		</ul>
+	</div>
+<?php endif; ?>
+
+<?php if ($options['show_feed']) : ?>
+	<div class="armory_section armory_feed">
+		<h4><?php _e('Recent Activity', 'wow_armory_character'); ?></h4>
+		<ul class="armory_feed_list">
+<?php		$feed_items = $character->get_activity_feed_items();
+			for ($i = 0; $i < 5; $i++) : ?>
+			<li>
+				Activity Item
+			</li>
+<?php 			$count++;
+			endfor; ?>
 		</ul>
 	</div>
 <?php endif; ?>

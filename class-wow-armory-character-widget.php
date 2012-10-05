@@ -37,6 +37,8 @@ class WoW_Armory_Character_Widget extends WP_Widget
 			'show_items' => 1,
 			'show_profs' => WoW_Armory_Character_Plugin::STYLE_PROF_BAR | WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY,
 			'show_achievs' => WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST,
+			'show_feed' => WoW_Armory_Character_Plugin::STYLE_FEED_ITEMS | WoW_Armory_Character_Plugin::STYLE_FEED_ACHIEVEMENTS |
+				WoW_Armory_Character_Plugin::STYLE_FEED_ICONS,
 			'locale' => 'en_GB',
 			'title' => __('Armory for %NAME%', 'wow_armory_character'),
 		);
@@ -147,6 +149,38 @@ class WoW_Armory_Character_Widget extends WP_Widget
 					/>
 					<label for="<?php echo $this->get_field_id('show_achievs_list_desc'); ?>" title="<?php _e('Show the achievement description text when showing the Recent Achievements listing.', 'wow_armory_character'); ?>"><?php _e('Achievement Descriptions', 'wow_armory_character'); ?></label>
 				</span>
+				<input id="<?php echo $this->get_field_id('show_feed'); ?>" name="<?php echo $this->get_field_name('show_feed'); ?>" value="1" type="checkbox" <?php echo $instance['show_feed'] ? 'checked="checked"' : ''; ?> />
+				<label for="<?php echo $this->get_field_id('show_feed'); ?>"><?php _e('Show Activity Feed', 'wow_armory_character'); ?></label><br/>
+				<span class="sub_options<?php echo !$instance['show_feed'] ? ' sub_options_hidden' : ''; ?>" rel="<?php echo $this->get_field_id('show_feed'); ?>">
+					<input id="<?php echo $this->get_field_id('show_feed_items'); ?>"
+						   name="<?php echo $this->get_field_name('show_feed_items'); ?>"
+						   value="<?php echo WoW_Armory_Character_Plugin::STYLE_FEED_ITEMS; ?>"
+						   type="checkbox"
+						<?php echo (($instance['show_feed'] & WoW_Armory_Character_Plugin::STYLE_FEED_ITEMS) === WoW_Armory_Character_Plugin::STYLE_FEED_ITEMS) ? 'checked="checked"' : ''; ?>
+					/>
+					<label for="<?php echo $this->get_field_id('show_feed_items'); ?>" title="<?php _e('Show loot/items you have received.', 'wow_armory_character'); ?>"><?php _e('Show Items', 'wow_armory_character'); ?></label><br />
+					<input id="<?php echo $this->get_field_id('show_feed_achievs'); ?>"
+						   name="<?php echo $this->get_field_name('show_feed_achievs'); ?>"
+						   value="<?php echo WoW_Armory_Character_Plugin::STYLE_FEED_ACHIEVEMENTS; ?>"
+						   type="checkbox"
+						<?php echo (($instance['show_feed'] & WoW_Armory_Character_Plugin::STYLE_FEED_ACHIEVEMENTS) === WoW_Armory_Character_Plugin::STYLE_FEED_ACHIEVEMENTS) ? 'checked="checked"' : ''; ?>
+					/>
+					<label for="<?php echo $this->get_field_id('show_feed_achievs'); ?>" title="<?php _e('Show achievements you have earned.', 'wow_armory_character'); ?>"><?php _e('Show Achievements', 'wow_armory_character'); ?></label><br />
+					<input id="<?php echo $this->get_field_id('show_feed_criteria'); ?>"
+						   name="<?php echo $this->get_field_name('show_feed_criteria'); ?>"
+						   value="<?php echo WoW_Armory_Character_Plugin::STYLE_FEED_CRITERIA; ?>"
+						   type="checkbox"
+						<?php echo (($instance['show_feed'] & WoW_Armory_Character_Plugin::STYLE_FEED_CRITERIA) === WoW_Armory_Character_Plugin::STYLE_FEED_CRITERIA) ? 'checked="checked"' : ''; ?>
+					/>
+					<label for="<?php echo $this->get_field_id('show_feed_criteria'); ?>" title="<?php _e('Show achievement criteria you have earned.', 'wow_armory_character'); ?>"><?php _e('Show Achievement Criteria', 'wow_armory_character'); ?></label><br />
+					<input id="<?php echo $this->get_field_id('show_feed_icons'); ?>"
+						   name="<?php echo $this->get_field_name('show_feed_icons'); ?>"
+						   value="<?php echo WoW_Armory_Character_Plugin::STYLE_FEED_ICONS; ?>"
+						   type="checkbox"
+						<?php echo (($instance['show_feed'] & WoW_Armory_Character_Plugin::STYLE_FEED_ICONS) === WoW_Armory_Character_Plugin::STYLE_FEED_ICONS) ? 'checked="checked"' : ''; ?>
+					/>
+					<label for="<?php echo $this->get_field_id('show_feed_icons'); ?>" title="<?php _e('Show icons on each of the above items. Criteria will show a tick.', 'wow_armory_character'); ?>"><?php _e('Show Icons', 'wow_armory_character'); ?></label>
+				</span>
 			</p>
 		</div>
 	<?php
@@ -178,6 +212,12 @@ class WoW_Armory_Character_Widget extends WP_Widget
 		if ($new_instance['show_achievs_list']) $ach_config =  $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST;
 		if ($new_instance['show_achievs_list_desc']) $ach_config =  $ach_config | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC;
 
+		$feed_config = null;
+		if ($new_instance['show_feed_items']) $feed_config = $feed_config | WoW_Armory_Character_Plugin::STYLE_FEED_ITEMS;
+		if ($new_instance['show_feed_achievs']) $feed_config = $feed_config | WoW_Armory_Character_Plugin::STYLE_FEED_ACHIEVEMENTS;
+		if ($new_instance['show_feed_criteria']) $feed_config = $feed_config | WoW_Armory_Character_Plugin::STYLE_FEED_CRITERIA;
+		if ($new_instance['show_feed_icons']) $feed_config = $feed_config | WoW_Armory_Character_Plugin::STYLE_FEED_ICONS;
+
 		// If no settings are configured but the master or useless setting is ticked then set the defaults.
 		if (($new_instance['show_profs'] && $prof_config == null) || 
 				$prof_config == WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY) 
@@ -187,7 +227,12 @@ class WoW_Armory_Character_Widget extends WP_Widget
 		if (($new_instance['show_achievs'] && $ach_config == null) ||
 				$ach_config == WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST_DESC) 
 			$ach_config = $this->_default_options['show_achievs'];
-		$instance['show_achievs'] = $ach_config;		
+		$instance['show_achievs'] = $ach_config;
+
+		if (($new_instance['show_feed'] && $feed_config == null) ||
+				$feed_config == WoW_Armory_Character_Plugin::STYLE_FEED_ICONS)
+			$feed_config = $this->_default_options['feed_config'];
+		$instance['show_feed'] = $feed_config;
 		
 		return $instance;
 	}

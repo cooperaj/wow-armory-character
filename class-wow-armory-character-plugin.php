@@ -39,6 +39,12 @@ class WoW_Armory_Character_Plugin
 	const STYLE_PROF_BADGES = 1;
 	const STYLE_PROF_BAR = 2;
 	const STYLE_PROF_SECONDARY = 4;
+
+	// Bitwise operators for feed display.
+	const STYLE_FEED_ITEMS = 1;
+	const STYLE_FEED_ACHIEVEMENTS = 2;
+	const STYLE_FEED_CRITERIA = 4;
+	const STYLE_FEED_ICONS = 8;
 	
 	public function init()
 	{
@@ -308,6 +314,7 @@ class WoW_Armory_Character_Plugin
 			'show_items' => 1,
 			'show_profs' => self::STYLE_PROF_BAR | self::STYLE_PROF_SECONDARY,
 			'show_achievs' => self::STYLE_ACHIEV_BAR | self::STYLE_ACHIEV_LIST,
+			'show_feed' => self::STYLE_FEED_ITEMS | self::STYLE_FEED_ACHIEVEMENTS | self::STYLE_FEED_ICONS,
 			'locale' => 'en_GB',
 		), $atts);
 		

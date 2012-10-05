@@ -111,6 +111,19 @@ class WoW_Armory_Character
 		
 		return $achievs;
 	}
+
+	public function get_activity_feed_items()
+	{
+		$feed_items = array();
+		$count = 0;
+
+		foreach ($this->feed as $feed_item)
+		{
+			$feed_items[] = $feed_item;
+		}
+
+		return $feed_items;
+	}
 	
 	/**
 	 * Return whether or not our achievement data is valid.

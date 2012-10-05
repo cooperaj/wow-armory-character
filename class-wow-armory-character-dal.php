@@ -29,7 +29,7 @@ class WoW_Armory_Character_DAL
 	 * The API url to retrieve a character populated with Guild, Equipped Items, Profession and Talent information.
 	 * @var string
 	 */
-	const CHARACTER_URL = 'http://%s.battle.net/api/wow/character/%s/%s?fields=guild,items,professions,talents,titles,achievements&locale=%s';
+	const CHARACTER_URL = 'http://%s.battle.net/api/wow/character/%s/%s?fields=guild,items,professions,talents,titles,achievements,feed&locale=%s';
 
     const REALM_URL = 'http://%s.battle.net/api/wow/realm/status';
 	const RACE_URL = 'http://%s.battle.net/api/wow/data/character/races?locale=%s';
