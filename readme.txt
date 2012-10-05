@@ -23,8 +23,8 @@ To see an example of the plugin in action [check it out on my wordpress blog](ht
   seeking a solution.
 * The widget configuration will keep reseting your language choice to English. When making changes be sure to first
   re-choose your region and then choose your language if you do not wish english to be selected.
-* Multiple Armory widgets on one page will cause issue with the javascript. For the time being I recommend using
-  shortcodes if you need more then one character displayed on a page.
+* Multiple Armory widgets on one page will cause issue with the administration pages javascript. For the time being I
+  recommend using shortcodes if you need more then one character displayed on a page.
 * Profession completion bars do not show when configured to.
 
 == With Thanks ==
@@ -130,8 +130,10 @@ themes CSS and keep the basic styling the plugin provides.
 == Changelog ==
 
 = 0.9.7 =
+* The activity feed for your character can now be shown. This is just like the one from your armory page and shows
+  the last 5 items, achievements and achievement criteria you gained.
 * Realms are now chosen from a dropdown list rather then typed. This should help where the slug varies from the
-realm name.
+  realm name.
 
 = 0.9.6 =
 * Update for patch 5.0.4 talent changes.
@@ -150,7 +152,7 @@ realm name.
 
 = 0.9.3 =
 * Fixed usages of __DIR__ which is PHP5.3 only. The plugin should now work on PHP5.2+ Thanks to @Flavio_Torelli
-for reporting the issue.
+  for reporting the issue.
 
 = 0.9.2 =
 * Retagging since I messed it up. Give us a break it's my first plugin :)
@@ -168,6 +170,7 @@ for reporting the issue.
 == Upgrade Notice ==
 
 = 0.9.7 =
+Your activity feed can now be shown - complete with icons - just like your armory page.
 
 = 0.9.6 =
 This update makes changes to how the talents are displayed due to the changes to talents in 5.0.4
