@@ -115,7 +115,7 @@ class WoW_Armory_Character
 	/**
 	 * Return whether or not our achievement data is valid.
 	 * 
-	 * It appears that sometimes the api will return incorrect data for the acheivements of a
+	 * It appears that sometimes the api will return incorrect data for the achievements of a
 	 * character. We now make sure to check before attempting any procession on that data.
 	 * @return boolean
 	 */

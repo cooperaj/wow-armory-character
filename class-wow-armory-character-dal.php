@@ -134,7 +134,7 @@ class WoW_Armory_Character_DAL
 			{
 				$achievs_json = json_decode($http_result['body']);
 				if ($achievs_json == null)
-					return new WP_Error(500, __('Unable to fetch data from battle.net for character acheivements', 'wow_armory_character'));
+					return new WP_Error(500, __('Unable to fetch data from battle.net for character achievements', 'wow_armory_character'));
 				
 				$achievs_data = array();
 				$achievs_data['last_checked'] = time();
@@ -145,7 +145,7 @@ class WoW_Armory_Character_DAL
 			}
 			else 
 			{
-				return new WP_Error(500, __('Unable to fetch data from battle.net for character acheivements', 'wow_armory_character'));
+				return new WP_Error(500, __('Unable to fetch data from battle.net for character achievements', 'wow_armory_character'));
 			}
 		}
 		
