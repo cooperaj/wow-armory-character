@@ -40,29 +40,29 @@
 	</div>
 	
 <?php if (($options['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_BADGES) === WoW_Armory_Character_Plugin::STYLE_PROF_BADGES && 
-					$character->professions ) : ?>
+				$character->professions ) : ?>
 	<div class="armory_section armory_profession">
 		<h4><?php _e('Professions', 'wow_armory_character')?></h4>
 		<ul class="armory_profession_list">
 <?php		if ($character->professions->primary) :
-					$count = 0;
-					foreach ($character->professions->primary as $prof) : ?>
+				$count = 0;
+				foreach ($character->professions->primary as $prof) : ?>
 			<li class="armory_profession_primary">
 				<a href="<?php echo $this->get_profession_url($prof); ?>"><img src="<?php echo $this->get_profession_icon_url($prof); ?>" alt="<?php echo $prof->name; ?> profession icon" /> <?php echo $this->get_profession_badge_text($prof); ?></a>
 			</li>
 <?php				$count++;
-					endforeach; 
-				endif; ?>
+				endforeach;
+			endif; ?>
 <?php		if (($options['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY) === WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY &&
-						$character->professions->secondary) :
-					$count = 0;
-					foreach ($character->professions->secondary as $prof) : ?>
+					$character->professions->secondary) :
+				$count = 0;
+				foreach ($character->professions->secondary as $prof) : ?>
 			<li class="armory_profession_secondary">
 				<a href="<?php echo $this->get_profession_url($prof); ?>"><img src="<?php echo $this->get_profession_icon_url($prof); ?>" alt="<?php echo $prof->name; ?> profession icon" /> <?php echo $this->get_profession_badge_text($prof); ?></a>
 			</li>
 <?php				$count++;
-					endforeach; 
-				endif; ?>
+				endforeach;
+			endif; ?>
 		</ul>
 		<br />
 	</div>
@@ -73,10 +73,10 @@
 		<h4><?php _e('Equipment List', 'wow_armory_character')?></h4>
 		<ul class="armory_equip_list">
 <?php		foreach ($this->_slot_table as $slot) : 
-					if (isset($character->items->$slot) && $item = $character->items->$slot) : ?>
+				if (isset($character->items->$slot) && $item = $character->items->$slot) : ?>
 			<li><a href="<?php echo $this->get_item_url($item->id); ?>" rel="<?php echo $this->get_wowhead_item_rel($item->tooltipParams); ?>"><img src="<?php echo $this->get_item_icon_url($item->icon); ?>" alt="<?php echo $item->id; ?>" class="armory_item_icon" /></a></li>
-<?php 		endif;
-				endforeach; ?>
+<?php 			endif;
+			endforeach; ?>
 		</ul>
 	</div>
 <?php endif; ?>
