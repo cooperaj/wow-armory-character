@@ -81,6 +81,35 @@ img.armory_char_portrait {
 	background: url(../images/shield.png) no-repeat right center;
 }
 
+.armory_feed_list {
+	margin-left: 0;
+	padding: 0;
+}
+
+.armory_feed_list li {
+	list-style: none;
+}
+
+.armory_feed_list li img {
+	float: left;
+	margin: 0.3em 0 0 0;
+	width: 18px;
+	height: 18px;
+}
+
+.armory_feed_list li p {
+	margin-left: 2em;
+}
+
+.armory_feed_list .criteria_step {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.armory_feed_list .timeago {
+	font-style: italic;
+}
+
 .bar-wrap {
 	position: relative;
 	border: 1px solid #555;

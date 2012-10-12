@@ -18,10 +18,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 require_once('class-wow-armory-character.php');
 require_once('class-wow-armory-character-dal.php');
+require_once('class-wow-armory-character-item.php');
 require_once('class-wow-armory-character-view.php');
-require_once('class-wow-armory-character-widget.php');
-require_once('class-wow-armory-character-achievements.php');
 require_once('class-wow-armory-character-realms.php');
+require_once('class-wow-armory-character-widget.php');
+require_once('class-wow-armory-character-feeditem.php');
+require_once('class-wow-armory-character-achievements.php');
 
 /**
  * Provides the wordpress integration.

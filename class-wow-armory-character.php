@@ -112,14 +112,44 @@ class WoW_Armory_Character
 		return $achievs;
 	}
 
-	public function get_activity_feed_items()
+	public function get_activity_feed_items($max_items = 5)
 	{
+		// We want five of each item so this slightly confusing thing keeps track of
+		// what we've added to the return to ensure this happens.
 		$feed_items = array();
-		$count = 0;
+		$item_count = 0;
+		$achiev_count = 0;
+		$criteria_count = 0;
 
 		foreach ($this->feed as $feed_item)
 		{
-			$feed_items[] = $feed_item;
+			$item = new WoW_Armory_Character_FeedItem($this->region, $this->locale, $feed_item);
+
+			switch ($item->type)
+			{
+				case 'ACHIEVEMENT' :
+					if ($achiev_count < $max_items)
+					{
+						$feed_items[] = $item;
+					}
+					$achiev_count++;
+					break;
+				case 'CRITERIA' :
+					if ($criteria_count < $max_items)
+					{
+						$feed_items[] = $item;
+					}
+					$criteria_count++;
+					break;
+				case 'LOOT' :
+					if ($item_count < $max_items)
+					{
+						$feed_items[] = $item;
+					}
+					$item_count++;
+					break;
+			}
+
 		}
 
 		return $feed_items;

@@ -94,7 +94,6 @@ class WoW_Armory_Character_View
 	
 	public function get_achievement_url($achiev_id, $section_id, $category_id)
 	{
-	
 		if ($this->_global_options['wowhead_links'])
 		{
 			return sprintf(self::WOWHEAD_ACHIEV_URL, ($this->_locale_table[$this->character->locale] == 'en'
@@ -117,6 +116,67 @@ class WoW_Armory_Character_View
 		$this->fetch_asset($this->_get_static_url() . '/icons/class/classes-18.jpg');
 		
 		return 'icon-class-18 icon-' . strtolower(str_replace(' ', '-', $this->character->en_class->name)) . '-18';
+	}
+
+	public function get_feed_icon_url($icon)
+	{
+		return $this->fetch_asset(
+			$this->_get_cdn_url() . '/icons/56/' . $icon . '.jpg'
+		);
+	}
+
+	public function get_fuzzy_time($timestamp)
+	{
+		// values in microseconds
+		$time_formats = array(
+			array(60000, __('just now', 'wow_armory_character')),
+			array(90000, __('1 minute ago', 'wow_armory_character')),
+			array(3600000, __('minutes', 'wow_armory_character'), 60000),
+			array(5400000, __('1 hour ago', 'wow_armory_character')),
+			array(86400000, __('hours ago', 'wow_armory_character'), 3600000),
+			array(129600000, __('1 day ago', 'wow_armory_character')),
+			array(604800000, __('days ago', 'wow_armory_character'), 86400000),
+			array(907200000, __('1 week ago', 'wow_armory_character')),
+			array(2628000000, __('weeks ago', 'wow_armory_character'), 604800000),
+			array(3942000000, __('1 month ago', 'wow_armory_character')),
+			array(31536000000, __('months ago', 'wow_armory_character'), 2628000000),
+			array(47304000000, __('1 year ago', 'wow_armory_character')),
+			array(3153600000000, __('years ago', 'wow_armory_character'), 31536000000),
+		);
+
+		$now = time() * 1000; // current unix timestamp boosted to milliseconds
+
+		// if a number is passed assume it is a unix time stamp
+		// if string is passed try and parse it to unix time stamp
+		if(is_numeric($timestamp)){
+			$dateFrom = $timestamp;
+		}elseif (is_string($timestamp)) {
+			$dateFrom = strtotime($timestamp);
+		}
+
+		$difference = $now - $dateFrom; // difference between now and the passed time.
+		$val = ''; // value to return
+
+		if ($dateFrom <= 0) {
+			$val = __('a long time ago', 'wow_armory_character');
+		} else {
+			// loop through each format measurement in array
+			foreach ($time_formats as $format) {
+				// if the difference from now and passed time is less than first option in format measurment
+				if ($difference < $format[0]) {
+					// if the format array item has no calculation value
+					if (count($format) == 2) {
+						$val = $format[1];
+						break;
+					} else {
+						// divide difference by format item value to get number of units
+						$val = sprintf('%d %s', ceil($difference / $format[2]), $format[1]);
+						break;
+					}
+				}
+			}
+		}
+		return $val;
 	}
 	
 	public function get_guild_url()

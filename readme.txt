@@ -12,10 +12,11 @@ Pulls character information from the WoW community API and displays it.
 
 This plugin displays World of Warcraft character profiles pulled from data made available by the WoW community API.
 It allows you to view a basic profile that shows your character information and picture. It can be easily configured to 
-show the gear that you are wearing (with optional links to [wowhead](http://wowhead.com)), your talents, professions and
-recent achievements.
+show the gear that you are wearing (with optional links to [wowhead](http://wowhead.com)), your talents, professions,
+activity feed and recent achievements.
 
-To see an example of the plugin in action [check it out on my wordpress blog](http://realmenweardress.es/about/).
+To see a customised example of the plugin in action [check it out on my wordpress blog](http://realmenweardress.es/about/).
+For an example of the plugin configured to show all the available information check out the screenshots tab.
 
 = Known Issues =
 
@@ -63,6 +64,11 @@ The configuration parameters available to use are:
     * *1* - Show achievement bar
     * *2* - Show achievement list
     * *4* - Show descriptions on the achievement list.
+* **show_feed** - This is a bitwise field. To get the setting you want add together the numbers below.
+    * *1* - Show items (loot).
+    * *2* - Show acheivements gained.
+    * *4* - Show acheivement criteria.
+    * *8* - Show icons next to each item.
 * **locale** - *en_GB*, *en_US*, *de_DE*, *es_ES*, *es_MX*, *fr_FR*, *ru_RU*, *ko_KR*, *zh_TW* or *zh_CN*
 
 Note: Certain locale choices are only available when selecting some regions.
@@ -131,7 +137,8 @@ themes CSS and keep the basic styling the plugin provides.
 
 = 0.9.7 =
 * The activity feed for your character can now be shown. This is just like the one from your armory page and shows
-  the last 5 items, achievements and achievement criteria you gained.
+  the last 5 items, achievements and achievement criteria you gained. PLEASE NOTE: If you're upgrading to this release
+  your widgets may give errors until their settings are adjusted.
 * Realms are now chosen from a dropdown list rather then typed. This should help where the slug varies from the
   realm name.
 
@@ -170,7 +177,8 @@ themes CSS and keep the basic styling the plugin provides.
 == Upgrade Notice ==
 
 = 0.9.7 =
-Your activity feed can now be shown - complete with icons - just like your armory page.
+Your activity feed can now be shown - complete with icons - just like your armory page. Please resave your
+widget settings afterwards to ensure they work.
 
 = 0.9.6 =
 This update makes changes to how the talents are displayed due to the changes to talents in 5.0.4

@@ -115,12 +115,68 @@
 	<div class="armory_section armory_feed">
 		<h4><?php _e('Recent Activity', 'wow_armory_character'); ?></h4>
 		<ul class="armory_feed_list">
-<?php		$feed_items = $character->get_activity_feed_items();
-			for ($i = 0; $i < 5; $i++) : ?>
-			<li>
-				Activity Item
-			</li>
-<?php 			$count++;
+<?php		$feed_icons = ($options['show_feed'] & WoW_Armory_Character_Plugin::STYLE_FEED_ICONS) === WoW_Armory_Character_Plugin::STYLE_FEED_ICONS;
+			$feed_achiev = ($options['show_feed'] & WoW_Armory_Character_Plugin::STYLE_FEED_ACHIEVEMENTS) === WoW_Armory_Character_Plugin::STYLE_FEED_ACHIEVEMENTS;
+			$feed_criteria = ($options['show_feed'] & WoW_Armory_Character_Plugin::STYLE_FEED_CRITERIA) === WoW_Armory_Character_Plugin::STYLE_FEED_CRITERIA;
+			$feed_loot = ($options['show_feed'] & WoW_Armory_Character_Plugin::STYLE_FEED_ITEMS) === WoW_Armory_Character_Plugin::STYLE_FEED_ITEMS;
+
+			$feed_items = $character->get_activity_feed_items(5); // return a max of 5 of each type.
+			for ($i = 0; $i < (count($feed_items) < 5 ? count($feed_items) : 5); $i++) : // and only print five or less
+				switch ($feed_items[$i]->type)
+				{
+					case WoW_Armory_Character_FeedItem::ITEM_ACHIEVEMENT :
+						if ($feed_achiev) :
+							$url_parts = $feed_items[$i]->get_item_url_components(); ?>
+							<li>
+<?php						if ($feed_icons) : ?>
+								<a href="<?php echo $this->get_achievement_url($url_parts['id'], $url_parts['section'], $url_parts['category']); ?>">
+									<img class="armory_feed_icon achievement" src="<?php echo $this->get_feed_icon_url($feed_items[$i]->get_item_icon()) ?>" />
+								</a>
+<?php						endif; ?>
+								<p><?php printf(__('Earned the Achievement %s for %d points.', 'wow_armory_character'),
+										sprintf('<a href="%s">%s</a>',
+											$this->get_achievement_url($url_parts['id'], $url_parts['section'], $url_parts['category']),
+											$feed_items[$i]->get_item_title()),
+										$feed_items[$i]->get_item_related()); ?> <span class="timeago"><?php echo $this->get_fuzzy_time($feed_items[$i]->timestamp); ?></span></p>
+							</li>
+<?php					endif;
+						break;
+					case WoW_Armory_Character_FeedItem::ITEM_CRITERIA :
+						if ($feed_criteria) :
+							$url_parts = $feed_items[$i]->get_item_url_components(); ?>
+							<li>
+<?php						if ($feed_icons) : ?>
+								<a href="<?php echo $this->get_achievement_url($url_parts['id'], $url_parts['section'], $url_parts['category']); ?>">
+									<img class="armory_feed_icon criteria" src="<?php echo WP_PLUGIN_URL ?>/wow-armory-character/images/check.png" />
+								</a>
+<?php						endif; ?>
+								<p><?php printf(__('Completed step %1$s of achievement %2$s.', 'wow_armory_character'),
+									'<span class="criteria_step">' . $feed_items[$i]->get_item_title() . '</span>',
+									sprintf('<a href="%s">%s</a>',
+										$this->get_achievement_url($url_parts['id'], $url_parts['section'], $url_parts['category']),
+										$feed_items[$i]->get_item_related())); ?>
+									<span class="timeago"><?php echo $this->get_fuzzy_time($feed_items[$i]->timestamp); ?></span></p>
+							</li>
+<?php					endif;
+						break;
+					case WoW_Armory_Character_FeedItem::ITEM_LOOT :
+						if ($feed_loot) :
+							$url_parts = $feed_items[$i]->get_item_url_components(); ?>
+							<li>
+<?php						if ($feed_icons) : ?>
+								<a href="<?php echo $this->get_item_url($url_parts['id']); ?>">
+									<img class="armory_feed_icon item" src="<?php echo $this->get_feed_icon_url($feed_items[$i]->get_item_icon()) ?>" />
+								</a>
+<?php						endif; ?>
+								<p><?php printf(__('Obtained %s.', 'wow_armory_character'),
+									sprintf('<a href="%s">%s</a>',
+										$this->get_item_url($url_parts['id']),
+										$feed_items[$i]->get_item_title())); ?>
+									<span class="timeago"><?php echo $this->get_fuzzy_time($feed_items[$i]->timestamp); ?></span></p>
+							</li>
+<?php					endif;
+						break;
+				}
 			endfor; ?>
 		</ul>
 	</div>
