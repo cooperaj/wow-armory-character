@@ -28,6 +28,12 @@ For an example of the plugin configured to show all the available information ch
   recommend using shortcodes if you need more then one character displayed on a page.
 * Profession completion bars do not show when configured to.
 
+== Translation ==
+
+The plugin is fully setup to use the excellent internationalisation features of wordpress. However, since I sadly do not
+speak any of the languages I'd like to support (those used by World of Warcraft itself) I am not able to provide the
+translations I need. If you are interested in providing any translations for this project please contact me.
+
 == With Thanks ==
 
 Many thanks to seifertim and his effort [WoW Armory](http://wordpress.org/extend/plugins/wow-armory/) for providing the
@@ -56,11 +62,11 @@ The configuration parameters available to use are:
 * **show_title** - *1* or *0*
 * **show_talents** - *1* or *0*
 * **show_items** - *1* or *0*
-* **show_profs** - This is a bitwise field. To get the setting you want use add together the numbers below.
+* **show_profs** - This is a bitwise field. To get the setting you want add together the numbers below.
     * *1* - Show profession badges
     * *2* - Show profession completion bars
     * *4* - Show seconday professions
-* **show_achievs** - This is a bitwise field. To get the setting you want use add together the numbers below.
+* **show_achievs** - This is a bitwise field. To get the setting you want add together the numbers below.
     * *1* - Show achievement bar
     * *2* - Show achievement list
     * *4* - Show descriptions on the achievement list.
@@ -76,7 +82,7 @@ Note: Certain locale choices are only available when selecting some regions.
 = Available Filters =
 
 For more capable/adventurous developers there are a number of hooks that allow you to change the way the
-plugin functions without altering it's code. This means you get to upgrade in the future without worrying
+plugin functions without altering its code. This means you get to upgrade in the future without worrying
 about breaking any changes you may have made.
 
 **wow-armory-character-template**  

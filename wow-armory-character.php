@@ -30,7 +30,7 @@ include_once('class-wow-armory-character-plugin.php');
 
 // Store the plugin path globally so that it can find itself later.
 // Normally the use of __FILE__ would be ok except I develop using
-// symbolic links and __FILL__ breaks horribly with symbolic links.
+// symbolic links and __FILE__ breaks horribly with symbolic links.
 $wacpath = $plugin;
 
 // OO all the way baby.

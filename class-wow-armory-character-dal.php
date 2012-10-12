@@ -83,7 +83,7 @@ class WoW_Armory_Character_DAL
 	 * @param string $realm The realm of the character to fetch.
 	 * @param string $name The character name.
 	 * @param int $expires_after A value in seconds for which the character should be retrieved from the cache.
-	 * @return WoW_Armory_Character|WP_Error A completed character or an error if the retrieval was unsuccessful.
+	 * @return WP_Error|WoW_Armory_Character A completed character or an error if the retrieval was unsuccessful.
 	 */
 	static function fetch_character($region, $locale, $realm, $name, $expires_after = 43200)
 	{
@@ -118,7 +118,7 @@ class WoW_Armory_Character_DAL
 	 * @param string $region The region to fetch from.
 	 * @param string $locale The locale in which to return the result.
 	 * @param int $expires_after The expiry time for this lookup cache. Defaults to 1 week.
-	 * @return WP_Error|stdClass Returns either an error if the API request failed or a stdClass encapsulating the response.
+	 * @return WP_Error|WoW_Armory_Character_Achievements Returns either an error if the API request failed or a class encapsulating the response.
 	 */
 	static function fetch_achievements($region, $locale, $expires_after = 2419200)
 	{
