@@ -2,8 +2,8 @@
 Contributors: blueajcooper
 Tags: widget, world of warcraft, wow, armory, character, warcraft, blizzard, toon, gear, achievements, professions
 Requires at least: 3.0.0
-Tested up to: 3.4.2
-Stable tag: 0.9.6
+Tested up to: 3.9
+Stable tag: 1.0.0
 License: GPLv2
 
 Pulls character information from the WoW community API and displays it.
@@ -141,6 +141,10 @@ themes CSS and keep the basic styling the plugin provides.
 
 == Changelog ==
 
+= 1.0.0 =
+* Starting at the big 1.0. Is stable enough for that I reckon.
+* Tooltip updates to show item upgrades/reforges.
+
 = 0.9.7 =
 * The activity feed for your character can now be shown. This is just like the one from your armory page and shows
   the last 5 items, achievements and achievement criteria you gained. PLEASE NOTE: If you're upgrading to this release
@@ -150,7 +154,7 @@ themes CSS and keep the basic styling the plugin provides.
 
 = 0.9.6 =
 * Update for patch 5.0.4 talent changes.
-* Achievemnt count update
+* Achievement count update
 * Include Portugese language configuration options.
 
 = 0.9.5 =
