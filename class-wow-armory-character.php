@@ -63,6 +63,18 @@ class WoW_Armory_Character
 
         $achiev_data = WoW_Armory_Character_DAL::fetch_achievements($this->region, $this->locale);
 
+        if (is_wp_error($achiev_data)) {
+            WoW_Armory_Character_DAL::persist_character_note(
+                $this,
+                __(
+                    'The global achievement data is corrupt. Please clear the cache.',
+                    'wow_armory_character'
+                )
+            );
+
+            return null;
+        }
+
         // TODO ensure that we're not counting Feats of Strength
         $data->completed = count($this->achievements->achievementsCompleted);
         $data->total = $achiev_data->get_achievement_count();
@@ -83,30 +95,40 @@ class WoW_Armory_Character
 
         $achiev_data = WoW_Armory_Character_DAL::fetch_achievements($this->region, $this->locale);
 
-        arsort($this->achievements->achievementsCompletedTimestamp);
-        foreach ($this->achievements->achievementsCompletedTimestamp as $key => $timestamp) {
-            if ($count >= $no_to_fetch) {
-                break;
-            }
+        if (is_wp_error($achiev_data)) {
+            WoW_Armory_Character_DAL::persist_character_note(
+                $this,
+                __(
+                    'The global achievement data is corrupt. Please clear the cache.',
+                    'wow_armory_character'
+                )
+            );
+        } else {
+            arsort($this->achievements->achievementsCompletedTimestamp);
+            foreach ($this->achievements->achievementsCompletedTimestamp as $key => $timestamp) {
+                if ($count >= $no_to_fetch) {
+                    break;
+                }
 
-            $ach = $achiev_data->get_achievement_by_id($this->achievements->achievementsCompleted[$key]);
+                $ach = $achiev_data->get_achievement_by_id($this->achievements->achievementsCompleted[$key]);
 
-            // Our achievement data may not contain what we need so we skip achievements that don't get
-            // returned correctly. Come on Blizz...
-            if (!is_null($ach)) {
-                $ach->completed = $timestamp;
-                $achievs[] = $ach;
+                // Our achievement data may not contain what we need so we skip achievements that don't get
+                // returned correctly. Come on Blizz...
+                if (!is_null($ach)) {
+                    $ach->completed = $timestamp;
+                    $achievs[] = $ach;
 
-                $count++;
-            } else {
-                WoW_Armory_Character_DAL::persist_character_note(
-                    $this,
-                    __(
-                        'The achievement data does not contain a match for achievement id ' .
-                        $this->achievements->achievementsCompleted[$key] . '.',
-                        'wow_armory_character'
-                    )
-                );
+                    $count++;
+                } else {
+                    WoW_Armory_Character_DAL::persist_character_note(
+                        $this,
+                        __(
+                            'The achievement data does not contain a match for achievement id ' .
+                            $this->achievements->achievementsCompleted[$key] . '.',
+                            'wow_armory_character'
+                        )
+                    );
+                }
             }
         }
 

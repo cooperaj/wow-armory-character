@@ -82,7 +82,8 @@
     <?php endif; ?>
 
     <?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR) :
-        $ach_data = $character->get_completed_achievement_data(); ?>
+        $ach_data = $character->get_completed_achievement_data();
+        if (!is_null($ach_data)) : ?>
         <div class="armory_section armory_achiev_points">
             <h4><?php _e('Achievements', 'wow_armory_character'); ?></h4>
             <div class="bar-wrap" title="<?php printf(__('Completed %1$s out of a possible %2$s achievements earning a total of %3$s achievement points.'), $ach_data->completed, $ach_data->total, $character->achievementPoints); ?>">
@@ -93,7 +94,8 @@
                 </div>
             </div>
         </div>
-    <?php endif; ?>
+        <?php endif;
+    endif; ?>
 
     <?php if (($options['show_achievs'] & WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST) === WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST) : ?>
         <div class="armory_section armory_achiev">
@@ -125,7 +127,8 @@
                     {
                         case WoW_Armory_Character_FeedItem::ITEM_ACHIEVEMENT :
                             if ($feed_achiev) :
-                                $url_parts = $feed_items[$i]->get_item_url_components(); ?>
+                                $url_parts = $feed_items[$i]->get_item_url_components();
+                                if (!is_null($url_parts)) : ?>
                                 <li>
                                     <?php if ($feed_icons) : ?>
                                         <a href="<?php echo $this->get_achievement_url($url_parts['id'], $url_parts['section'], $url_parts['category']); ?>">
@@ -139,10 +142,12 @@
                                             $feed_items[$i]->get_item_related()); ?> <span class="timeago"><?php echo $this->get_fuzzy_time($feed_items[$i]->timestamp); ?></span></p>
                                 </li>
                             <?php endif;
+                            endif;
                             break;
                         case WoW_Armory_Character_FeedItem::ITEM_CRITERIA :
                             if ($feed_criteria) :
-                                $url_parts = $feed_items[$i]->get_item_url_components(); ?>
+                                $url_parts = $feed_items[$i]->get_item_url_components();
+                                if (!is_null($url_parts)) : ?>
                                 <li>
                                     <?php if ($feed_icons) : ?>
                                         <a href="<?php echo $this->get_achievement_url($url_parts['id'], $url_parts['section'], $url_parts['category']); ?>">
@@ -157,6 +162,7 @@
                                         <span class="timeago"><?php echo $this->get_fuzzy_time($feed_items[$i]->timestamp); ?></span></p>
                                 </li>
                             <?php endif;
+                            endif;
                             break;
                         case WoW_Armory_Character_FeedItem::ITEM_LOOT :
                             if ($feed_loot) :

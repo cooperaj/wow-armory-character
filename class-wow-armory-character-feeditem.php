@@ -80,6 +80,9 @@ class WoW_Armory_Character_FeedItem
             case self::ITEM_ACHIEVEMENT :
             case self::ITEM_CRITERIA :
                 $achievements = WoW_Armory_Character_DAL::fetch_achievements($this->region, $this->locale);
+                if (is_wp_error($achievements))
+                    return null;
+
                 $achiev = $achievements->get_achievement_by_id($this->achievement->id);
                 $components = array(
                     'id' => $achiev->id,
