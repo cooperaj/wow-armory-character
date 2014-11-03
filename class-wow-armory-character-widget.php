@@ -178,6 +178,8 @@ class WoW_Armory_Character_Widget extends WP_Widget
     {
         $realms_for_region = WoW_Armory_Character_DAL::fetch_realms($region);
 
-        return $realms_for_region->get_realms_as_options($current_realm);
+	    if ( ! $realms_for_region instanceof WP_Error) {
+		    return $realms_for_region->get_realms_as_options($current_realm);
+	    }
     }
 }
