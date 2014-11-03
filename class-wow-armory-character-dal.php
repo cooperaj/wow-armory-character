@@ -37,6 +37,8 @@ class WoW_Armory_Character_DAL
     const ACHIEV_URL = 'http://%s.battle.net/api/wow/data/character/achievements?locale=%s';
     const ITEM_URL = 'http://%s.battle.net/api/wow/item/%s?locale=%s';
 
+	const REQUEST_TIMEOUT = 10;
+
     static function fetch_all_cached_characters()
     {
         $chars = array();
@@ -215,7 +217,10 @@ class WoW_Armory_Character_DAL
             $realms_json = json_decode($cached_realms['api_data']);
         } else {
             $http_request = new WP_Http();
-            $http_result = $http_request->request(self::_encode_url(sprintf(self::REALM_URL, strtolower($region))));
+            $http_result = $http_request->request(
+	            self::_encode_url(sprintf(self::REALM_URL, strtolower($region))),
+	            array('timeout' => self::REQUEST_TIMEOUT)
+            );
 
             if (!is_wp_error($http_result) && $http_result['response']['code'] == 200) {
                 $realms_json = json_decode($http_result['body']);
