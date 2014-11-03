@@ -60,7 +60,7 @@ class WoW_Armory_Character_Widget extends WP_Widget
 
         $instance = wp_parse_args((array)$instance, $this->_default_options);
 
-        include(dirname($wacpath) . '/view-wow-armory-character-widget.php');
+        include(plugin_dir_path($wacpath) . '/view-wow-armory-character-widget.php');
     }
 
     public function update($new_instance, $old_instance)
