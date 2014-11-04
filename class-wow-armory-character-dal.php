@@ -37,7 +37,7 @@ class WoW_Armory_Character_DAL
     const ACHIEV_URL = 'http://%s.battle.net/api/wow/data/character/achievements?locale=%s';
     const ITEM_URL = 'http://%s.battle.net/api/wow/item/%s?locale=%s';
 
-	const REQUEST_TIMEOUT = 10;
+	const REQUEST_TIMEOUT = 5;
 
     static function fetch_all_cached_characters()
     {
