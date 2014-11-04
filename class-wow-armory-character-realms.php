@@ -1,6 +1,6 @@
 <?php
 /*  
-Copyright 2011  Adam Cooper  (email : adam@networkpie.co.uk)
+Copyright 2014  Adam Cooper  (email : adam@networkpie.co.uk)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 

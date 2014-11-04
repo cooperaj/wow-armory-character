@@ -2,7 +2,7 @@
 Contributors: blueajcooper
 Tags: widget, world of warcraft, wow, armory, character, warcraft, blizzard, toon, gear, achievements, professions
 Requires at least: 3.0.0
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: 1.0.0
 License: GPLv2
 
@@ -144,6 +144,7 @@ themes CSS and keep the basic styling the plugin provides.
 = 1.0.0 =
 * Starting at the big 1.0. Is stable enough for that I reckon.
 * Tooltip updates to show item upgrades/reforges.
+* Reworked achievements to calculate based on API - not using a hardcoded value.
 
 = 0.9.7 =
 * The activity feed for your character can now be shown. This is just like the one from your armory page and shows
