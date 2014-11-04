@@ -395,24 +395,27 @@ class WoW_Armory_Character_View
         $new_asset_url = $cache_url . $asset_name;
 
         $final_url = $asset_url;
+	    $new_asset_path = plugin_dir_path($wacpath) . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name;
+
         if ($extension == 'gif' || $extension == 'jpg' || $extension == 'png') {
-            if (file_exists(plugin_dir_path($wacpath) . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name)) {
+            if (file_exists($new_asset_path)) {
                 $final_url = $new_asset_url;
             } else {
-                if ($fp = fopen(
-                    plugin_dir_path($wacpath) . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name,
-                    'w'
-                )
-                ) {
-                    $http_request = new WP_Http();
-                    $http_result = $http_request->request($asset_url);
-                    if (!is_wp_error($http_result) && $http_result['response']['code'] == 200) {
-                        fwrite($fp, $http_result['body']);
-                        $final_url = $new_asset_url;
-                    }
+                $http_request = new WP_Http();
+                $http_result = $http_request->request(
+                    $asset_url,
+                    array(
+	                    'stream' => true,
+	                    'filename' => $new_asset_path
+                    )
+                );
 
-                    fclose($fp);
+                if (!is_wp_error($http_result) && $http_result['response']['code'] == 200) {
+                    $final_url = $new_asset_url;
+                } else {
+	                unlink($new_asset_path);
                 }
+
             }
         }
 
