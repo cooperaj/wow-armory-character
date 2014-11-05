@@ -191,7 +191,6 @@ class WoW_Armory_Character_Plugin
         $options = get_option('wac_settings');
         ?>
         <div class="wrap">
-            <?php screen_icon(); ?>
             <h2><?php _e('World of Warcraft Armory Character', 'wow_armory_character') ?></h2>
 
             <form method="post" action="<?php echo admin_url('options.php'); ?>">
