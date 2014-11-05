@@ -63,10 +63,20 @@ svn co $SVNURL $SVNPATH
 echo "Exporting the HEAD of master from git to the trunk of SVN"
 git checkout-index -a -f --prefix=$SVNPATH/trunk/
 
+echo "Copying assets to correct location"
+find assets -type f \( -iname '*.png' -o -iname '*.jpg' \) -exec cp {} $SVNPATH/assets/ \;
+
+echo "Changing directory to SVN and committing assets"
+cd $SVNPATH/assets/
+# Add all new files that are not set to be ignored
+svn status | grep -v "^.[ \t]*\..*" | grep "^?" | awk '{print $2}' | xargs svn add
+svn commit --username=$SVNUSER -m "Deploy.sh commit to plugin assets"
+
 echo "Ignoring github specific files and deployment script"
 svn propset svn:ignore "deploy.sh
 .git
-.gitignore" "$SVNPATH/trunk/"
+.gitignore
+assets" "$SVNPATH/trunk/"
 
 echo "Changing directory to SVN and committing to trunk"
 cd $SVNPATH/trunk/
