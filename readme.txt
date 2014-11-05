@@ -1,7 +1,7 @@
 === WoW Armory Character ===
 Contributors: blueajcooper
 Tags: widget, world of warcraft, wow, armory, character, warcraft, blizzard, toon, gear, achievements, professions
-Requires at least: 3.0.0
+Requires at least: 3.5.0
 Tested up to: 4.0
 Stable tag: 1.0.0
 License: GPLv2

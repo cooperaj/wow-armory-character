@@ -26,6 +26,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+define( 'TWELVE_HOUR_IN_SECONDS', 12 * HOUR_IN_SECONDS );
+
 include_once('class-wow-armory-character-plugin.php');
 
 // Store the plugin path globally so that it can find itself later.

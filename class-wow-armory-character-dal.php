@@ -86,7 +86,7 @@ class WoW_Armory_Character_DAL
      * @param int $expires_after A value in seconds for which the character should be retrieved from the cache.
      * @return WP_Error|WoW_Armory_Character A completed character or an error if the retrieval was unsuccessful.
      */
-    static function fetch_character($region, $locale, $realm, $name, $expires_after = 43200)
+    static function fetch_character($region, $locale, $realm, $name, $expires_after = TWELVE_HOUR_IN_SECONDS)
     {
         $char_api_data_obj = self::_fetch_character($region, $locale, $realm, $name, $expires_after);
         if (is_wp_error($char_api_data_obj)) {
@@ -126,7 +126,7 @@ class WoW_Armory_Character_DAL
      * @param int $expires_after The expiry time for this lookup cache. Defaults to 1 week.
      * @return WP_Error|WoW_Armory_Character_Achievements Returns either an error if the API request failed or a class encapsulating the response.
      */
-    static function fetch_achievements($region, $locale, $expires_after = 2419200)
+    static function fetch_achievements($region, $locale, $expires_after = WEEK_IN_SECONDS)
     {
         if (false !== ($cached_achievs = get_transient('wowachcache-' . $region . '-' . $locale))) {
             $achievs_json = json_decode($cached_achievs['api_data']);
@@ -171,7 +171,7 @@ class WoW_Armory_Character_DAL
      * @param int $expires_after The expiry time for this lookup cache. Defaults to 1 week.
      * @return WP_Error|WoW_Armory_Character_Item Returns either an error if the API request failed or a class encapsulating the response.
      */
-    static function fetch_item($region, $locale, $id, $expires_after = 2419200)
+    static function fetch_item($region, $locale, $id, $expires_after = WEEK_IN_SECONDS)
     {
         if (false !== ($cached_item = get_transient('wowitemcache-' . $region . '-' . $locale . '-' . $id))) {
             $item_json = json_decode($cached_item['api_data']);
@@ -211,7 +211,7 @@ class WoW_Armory_Character_DAL
      * @param int $expires_after The expiry time for this lookup cache. Defaults to 1 week.
      * @return WP_Error|WoW_Armory_Character_Realms Returns either an error if the API request failed or a class encapsulating the response.
      */
-    static function fetch_realms($region, $expires_after = 2419200)
+    static function fetch_realms($region, $expires_after = WEEK_IN_SECONDS)
     {
         if (false !== ($cached_realms = get_transient('wowrealmcache-' . $region))) {
             $realms_json = json_decode($cached_realms['api_data']);
@@ -244,7 +244,14 @@ class WoW_Armory_Character_DAL
         return new WoW_Armory_Character_Realms($region, $realms_json);
     }
 
-    static function persist_character_note($character, $note, $expires_after = 43200)
+	/**
+	 * Attaches a note to a character for display in the admin page.
+	 *
+	 * @param $character WoW_Armory_Character The character to attach the note to.
+	 * @param string $note The note text.
+	 * @param int $expires_after An expiry date for the character (not the note, the whole character)
+	 */
+	static function persist_character_note($character, $note, $expires_after = TWELVE_HOUR_IN_SECONDS)
     {
         $char_data = get_transient(
             'wowcharcache-' . md5(
@@ -277,7 +284,7 @@ class WoW_Armory_Character_DAL
      * @param int $expires_after A value in seconds for which the character should be retrieved from the cache. Defaults to 12 hours.
      * @return stdClass|WP_Error A stdClass data object containing character information or an error if the retrieval was unsuccessful.
      */
-    private function _fetch_character($region, $locale, $realm, $name, $expires_after = 43200)
+    private function _fetch_character($region, $locale, $realm, $name, $expires_after = TWELVE_HOUR_IN_SECONDS)
     {
         // Try to fetch from the cache.
         if (false !== ($cached_char = get_transient(
@@ -332,7 +339,7 @@ class WoW_Armory_Character_DAL
      * @param int $expires_after The expiry time for this lookup cache. Defaults to 1 week.
      * @return WP_Error|stdClass Returns either an error if the API request failed or a stdClass encapsulating the response.
      */
-    private function _fetch_race($region, $locale, $race_id, $expires_after = 2419200)
+    private function _fetch_race($region, $locale, $race_id, $expires_after = WEEK_IN_SECONDS)
     {
         if (false !== ($cached_races = get_transient('wowracecache-' . $region . '-' . $locale))) {
             $races_json = json_decode($cached_races['api_data']);
@@ -385,7 +392,7 @@ class WoW_Armory_Character_DAL
      * @param int $expires_after The expiry time for this lookup cache. Defaults to 1 week.
      * @return WP_Error|stdClass Returns either an error if the API request failed or a stdClass encapsulating the response.
      */
-    private function _fetch_class($region, $locale, $class_id, $expires_after = 2419200)
+    private function _fetch_class($region, $locale, $class_id, $expires_after = WEEK_IN_SECONDS)
     {
         if (false !== ($cached_classes = get_transient('wowclasscache-' . $region . '-' . $locale))) {
             $classes_json = json_decode($cached_classes['api_data']);
