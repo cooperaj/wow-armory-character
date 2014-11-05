@@ -107,6 +107,18 @@ you need.
     }
     add_filter('wow-armory-character-display','my_function_name');
 
+**wow-armory-character-css**
+Allows you to specify an alternate stylesheet. This is the replacement for the tickbox provided in the administration
+screen. You should now consider that option as deprecated and it will be removed in a future release.
+The rationale behind this is that if you're overriding the css completely you will have access to your theme to be able
+to add this hook.
+
+    function my_function_name($file_path) {
+      // e.g. return realpath(__FILE__) . '/wowcss.css'
+      return "THE_PATH_TO_YOUR_CSS_FILE";
+    }
+    add_filter('wow-armory-character-css','my_function_name');
+
 == Frequently Asked Questions ==
 
 = The plugin is displaying old information. How do I update it? =

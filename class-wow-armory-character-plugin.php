@@ -54,19 +54,15 @@ class WoW_Armory_Character_Plugin
 
         load_plugin_textdomain('wow_armory_character', false, plugin_dir_path($wacpath) . '/languages');
 
-        $wowhead_script_http =
-            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ?
-                'https://' : 'http://';
-
         $options = get_option('wac_settings', $this->admin_settings_default_values());
 
         if ($options['use_tooltips'] === 1) {
-            wp_enqueue_script('wowhead', $wowhead_script_http . 'static.wowhead.com/widgets/power.js');
+	        add_action( 'wp_print_scripts', array( &$this, 'attach_js' ) );
         }
 
-        if ($options['attach_css'] === 1) {
-            wp_enqueue_style('wow_armory_character', plugins_url('css/style.css', $wacpath));
-        }
+	    if ($options['attach_css'] === 1) {
+		    add_action( 'wp_print_styles', array( &$this, 'attach_css' ) );
+	    }
     }
 
     public function admin_init()
@@ -94,6 +90,19 @@ class WoW_Armory_Character_Plugin
 
         register_setting('wac_settings', 'wac_settings', array($this, 'admin_settings_validate'));
     }
+
+	public function attach_css()
+	{
+		global $wacpath;
+
+		$css_path = apply_filters( 'wow-armory-character-css', plugins_url('css/style.css', $wacpath) );
+		wp_enqueue_style('wow_armory_character', $css_path);
+	}
+
+	public function attach_js()
+	{
+		wp_enqueue_script('wowhead', '//static.wowhead.com/widgets/power.js');
+	}
 
     public function admin_settings_validate($input)
     {
@@ -195,10 +204,10 @@ class WoW_Armory_Character_Plugin
                             <input id="attach_css" name="wac_settings[attach_css]" type="checkbox"
                                    value="1" <?php checked(1, $options['attach_css']); ?> />
                             <label for="attach_css" title="<?php _e(
-                                'Add a basic CSS file that styles the widget and shortcode outputs. Unchecking this will remove all styling from the plugins display. Please ensure you have styled the plugin in your own CSS.',
+                                'DEPRECATED. Please see documentation on filters. Add a basic CSS file that styles the widget and shortcode outputs. Unchecking this will remove all styling from the plugins display. Please ensure you have styled the plugin in your own CSS.',
                                 'wow_armory_character'
                             ); ?>">
-                                <?php _e('Add plugin css to the page.', 'wow_armory_character'); ?>
+                                <?php _e('Add plugin css to the page. (Deprecated. See readme)', 'wow_armory_character'); ?>
                             </label>
                             <br/>
                             <input id="use_tooltips" name="wac_settings[use_tooltips]" type="checkbox"
