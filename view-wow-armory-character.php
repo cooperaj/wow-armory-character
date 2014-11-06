@@ -1,5 +1,5 @@
 <div id="armory-<?php echo $randNo; ?>" class="armory_display">
-    <div class="armory_character">
+    <div class="armory_section armory_character">
         <?php if ($options['show_portrait'] == 1) : ?>
             <img src="<?php echo $this->get_portrait_icon_url(); ?>" class="armory_char_portrait" alt="Character Portrait" />
         <?php endif; ?>
@@ -42,11 +42,11 @@
         </span>
     </div>
 
-    <?php if (($options['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_BADGES) === WoW_Armory_Character_Plugin::STYLE_PROF_BADGES &&
-        $character->professions ) : ?>
+    <?php if ((($options['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_BADGES) === WoW_Armory_Character_Plugin::STYLE_PROF_BADGES)
+        && $character->professions ) : ?>
         <div class="armory_section armory_profession">
             <h4><?php _e('Professions', 'wow_armory_character')?></h4>
-            <ul class="armory_profession_list">
+            <ul class="armory_profession_badges">
                 <?php if ($character->professions->primary) :
                     $count = 0;
                     foreach ($character->professions->primary as $prof) : ?>

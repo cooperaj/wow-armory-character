@@ -143,16 +143,6 @@
                 'Show your professions as a series of badges.',
                 'wow_armory_character'
             ); ?>"><?php _e('Badges', 'wow_armory_character'); ?></label><br/>
-            <input id="<?php echo $this->get_field_id('show_profs_bar'); ?>"
-                   name="<?php echo $this->get_field_name('show_profs_bar'); ?>"
-                   value="<?php echo WoW_Armory_Character_Plugin::STYLE_PROF_BAR; ?>"
-                   type="checkbox"
-                <?php echo (($instance['show_profs'] & WoW_Armory_Character_Plugin::STYLE_PROF_BAR) === WoW_Armory_Character_Plugin::STYLE_PROF_BAR) ? 'checked="checked"' : ''; ?>
-                />
-            <label for="<?php echo $this->get_field_id('show_profs_bar'); ?>" title="<?php _e(
-                'Show your profession levels with a progress bar.',
-                'wow_armory_character'
-            ); ?>"><?php _e('Progress Bars', 'wow_armory_character'); ?></label><br/>
             <input id="<?php echo $this->get_field_id('show_profs_secondary'); ?>"
                    name="<?php echo $this->get_field_name('show_profs_secondary'); ?>"
                    value="<?php echo WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY; ?>"

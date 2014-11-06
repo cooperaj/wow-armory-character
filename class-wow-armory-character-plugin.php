@@ -39,8 +39,7 @@ class WoW_Armory_Character_Plugin
 
     // Bitwise operators for profession display.
     const STYLE_PROF_BADGES = 1;
-    const STYLE_PROF_BAR = 2;
-    const STYLE_PROF_SECONDARY = 4;
+    const STYLE_PROF_SECONDARY = 2;
 
     // Bitwise operators for feed display.
     const STYLE_FEED_ITEMS = 1;

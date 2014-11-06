@@ -42,18 +42,18 @@ img.armory_char_portrait {
 	margin: 0;
 }
 
-.armory_profession_list {
+.armory_profession_badges {
 	margin: 0;
 }
 
 .armory_equip_list li,
-.armory_profession_list li {
+.armory_profession_badges li {
 	margin: 0;
 	display: inline;
 }
 
 .armory_char_spec span a,
-.armory_profession_list li a {
+.armory_profession_badges li a {
 	display: block;
 	width: 50%;
 	float: left;
@@ -139,7 +139,7 @@ img.armory_item_icon {
 
 .bar-text {
 	position: absolute;
-	top:0; 
+	top:2px;
 	left:0;
 	color: #fff;
 	text-shadow: 2px 2px 2px #000;

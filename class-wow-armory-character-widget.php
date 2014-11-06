@@ -33,7 +33,7 @@ class WoW_Armory_Character_Widget extends WP_Widget {
 			'show_title'    => 1,
 			'show_talents'  => 1,
 			'show_items'    => 1,
-			'show_profs'    => WoW_Armory_Character_Plugin::STYLE_PROF_BAR | WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY,
+			'show_profs'    => WoW_Armory_Character_Plugin::STYLE_PROF_BADGES,
 			'show_achievs'  => WoW_Armory_Character_Plugin::STYLE_ACHIEV_BAR | WoW_Armory_Character_Plugin::STYLE_ACHIEV_LIST,
 			'show_feed'     => WoW_Armory_Character_Plugin::STYLE_FEED_ITEMS | WoW_Armory_Character_Plugin::STYLE_FEED_ACHIEVEMENTS |
 			                   WoW_Armory_Character_Plugin::STYLE_FEED_ICONS,
@@ -78,9 +78,6 @@ class WoW_Armory_Character_Widget extends WP_Widget {
 		$prof_config = null;
 		if ( $new_instance['show_profs_badges'] ) {
 			$prof_config = $prof_config | WoW_Armory_Character_Plugin::STYLE_PROF_BADGES;
-		}
-		if ( $new_instance['show_profs_bar'] ) {
-			$prof_config = $prof_config | WoW_Armory_Character_Plugin::STYLE_PROF_BAR;
 		}
 		if ( $new_instance['show_profs_secondary'] ) {
 			$prof_config = $prof_config | WoW_Armory_Character_Plugin::STYLE_PROF_SECONDARY;
