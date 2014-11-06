@@ -22,33 +22,29 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @author Adam Cooper <adam@networkpie.co.uk>
  */
-class WoW_Armory_Character_Item
-{
-    public $region;
-    public $locale;
+class WoW_Armory_Character_Item {
+	public $region;
+	public $locale;
 
-    // Setting these in the object makes things a little easier.
-    public $last_checked;
-    public $cache_name;
+	// Setting these in the object makes things a little easier.
+	public $last_checked;
+	public $cache_name;
 
-    private $_api_data;
+	private $_api_data;
 
-    public function __construct($region, $locale, stdClass $api_data)
-    {
-        $this->region = $region;
-        $this->locale = $locale;
-        $this->_api_data = $api_data;
-    }
+	public function __construct( $region, $locale, stdClass $api_data ) {
+		$this->region    = $region;
+		$this->locale    = $locale;
+		$this->_api_data = $api_data;
+	}
 
-    public function __get($name)
-    {
-        if (isset($this->_api_data->$name)) {
-            return $this->_api_data->$name;
-        }
-    }
+	public function __get( $name ) {
+		if ( isset( $this->_api_data->$name ) ) {
+			return $this->_api_data->$name;
+		}
+	}
 
-    public function __isset($name)
-    {
-        return isset($this->_api_data->$name);
-    }
+	public function __isset( $name ) {
+		return isset( $this->_api_data->$name );
+	}
 }

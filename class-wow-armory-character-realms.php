@@ -22,46 +22,41 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @author Adam Cooper <adam@networkpie.co.uk>
  */
-class WoW_Armory_Character_Realms
-{
-    public $region;
+class WoW_Armory_Character_Realms {
+	public $region;
 
-    // Setting these in the object makes things a little easier.
-    public $last_checked;
-    public $cache_name;
+	// Setting these in the object makes things a little easier.
+	public $last_checked;
+	public $cache_name;
 
-    private $_api_data;
+	private $_api_data;
 
-    public function __construct($region, stdClass $api_data)
-    {
-        $this->region = $region;
-        $this->_api_data = $api_data;
-    }
+	public function __construct( $region, stdClass $api_data ) {
+		$this->region    = $region;
+		$this->_api_data = $api_data;
+	}
 
-    public function __get($name)
-    {
-        if (isset($this->_api_data->$name)) {
-            return $this->_api_data->$name;
-        }
-    }
+	public function __get( $name ) {
+		if ( isset( $this->_api_data->$name ) ) {
+			return $this->_api_data->$name;
+		}
+	}
 
-    public function __isset($name)
-    {
-        return isset($this->_api_data->$name);
-    }
+	public function __isset( $name ) {
+		return isset( $this->_api_data->$name );
+	}
 
-    public function get_realms_as_options($current_realm = null)
-    {
-        $options = '';
+	public function get_realms_as_options( $current_realm = null ) {
+		$options = '';
 
-        foreach ($this->realms as $realm) {
-            $options .= '<option value="' . $realm->slug . '"' . selected(
-                    $current_realm,
-                    $realm->slug,
-                    true
-                ) . '>' . $realm->name . '</option>' . PHP_EOL;
-        }
+		foreach ( $this->realms as $realm ) {
+			$options .= '<option value="' . $realm->slug . '"' . selected(
+					$current_realm,
+					$realm->slug,
+					true
+				) . '>' . $realm->name . '</option>' . PHP_EOL;
+		}
 
-        return $options;
-    }
+		return $options;
+	}
 }

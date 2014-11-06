@@ -373,9 +373,10 @@ class WoW_Armory_Character_View {
 		global $wacpath;
 
 		// Check to see if cache folder is writable before attempting to cache anything
-		$cache_folder = plugin_dir_path($wacpath) . self::CACHE_FOLDER_NAME;
-		if ( ! @is_writable( $cache_folder ) )
+		$cache_folder = plugin_dir_path( $wacpath ) . self::CACHE_FOLDER_NAME;
+		if ( ! @is_writable( $cache_folder ) ) {
 			return $asset_url;
+		}
 
 		$cache_url = plugins_url( self::CACHE_FOLDER_NAME, plugin_basename( $wacpath ) );
 
