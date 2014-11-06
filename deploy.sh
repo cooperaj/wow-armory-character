@@ -11,7 +11,6 @@ MAINFILE="wow-armory-character.php" # this should be the name of your main php f
 GITPATH="$CURRENTDIR/" # this file should be in the base of your git repository
 
 # wordpress i18n tools config
-MAKEPOTPATH="/usr/local/lib/wordpress-i18n-tools/makepot.php"
 TEXTDOMAIN="wow_armory_character"
 
 # svn config
@@ -41,7 +40,7 @@ if [ "$NEWVERSION1" != "$NEWVERSION2" ]; then echo "Versions don't match. Exitin
 echo "Versions match in readme.txt and PHP file. Let's proceed..."
 
 echo "Generating translation POT file and commiting it to git"
-php $MAKEPOTPATH wp-plugin . languages/$TEXTDOMAIN.pot
+grunt makepot
 git add languages/$TEXTDOMAIN.pot
 git commit -m "Deploy.sh auto-generated wow_armory_character.pot translation file"
 

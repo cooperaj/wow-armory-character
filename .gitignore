@@ -8,3 +8,6 @@ atlassian-ide-plugin.xml
 # Cache Files
 cache/*
 !cache/index.php
+
+# NPM stuff
+node_modules
