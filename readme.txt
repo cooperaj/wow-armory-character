@@ -26,7 +26,6 @@ For an example of the plugin configured to show all the available information ch
   re-choose your region and then choose your language if you do not wish english to be selected.
 * Multiple Armory widgets on one page will cause issue with the administration pages javascript. For the time being I
   recommend using shortcodes if you need more then one character displayed on a page.
-* Profession completion bars do not show when configured to.
 
 == Translation ==
 
@@ -64,8 +63,7 @@ The configuration parameters available to use are:
 * **show_items** - *1* or *0*
 * **show_profs** - This is a bitwise field. To get the setting you want add together the numbers below.
     * *1* - Show profession badges
-    * *2* - Show profession completion bars
-    * *4* - Show seconday professions
+    * *2* - Show secondary professions
 * **show_achievs** - This is a bitwise field. To get the setting you want add together the numbers below.
     * *1* - Show achievement bar
     * *2* - Show achievement list
@@ -142,9 +140,10 @@ To use the filters please create the necessary function (perhaps in your templat
 you see fit. You can either alter the html after it has been created or you can override the template that produces
 the output.
 
-The CSS can be overriden by using the global setting 'Add plugin css to the page'. Unticking this box will allow
-you to provide your own CSS as part of your theme. For simple edits I suggest you add the necessary tweaks to your
-themes CSS and keep the basic styling the plugin provides.
+The CSS can be overridden by using the global setting 'Add plugin css to the page'. Unticking this box will allow
+you to provide your own CSS as part of your theme. _NOTE_ This option is now deprecated. It will be replaced in a future
+release by the filter documented in the installation tab. For simple edits I suggest you add the necessary tweaks to
+your themes CSS and keep the basic styling the plugin provides.
 
 == Screenshots ==
 
@@ -157,13 +156,16 @@ themes CSS and keep the basic styling the plugin provides.
 * Starting at the big 1.0. Is stable enough for that I reckon.
 * Tooltip updates to show item upgrades/reforges.
 * Reworked achievements to calculate based on API - not using a hardcoded value.
-
-= 0.9.7 =
+* Fixed a large number of bugs
+* Styling tweaks to work better in Twenty Fourteen
 * The activity feed for your character can now be shown. This is just like the one from your armory page and shows
   the last 5 items, achievements and achievement criteria you gained. PLEASE NOTE: If you're upgrading to this release
   your widgets may give errors until their settings are adjusted.
 * Realms are now chosen from a dropdown list rather then typed. This should help where the slug varies from the
   realm name.
+* _DEPRECATED_ setting for css inclusion. A filter is now available for theme authors.
+* Moved to grunt for building.
+* New banner!
 
 = 0.9.6 =
 * Update for patch 5.0.4 talent changes.
