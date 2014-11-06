@@ -368,7 +368,7 @@ class WoW_Armory_Character_Plugin
                 'show_title' => 1,
                 'show_talents' => 1,
                 'show_items' => 1,
-                'show_profs' => self::STYLE_PROF_BAR | self::STYLE_PROF_SECONDARY,
+                'show_profs' => self::STYLE_PROF_BADGES | self::STYLE_PROF_SECONDARY,
                 'show_achievs' => self::STYLE_ACHIEV_BAR | self::STYLE_ACHIEV_LIST,
                 'show_feed' => self::STYLE_FEED_ITEMS | self::STYLE_FEED_ACHIEVEMENTS | self::STYLE_FEED_ICONS,
                 'locale' => 'en_GB',
