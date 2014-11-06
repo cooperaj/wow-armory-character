@@ -129,7 +129,7 @@ class WoW_Armory_Character_DAL
     static function fetch_achievements($region, $locale, $expires_after = WEEK_IN_SECONDS)
     {
         if (false !== ($cached_achievs = get_transient('wowachcache-' . $region . '-' . $locale))) {
-            $achievs_json = json_decode($cached_achievs['api_data']);
+            return $cached_achievs['api_data'];
         } else {
             $http_request = new WP_Http();
             $http_result = $http_request->request(
@@ -148,9 +148,13 @@ class WoW_Armory_Character_DAL
                 $achievs_data = array();
                 $achievs_data['last_checked'] = time();
                 $achievs_data['locale'] = $locale;
-                $achievs_data['api_data'] = $http_result['body'];
+
+	            // We cache the completed object rather then just the raw data as we do a fairly intensive bit
+	            // of processing on it that we don't want to keep repeating.
+                $achievs_data['api_data'] = new WoW_Armory_Character_Achievements($region, $locale, $achievs_json);
 
                 set_transient('wowachcache-' . $region . '-' . $locale, $achievs_data, $expires_after);
+                return $achievs_data['api_data'];
             } else {
                 return new WP_Error(500, __(
                     'Unable to fetch data from battle.net for character achievements',
@@ -158,8 +162,6 @@ class WoW_Armory_Character_DAL
                 ));
             }
         }
-
-        return new WoW_Armory_Character_Achievements($region, $locale, $achievs_json);
     }
 
     /**

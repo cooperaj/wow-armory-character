@@ -75,8 +75,7 @@ class WoW_Armory_Character
             return null;
         }
 
-        // TODO ensure that we're not counting Feats of Strength
-        $data->completed = count($this->achievements->achievementsCompleted);
+        $data->completed = count($achiev_data->get_achievements_countable($this->achievements->achievementsCompleted));
         $data->total = $achiev_data->get_achievement_count();
         $data->percent_complete = round(($data->completed / $data->total) * 100);
         $data->percent_remaining = 100 - $data->percent_complete;

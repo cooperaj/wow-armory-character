@@ -31,6 +31,10 @@ class WoW_Armory_Character_Achievements
     public $last_checked;
     public $cache_name;
 
+	private $_totalAchievable;
+    private $_flat_fos;
+	private $_flat_legacy;
+
     private $_api_data;
     private $_flat_api_data;
 
@@ -39,6 +43,8 @@ class WoW_Armory_Character_Achievements
         $this->region = $region;
         $this->locale = $locale;
         $this->_api_data = $api_data;
+
+        $this->_flatten_achievement_data();
     }
 
     public function __get($name)
@@ -53,6 +59,22 @@ class WoW_Armory_Character_Achievements
         return isset($this->_api_data->$name);
     }
 
+	/**
+	 * Takes a passed in array of achievement ID's like that returned as part of a character query and remove the
+	 * feats of strength from it as they don't count.
+	 *
+	 * @param $achievements array An array of achievement IDs.
+	 *
+	 * @return array
+	 */
+	public function get_achievements_countable($achievements)
+	{
+		// remove FoS from count.
+		$ret = array_diff($achievements, array_keys($this->_flat_fos));
+
+		return $ret;
+	}
+
     /**
      * Returns the count of the earnable achievements.
      *
@@ -60,14 +82,13 @@ class WoW_Armory_Character_Achievements
      * or are duplicated because they are different for horde/alliance we need to
      * calculate a count that will remove these from consideration.
      *
+     * @todo Figure out why this produces a value that is 6 off the number given on the armory.
+     *
      * @return int The number of achievements available to earn.
      */
     public function get_achievement_count()
     {
-        // TODO Until I can figure this out I'm going to hard code it based on what the armory
-        // tells me is available.
-
-        return 1821;
+        return $this->_totalAchievable[0] + $this->_totalAchievable[2]; // 0 and 1 are the two factions. They're both equal
     }
 
     /**
@@ -79,11 +100,6 @@ class WoW_Armory_Character_Achievements
      */
     public function get_achievement_by_id($achiev_id)
     {
-        // Flattens the data so a search by key is easy.
-        if ($this->_flat_api_data == null) {
-            $this->_flatten_achievement_data();
-        }
-
         if (isset($this->_flat_api_data[$achiev_id])) {
             return $this->_flat_api_data[$achiev_id];
         }
@@ -100,8 +116,14 @@ class WoW_Armory_Character_Achievements
     private function _flatten_achievement_data()
     {
         $this->_flat_api_data = array();
+        $this->_flat_fos = array();
+	    $this->_flat_legacy = array();
+        $this->_totalAchievable = array();
 
         foreach ($this->_api_data->achievements as $section) {
+            $is_fos = ($section->id == 81) ? true : false; // Feats of Strength
+	        $is_legacy = ($section->id == 15234) ? true : false; // Legacy
+
             if (isset($section->categories) && is_array($section->categories)) {
                 foreach ($section->categories as $category) {
                     foreach ($category->achievements as $ach) {
@@ -114,6 +136,15 @@ class WoW_Armory_Character_Achievements
                         $ach->category->name = $category->name;
 
                         $this->_flat_api_data[$ach->id] = $ach;
+                        if ($is_fos) $this->_flat_fos[$ach->id] = $ach;
+	                    if ($is_legacy) $this->_flat_legacy[$ach->id] = $ach;
+
+                        if (!$is_fos && !$is_legacy) {
+	                        if (!isset($this->_totalAchievable[$ach->factionId]))
+		                        $this->_totalAchievable[$ach->factionId] = 0;
+
+	                        $this->_totalAchievable[$ach->factionId]++;
+                        }
                     }
                 }
             }
@@ -128,6 +159,15 @@ class WoW_Armory_Character_Achievements
                 $ach->category->name = null;
 
                 $this->_flat_api_data[$ach->id] = $ach;
+                if ($is_fos) $this->_flat_fos[$ach->id] = $ach;
+	            if ($is_legacy) $this->_flat_legacy[$ach->id] = $ach;
+
+	            if (!$is_fos && !$is_legacy) {
+		            if (!isset($this->_totalAchievable[$ach->factionId]))
+			            $this->_totalAchievable[$ach->factionId] = 0;
+
+		            $this->_totalAchievable[$ach->factionId]++;
+	            }
             }
         }
     }
