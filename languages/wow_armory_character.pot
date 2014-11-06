@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: WoW Armory Character 1.0.0\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/cooperaj/wow-armory-character/issues\n"
-"POT-Creation-Date: 2014-11-06 12:34:53+00:00\n"
+"POT-Creation-Date: 2014-11-06 15:09:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,33 +14,33 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.4.9\n"
 
-#: class-wow-armory-character-dal.php:142
-#: class-wow-armory-character-dal.php:159
+#: class-wow-armory-character-dal.php:140
+#: class-wow-armory-character-dal.php:158
 msgid "Unable to fetch data from battle.net for character achievements"
 msgstr ""
 
-#: class-wow-armory-character-dal.php:189
+#: class-wow-armory-character-dal.php:188
 #: class-wow-armory-character-dal.php:202
 msgid "Unable to fetch data from battle.net for item"
 msgstr ""
 
 #: class-wow-armory-character-dal.php:230
-#: class-wow-armory-character-dal.php:242
+#: class-wow-armory-character-dal.php:243
 msgid "Unable to fetch data from battle.net for realms"
 msgstr ""
 
 #: class-wow-armory-character-dal.php:307
-#: class-wow-armory-character-dal.php:331
+#: class-wow-armory-character-dal.php:332
 msgid "Unable to fetch data from battle.net for character"
 msgstr ""
 
-#: class-wow-armory-character-dal.php:357
-#: class-wow-armory-character-dal.php:370
+#: class-wow-armory-character-dal.php:358
+#: class-wow-armory-character-dal.php:371
 msgid "Unable to fetch data from battle.net for character races"
 msgstr ""
 
-#: class-wow-armory-character-dal.php:410
-#: class-wow-armory-character-dal.php:423
+#: class-wow-armory-character-dal.php:411
+#: class-wow-armory-character-dal.php:424
 msgid "Unable to fetch data from battle.net for character classes"
 msgstr ""
 
@@ -68,65 +68,65 @@ msgstr ""
 msgid "Add plugin css to the page. (Deprecated. See readme)"
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:214
+#: class-wow-armory-character-plugin.php:215
 msgid ""
 "Display informational tooltips when hovering over equipped items and "
 "completed achievements."
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:218
+#: class-wow-armory-character-plugin.php:219
 msgid "Show equipped item tooltips."
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:223
+#: class-wow-armory-character-plugin.php:224
 msgid ""
 "Instead of linking items and acheivements to battle.net link to the wowhead "
 "3rd party site."
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:227
+#: class-wow-armory-character-plugin.php:228
 msgid "Link items and acheivements to wowhead."
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:234
+#: class-wow-armory-character-plugin.php:235
 msgid "Save Changes"
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:238
+#: class-wow-armory-character-plugin.php:239
 msgid "Character Cache"
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:252
+#: class-wow-armory-character-plugin.php:253
 msgid "Character Name"
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:253
+#: class-wow-armory-character-plugin.php:254
 msgid "Realm"
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:254
+#: class-wow-armory-character-plugin.php:255
 msgid "Cached On"
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:255
+#: class-wow-armory-character-plugin.php:256
 msgid "Note/s"
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:265
+#: class-wow-armory-character-plugin.php:266
 msgid "No cached characters found"
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:287
-#: class-wow-armory-character-plugin.php:313
+#: class-wow-armory-character-plugin.php:288
+#: class-wow-armory-character-plugin.php:314
 msgid "F j, Y, g:i a"
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:294
-#: class-wow-armory-character-plugin.php:320
+#: class-wow-armory-character-plugin.php:295
+#: class-wow-armory-character-plugin.php:321
 msgid "Warning Icon"
 msgstr ""
 
-#: class-wow-armory-character-plugin.php:338
+#: class-wow-armory-character-plugin.php:339
 msgid "Clear selected cache items"
 msgstr ""
 
@@ -198,11 +198,11 @@ msgstr ""
 msgid "Displays a World of Warcraft character's information"
 msgstr ""
 
-#: class-wow-armory-character.php:69 class-wow-armory-character.php:100
+#: class-wow-armory-character.php:64 class-wow-armory-character.php:94
 msgid "The global achievement data is corrupt. Please clear the cache."
 msgstr ""
 
-#: class-wow-armory-character.php:192
+#: class-wow-armory-character.php:184
 msgid "The achievement data for this character is not fully formed."
 msgstr ""
 
@@ -287,7 +287,7 @@ msgid "Show Talents"
 msgstr ""
 
 #: view-wow-armory-character-widget.php:122
-#: view-wow-armory-character-widget.php:225
+#: view-wow-armory-character-widget.php:215
 msgid "Show Items"
 msgstr ""
 
@@ -304,121 +304,113 @@ msgid "Badges"
 msgstr ""
 
 #: view-wow-armory-character-widget.php:152
-msgid "Show your profession levels with a progress bar."
-msgstr ""
-
-#: view-wow-armory-character-widget.php:155
-msgid "Progress Bars"
-msgstr ""
-
-#: view-wow-armory-character-widget.php:162
 msgid "Show your secondary professions (e.g. fishing, first aid)."
 msgstr ""
 
-#: view-wow-armory-character-widget.php:165
+#: view-wow-armory-character-widget.php:155
 msgid "Secondary Professions"
 msgstr ""
 
-#: view-wow-armory-character-widget.php:171
-#: view-wow-armory-character-widget.php:236
+#: view-wow-armory-character-widget.php:161
+#: view-wow-armory-character-widget.php:226
 msgid "Show Achievements"
 msgstr ""
 
-#: view-wow-armory-character-widget.php:183
+#: view-wow-armory-character-widget.php:173
 msgid ""
 "Show a progress bar indicating the number of achievements this character "
 "has gained from the total."
 msgstr ""
 
-#: view-wow-armory-character-widget.php:186
+#: view-wow-armory-character-widget.php:176
 msgid "Completion Bar"
 msgstr ""
 
-#: view-wow-armory-character-widget.php:193
+#: view-wow-armory-character-widget.php:183
 msgid "Show a listing of the characters most recent achievements."
 msgstr ""
 
-#: view-wow-armory-character-widget.php:196 view-wow-armory-character.php:132
+#: view-wow-armory-character-widget.php:186 view-wow-armory-character.php:128
 msgid "Recent Achievements"
 msgstr ""
 
-#: view-wow-armory-character-widget.php:203
+#: view-wow-armory-character-widget.php:193
 msgid ""
 "Show the achievement description text when showing the Recent Achievements "
 "listing."
 msgstr ""
 
-#: view-wow-armory-character-widget.php:206
+#: view-wow-armory-character-widget.php:196
 msgid "Achievement Descriptions"
 msgstr ""
 
-#: view-wow-armory-character-widget.php:212
+#: view-wow-armory-character-widget.php:202
 msgid "Show Activity Feed"
 msgstr ""
 
-#: view-wow-armory-character-widget.php:225
+#: view-wow-armory-character-widget.php:215
 msgid "Show loot/items you have received."
 msgstr ""
 
-#: view-wow-armory-character-widget.php:236
+#: view-wow-armory-character-widget.php:226
 msgid "Show achievements you have earned."
 msgstr ""
 
-#: view-wow-armory-character-widget.php:246
+#: view-wow-armory-character-widget.php:236
 msgid "Show achievement criteria you have earned."
 msgstr ""
 
-#: view-wow-armory-character-widget.php:249
+#: view-wow-armory-character-widget.php:239
 msgid "Show Achievement Criteria"
 msgstr ""
 
-#: view-wow-armory-character-widget.php:256
+#: view-wow-armory-character-widget.php:246
 msgid "Show icons on each of the above items. Criteria will show a tick."
 msgstr ""
 
-#: view-wow-armory-character-widget.php:259
+#: view-wow-armory-character-widget.php:249
 msgid "Show Icons"
 msgstr ""
 
-#: view-wow-armory-character.php:17
+#: view-wow-armory-character.php:19
 msgid "of"
 msgstr ""
 
-#: view-wow-armory-character.php:22
+#: view-wow-armory-character.php:25
 msgid "Level"
 msgstr ""
 
-#: view-wow-armory-character.php:50
+#: view-wow-armory-character.php:56
 msgid "Professions"
 msgstr ""
 
-#: view-wow-armory-character.php:103
+#: view-wow-armory-character.php:91
 msgid "Equipment List"
 msgstr ""
 
-#: view-wow-armory-character.php:118
+#: view-wow-armory-character.php:108
 msgid "Achievements"
 msgstr ""
 
-#: view-wow-armory-character.php:119
+#: view-wow-armory-character.php:111
 msgid ""
 "Completed %1$s out of a possible %2$s achievements earning a total of %3$s "
 "achievement points."
 msgstr ""
 
-#: view-wow-armory-character.php:147
+#: view-wow-armory-character.php:148
 msgid "Recent Activity"
 msgstr ""
 
-#: view-wow-armory-character.php:168
+#: view-wow-armory-character.php:172
 msgid "Earned the Achievement %s for %d points."
 msgstr ""
 
-#: view-wow-armory-character.php:187
+#: view-wow-armory-character.php:199
 msgid "Completed step %1$s of achievement %2$s."
 msgstr ""
 
-#: view-wow-armory-character.php:206
+#: view-wow-armory-character.php:224
 msgid "Obtained %s."
 msgstr ""
 
