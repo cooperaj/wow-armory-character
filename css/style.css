@@ -4,6 +4,8 @@
 	display: inline;
 	border: 0 none;
 	margin: 0;
+	width: 18px;
+	height: 18px;
 }
 
 img.armory_char_portrait {
@@ -57,9 +59,11 @@ img.armory_char_portrait {
 	float: left;
 }
 
-.armory_item_icon {
+img.armory_item_icon {
 	width: 26px;
 	height: 26px;
+	margin-bottom: 0.2em;
+	margin-right: 0.2em;
 }
 
 .armory_achiev_list {
