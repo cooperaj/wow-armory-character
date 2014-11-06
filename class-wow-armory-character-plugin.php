@@ -173,6 +173,18 @@ class WoW_Armory_Character_Plugin
     {
         global $wacpath;
 
+	    $cache_folder = plugin_dir_path($wacpath) . WoW_Armory_Character_View::CACHE_FOLDER_NAME;
+	    if ( ! @is_writable( $cache_folder ) )
+	    {
+		    echo '<div id="message" class="error"><p>' .
+		         sprintf( __( '<strong>Warning:</strong> ' .
+		                      'The cache folder (<code>%s</code>) is not writable. Please ensure your ' .
+		                      'webserver has the correct permissions to write files to this folder.',
+				         'wow_armory_character' ),
+			         $cache_folder ) .
+		         '</p></div>';
+	    }
+
         if (isset($_POST['deleteit']) && isset($_POST['delete'])) {
             // Verify nonce
             check_admin_referer('wowarmchar');
@@ -379,7 +391,6 @@ class WoW_Armory_Character_Plugin
             return $char->get_error_message();
         }
     }
-
 
     /**
      * Plugin activation method.
