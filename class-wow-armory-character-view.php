@@ -361,8 +361,21 @@ class WoW_Armory_Character_View {
 		return $output;
 	}
 
+	/**
+	 * Attempt to cache an image asset locally and use that instead of always hotlinking to the blizzard assets.
+	 *
+	 * @param $asset_url string An aboslute url pointing at a cacheable image asset.
+	 *
+	 * @return string The url of the asset to fetch. This could be the newly cached image or the original url dependant
+	 *                on if the attempt to cache was successful.
+	 */
 	public function fetch_asset( $asset_url ) {
 		global $wacpath;
+
+		// Check to see if cache folder is writable before attempting to cache anything
+		$cache_folder = plugin_dir_path($wacpath) . self::CACHE_FOLDER_NAME;
+		if ( ! @is_writable( $cache_folder ) )
+			return $asset_url;
 
 		$cache_url = plugins_url( self::CACHE_FOLDER_NAME, plugin_basename( $wacpath ) );
 
@@ -373,7 +386,7 @@ class WoW_Armory_Character_View {
 		$new_asset_url       = $cache_url . $asset_name;
 
 		$final_url      = $asset_url;
-		$new_asset_path = plugin_dir_path( $wacpath ) . DIRECTORY_SEPARATOR . self::CACHE_FOLDER_NAME . $asset_name;
+		$new_asset_path = $cache_folder . $asset_name;
 
 		if ( $extension == 'gif' || $extension == 'jpg' || $extension == 'png' ) {
 			if ( file_exists( $new_asset_path ) ) {
