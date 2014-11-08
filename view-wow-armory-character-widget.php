@@ -67,6 +67,10 @@
 				'Française',
 				'wow_armory_character'
 			); ?></option>
+		<option value="it_IT"<?php selected( $instance['locale'], 'it_IT', true ); ?>><?php _e(
+				'Italiano',
+				'wow_armory_character'
+			); ?></option>
 		<option value="pt_PT"<?php selected( $instance['locale'], 'pt_PT', true ); ?>><?php _e(
 				'Português (EU)',
 				'wow_armory_character'

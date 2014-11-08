@@ -92,6 +92,7 @@ class WoW_Armory_Character_View {
 			'fr_FR' => 'fr',
 			'ru_RU' => 'ru',
 			'de_DE' => 'de',
+			'it_IT' => 'it',
 			'ko_KR' => 'ko',
 			'zh_TW' => 'zh',
 			'zh_CN' => 'zh'

@@ -2,7 +2,7 @@ function wac_disable_lang(select_clone, chosen_value)
 {
 	var valid_options = {
 			'US' : ['en_US', 'es_MX', 'pt_BR'],
-			'EU' : ['en_GB', 'es_ES', 'fr_FR', 'ru_RU', 'de_DE', 'pt_PT'],
+			'EU' : ['en_GB', 'es_ES', 'fr_FR', 'ru_RU', 'de_DE', 'pt_PT', 'it_IT'],
 			'KR' : ['ko_KR'],
 			'TW' : ['zh_TW']
 	};
