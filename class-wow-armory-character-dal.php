@@ -70,6 +70,17 @@ class WoW_Armory_Character_DAL {
 		return $chars;
 	}
 
+	static function clear_all_cache() {
+		global $wpdb;
+		$wpdb->query(
+			"
+			DELETE FROM $wpdb->options
+			WHERE `option_name` LIKE '_transient_wow%'
+			OR `option_name` LIKE '_transient_timeout_wow%'
+			"
+		);
+	}
+
 	/**
 	 * Fetch a WoW character from the Community API.
 	 *

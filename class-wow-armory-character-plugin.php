@@ -188,6 +188,16 @@ class WoW_Armory_Character_Plugin {
 			     sprintf( __( 'Cleared %s caches.', 'wow_armory_character' ), $clear_count ) . '</p></div>';
 		}
 
+		if ( isset( $_POST['deleteall'] ) ) {
+			// Verify nonce
+			check_admin_referer( 'wowarmchar' );
+
+			WoW_Armory_Character_DAL::clear_all_cache();
+
+			echo '<div id="message" class="updated fade"><p>' .
+			     __( 'Cleared all cached items.', 'wow_armory_character' ) . '</p></div>';
+		}
+
 		$options = get_option( 'wac_settings' );
 		?>
 		<div class="wrap">
@@ -337,7 +347,9 @@ class WoW_Armory_Character_Plugin {
 				</table>
 				<div class="tablenav">
 					<input type="submit" value="<?php _e( 'Clear selected cache items', 'wow_armory_character' ) ?>"
-					       name="deleteit" class="button-secondary delete"/>
+					       name="deleteit" class="button-primary delete"/>
+					<input type="submit" value="<?php _e( 'Clear all cache items', 'wow_armory_character' ) ?>"
+					       name="deleteall" class="button-secondary delete"/>
 					<br class="clear"/>
 				</div>
 

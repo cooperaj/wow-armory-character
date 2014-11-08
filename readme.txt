@@ -3,7 +3,7 @@ Contributors: blueajcooper
 Tags: widget, world of warcraft, wow, armory, character, warcraft, blizzard, toon, gear, achievements, professions
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2
 
 Pulls character information from the WoW community API and displays it.
@@ -73,7 +73,7 @@ The configuration parameters available to use are:
     * *2* - Show acheivements gained.
     * *4* - Show acheivement criteria.
     * *8* - Show icons next to each item.
-* **locale** - *en_GB*, *en_US*, *de_DE*, *es_ES*, *es_MX*, *fr_FR*, *ru_RU*, *ko_KR*, *zh_TW* or *zh_CN*
+* **locale** - *en_GB*, *en_US*, *de_DE*, *es_ES*, *es_MX*, *fr_FR*, *it_IT*, *ru_RU*, *ko_KR*, *zh_TW* or *zh_CN*
 
 Note: Certain locale choices are only available when selecting some regions.
 
@@ -151,6 +151,10 @@ your themes CSS and keep the basic styling the plugin provides.
 2. The widget configuration screen.
 
 == Changelog ==
+
+= 1.1.0 =
+* Allow the clearing of all the cached items. Possible fix for the issue with acheivements reported by SilverCha0s
+* Include Italian language configuration options.
 
 = 1.0.0 =
 * Starting at the big 1.0. Is stable enough for that I reckon.
