@@ -72,11 +72,16 @@ svn status | grep -v "^.[ \t]*\..*" | grep "^?" | awk '{print $2}' | xargs svn a
 svn commit --username=$SVNUSER -m "Deploy.sh commit to plugin assets"
 
 echo "Ignoring github specific files and deployment script"
-svn propset svn:ignore "deploy.sh
-.git
+svn propset svn:ignore ".git
 .gitignore
+.travis.yml
 Gruntfile.js
+phpunit.xml
 package.json
+composer.json
+composer.lock
+bin
+tests
 assets" "$SVNPATH/trunk/"
 
 echo "Changing directory to SVN and committing to trunk"

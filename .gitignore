@@ -11,3 +11,5 @@ cache/*
 
 # NPM stuff
 node_modules
+
+/vendor/

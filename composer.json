@@ -1,0 +1,14 @@
+{
+    "name": "cooperaj/wow-armory-character",
+    "description": "Pulls character information from the WoW community API and displays it.",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Adam Cooper",
+            "email": "adam@networkpie.co.uk"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "4.3.*"
+    }
+}

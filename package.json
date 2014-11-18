@@ -4,8 +4,8 @@
   "description": "Pulls character information from the WoW community API and displays it.",
   "main": "wow-armory-character.php",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "./deploy.sh"
+    "test": "vendor/bin/phpunit",
+    "deploy": "bin/deploy.sh"
   },
   "repository": {
     "type": "git",
