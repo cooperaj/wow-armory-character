@@ -325,7 +325,7 @@ class WoW_Armory_Character_View {
 		return '&who=' . $this->character->name . '&when=' . $timestamp;
 	}
 
-	public function get_wowhead_item_rel( $tooltip_params ) {
+	public function get_wowhead_item_rel( $tooltip_params, $bonus_lists = null ) {
 		$output = '&amp;lvl=' . $this->character->level;
 		$output .= ( isset( $tooltip_params->upgrade ) ) ? '&amp;upgd=' . $tooltip_params->upgrade->current : '';
 		$output .= ( isset( $tooltip_params->enchant ) ) ? '&amp;ench=' . $tooltip_params->enchant : '';
@@ -358,6 +358,17 @@ class WoW_Armory_Character_View {
 			}
 		}
 		$output .= ( strlen( $set ) > 0 ) ? '&amp;pcs=' . $set : '';
+
+		// Bonus Items
+		// http://www.wowhead.com/tooltips#related-warlords-of-draenor-tooltip-changes
+		$bonus = '';
+		if ( isset( $bonus_lists ) && is_array( $bonus_lists ) ) {
+			foreach ( $bonus_lists as $bonus_item ) {
+				$bonus .= ( strlen( $bonus ) > 0 ) ? ':' : '';
+				$bonus .= $bonus_item;
+			}
+		}
+		$output .= ( strlen( $bonus ) > 0 ) ? '&amp;bonus=' . $bonus : '';
 
 		return $output;
 	}

@@ -93,7 +93,7 @@
 				if ( isset( $character->items->$slot ) && $item = $character->items->$slot ) :
 					?>
 					<li><a href="<?php echo $this->get_item_url( $item->id ); ?>"
-					       rel="<?php echo $this->get_wowhead_item_rel( $item->tooltipParams ); ?>"><img
+					       rel="<?php echo $this->get_wowhead_item_rel( $item->tooltipParams, $item->bonusLists ); ?>"><img
 							src="<?php echo $this->get_item_icon_url( $item->icon ); ?>"
 							alt="<?php echo $item->id; ?>" class="armory_item_icon"/></a></li><?php
 				endif;
