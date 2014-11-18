@@ -3,7 +3,7 @@ Contributors: blueajcooper
 Tags: widget, world of warcraft, wow, armory, character, warcraft, blizzard, toon, gear, achievements, professions
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2
 
 Pulls character information from the WoW community API and displays it.
@@ -151,6 +151,9 @@ your themes CSS and keep the basic styling the plugin provides.
 2. The widget configuration screen.
 
 == Changelog ==
+
+= 1.1.1 =
+* Updated the wowhead tooltips to work with the new way of handling item ID's.
 
 = 1.1.0 =
 * Allow the clearing of all the cached items. Possible fix for the issue with acheivements reported by SilverCha0s

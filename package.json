@@ -1,6 +1,6 @@
 {
   "name": "wow-armory-character",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Pulls character information from the WoW community API and displays it.",
   "main": "wow-armory-character.php",
   "scripts": {
