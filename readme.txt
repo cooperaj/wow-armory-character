@@ -70,8 +70,8 @@ The configuration parameters available to use are:
     * *4* - Show descriptions on the achievement list.
 * **show_feed** - This is a bitwise field. To get the setting you want add together the numbers below.
     * *1* - Show items (loot).
-    * *2* - Show acheivements gained.
-    * *4* - Show acheivement criteria.
+    * *2* - Show achievements gained.
+    * *4* - Show achievement criteria.
     * *8* - Show icons next to each item.
 * **locale** - *en_GB*, *en_US*, *de_DE*, *es_ES*, *es_MX*, *fr_FR*, *it_IT*, *ru_RU*, *ko_KR*, *zh_TW* or *zh_CN*
 
@@ -156,7 +156,7 @@ your themes CSS and keep the basic styling the plugin provides.
 * Updated the wowhead tooltips to work with the new way of handling item ID's.
 
 = 1.1.0 =
-* Allow the clearing of all the cached items. Possible fix for the issue with acheivements reported by SilverCha0s
+* Allow the clearing of all the cached items. Possible fix for the issue with achievements reported by SilverCha0s
 * Include Italian language configuration options.
 
 = 1.0.0 =
